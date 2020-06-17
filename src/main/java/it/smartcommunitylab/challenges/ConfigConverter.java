@@ -1,6 +1,5 @@
 package it.smartcommunitylab.challenges;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,8 +46,8 @@ class ConfigConverter {
         final Date end = timeHelper.calculateEnd(nextStart, challengeConfig.getDuration());
         confs.put("start", nextStart);
         confs.put("end", end);
-        confs.put("challengeWeek", new SimpleDateFormat("yyyy-MM-dd").format(nextStart));
-        confs.put("execDate", System.currentTimeMillis());
+        confs.put("challengeWeek", 1); // FIXME calculate right week of challenges
+        confs.put("exec", new Date());
         confs.put("hide", standardSingleChallenges.getSettings().isHide());
         return confs;
     }

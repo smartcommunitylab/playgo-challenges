@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
-import eu.fbk.das.api.sample.RecommenderSystemAPI;
+import eu.fbk.das.api.RecommenderSystemAPI;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
@@ -18,8 +18,8 @@ public class Challenges {
     public Challenges(GameEngineInfo gameEngineConf) {
         this.gameEngineConf = gameEngineConf;
         timeHelper = new TimeHelper();
-        // FIXME only for dev tests
-        recommenderApi = new eu.fbk.das.api.sample.RecommenderSystemImpl();
+        // use eu.fbk.das.api.sample to test without challenge-gen integration
+        recommenderApi = new eu.fbk.das.api.RecommenderSystemImpl();
     }
 
     Challenges(GameEngineInfo gameEngineConf, RecommenderSystemAPI recommerderApiImpl) {
