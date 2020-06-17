@@ -32,7 +32,7 @@ games:
           - Bus
           - Train
         hide: True
-      playerSet: []
+      playerSet:
       reward:
         scoreName: green leaves
         type: fixed
