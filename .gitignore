@@ -2,3 +2,6 @@
 .classpath
 .settings/
 target/
+
+# Recommendation System API stuff
+rs.statistics
