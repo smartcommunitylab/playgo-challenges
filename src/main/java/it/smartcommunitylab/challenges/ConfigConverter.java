@@ -46,7 +46,8 @@ class ConfigConverter {
         final Date end = timeHelper.calculateEnd(nextStart, challengeConfig.getDuration());
         confs.put("start", nextStart);
         confs.put("end", end);
-        confs.put("challengeWeek", 1); // FIXME calculate right week of challenges
+        confs.put("challengeWeek",
+                timeHelper.weekDifference(challengeConfig.getStart(), nextStart));
         confs.put("exec", new Date());
         confs.put("hide", standardSingleChallenges.getSettings().isHide());
         return confs;

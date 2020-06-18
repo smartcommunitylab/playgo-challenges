@@ -152,7 +152,6 @@ public class TimeHelperTest {
         assertThat(shouldBeSuspended).isFalse();
     }
 
-
     @Test
     public void startDate_after_suspensions() {
         TimeHelper timeHelper = new TimeHelper();
@@ -171,4 +170,36 @@ public class TimeHelperTest {
         assertThat(shouldBeSuspended).isFalse();
     }
 
+
+    @Test
+    public void week_difference_dst() {
+        TimeHelper timeHelper = new TimeHelper();
+        final int weeks = timeHelper.weekDifference(DateHelper.dateFromIso("2019-10-26"),
+                DateHelper.dateFromIso("2019-11-02"));
+        assertThat(weeks).isEqualTo(2);
+    }
+
+    @Test
+    public void week_difference_of_same_date() {
+        TimeHelper timeHelper = new TimeHelper();
+        final int weeks = timeHelper.weekDifference(DateHelper.dateFromIso("2020-06-20"),
+                DateHelper.dateFromIso("2020-06-20"));
+        assertThat(weeks).isEqualTo(1);
+    }
+
+    @Test
+    public void week_difference_next_week() {
+        TimeHelper timeHelper = new TimeHelper();
+        final int weeks = timeHelper.weekDifference(DateHelper.dateFromIso("2020-06-20"),
+                DateHelper.dateFromIso("2020-06-27"));
+        assertThat(weeks).isEqualTo(2);
+    }
+
+    @Test
+    public void week_difference_two_weeks_later() {
+        TimeHelper timeHelper = new TimeHelper();
+        final int weeks = timeHelper.weekDifference(DateHelper.dateFromIso("2020-06-20"),
+                DateHelper.dateFromIso("2020-07-04"));
+        assertThat(weeks).isEqualTo(2);
+    }
 }

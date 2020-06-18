@@ -21,6 +21,39 @@ public class TimeHelper {
         return new Timestamp(date.getTime()).toLocalDateTime();
     }
 
+
+    private boolean insideInterval(LocalDateTime start, LocalDateTime end, LocalDateTime date) {
+        return (start.isEqual(date) || start.isBefore(date)) && end.isAfter(date);
+    }
+
+    /**
+     * The method calculates the number of weeks between two dates, in detail it uses interval of 7
+     * days.
+     * 
+     * NOTE: Method considers the end date of week interval exclusive
+     * 
+     * @param from
+     * @param to
+     * @return
+     */
+    public int weekDifference(Date from, Date to) {
+        LocalDateTime toDateTime = localDateTimeFrom(to);
+        LocalDateTime startInterval = localDateTimeFrom(from);
+        Period weekDuration = Period.ofDays(7);
+        LocalDateTime endInterval = localDateTimeFrom(from).plus(weekDuration);
+        int weeks = 1;
+        do {
+            if(insideInterval(startInterval, endInterval, toDateTime)){
+                break;
+            }else {
+                weeks++;
+                startInterval = endInterval;
+                endInterval = endInterval.plus(weekDuration);
+            }
+        } while (endInterval.isBefore(toDateTime));
+
+        return weeks;
+    }
     public Date calculateNextStart(Date start, Period duration) {
         final LocalDateTime now = clock.nowAsLocalDateTime();
         LocalDateTime cursorDate = localDateTimeFrom(start);
