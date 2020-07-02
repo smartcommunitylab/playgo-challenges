@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import it.smartcommunitylab.challenges.Challenges;
 import it.smartcommunitylab.challenges.Result;
 import it.smartcommunitylab.challenges.app.configuration.ChallengesSettings;
@@ -17,9 +20,11 @@ import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
 public class Application {
 
+    private static final Logger logger = LogManager.getLogger(Application.class);
+
     public static void main(String[] args) {
         Map<String,String> options = getOptions(args);
-        System.out.println(getOptions(args));
+        logger.info(getOptions(args));
         
         GameEngineInfo gameEngineConf = new GameEngineInfo(options.get("url"), options.get("username"), options.get("password"));
         Challenges challenges = new Challenges(gameEngineConf);
@@ -34,11 +39,10 @@ public class Application {
                 final StandardSingleChallenge standardSingleChallenges =
                         settings.getStandardSingleChallengeConfig();
                 Result result = challenges.assign(game, standardSingleChallenges);
-                System.out.println(String.format("Terminated assignment %s", result.getResult()));
+                logger.info("Terminated assignment {}", result.getResult());
             });
         } catch (FileNotFoundException e) {
-            System.out.println("configuration file doesn't exist");
-            e.printStackTrace();
+            logger.error("configuration file doesn't exist", e);
         }
     }
 

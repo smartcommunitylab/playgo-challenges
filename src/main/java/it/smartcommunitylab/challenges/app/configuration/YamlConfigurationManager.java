@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +19,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import it.smartcommunitylab.challenges.bean.Game;
 
 public class YamlConfigurationManager implements ConfigurationManager {
+    private static final Logger logger = LogManager.getLogger(YamlConfigurationManager.class);
     private ObjectMapper mapper;
 
     public YamlConfigurationManager() {
@@ -42,7 +46,7 @@ public class YamlConfigurationManager implements ConfigurationManager {
                 return settings;
             }).collect(Collectors.toList());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
             return Collections.emptyList();
         }
 
