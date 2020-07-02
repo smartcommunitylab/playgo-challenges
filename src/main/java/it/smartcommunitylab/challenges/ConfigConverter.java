@@ -1,5 +1,6 @@
 package it.smartcommunitylab.challenges;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +12,6 @@ import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
 import it.smartcommunitylab.challenges.bean.LevelStrategy;
 import it.smartcommunitylab.challenges.bean.Reward;
-import it.smartcommunitylab.challenges.bean.Settings;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
 class ConfigConverter {
@@ -38,18 +38,14 @@ class ConfigConverter {
     }
 
     public static Map<String, Object> toChallengeValues(
-            StandardSingleChallenge standardSingleChallenges) {
-        final TimeHelper timeHelper = new TimeHelper();
+            NextExecution nextChallengeExecution) {
         Map<String, Object> confs = new HashMap<>();
-        final Settings challengeConfig = standardSingleChallenges.getSettings();
-        final Date nextStart = timeHelper.calculateNextStart(challengeConfig.getStart(),
-                challengeConfig.getDuration());
-        final Date end = timeHelper.calculateEnd(nextStart, challengeConfig.getDuration());
-        confs.put("start", nextStart);
-        confs.put("end", end);
-        confs.put("challengeWeek", new SimpleDateFormat("yyyy-MM-dd").format(nextStart));
-        confs.put("execDate", System.currentTimeMillis());
-        confs.put("hide", standardSingleChallenges.getSettings().isHide());
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZ");
+        confs.put("start", dateFormatter.format(nextChallengeExecution.getStart()));
+        confs.put("duration", nextChallengeExecution.getDuration().toString().substring(1));
+        confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
+        confs.put("exec", new Date());
+        confs.put("hide", nextChallengeExecution.isHidden());
         return confs;
     }
 

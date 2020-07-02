@@ -15,7 +15,7 @@ public class StandardSingleSettings {
             timezone = "Europe/Rome")
     private Date start;
     private Period duration;
-    private List<String> modes;
+    private List<String> modeConcepts;
     private boolean hide;
     private List<SuspensionConfig> suspensions;
 
@@ -35,12 +35,12 @@ public class StandardSingleSettings {
         this.duration = duration;
     }
 
-    public List<String> getModes() {
-        return modes;
+    public List<String> getModeConcepts() {
+        return modeConcepts;
     }
 
-    public void setModes(List<String> modes) {
-        this.modes = modes;
+    public void setModeConcepts(List<String> modeConcepts) {
+        this.modeConcepts = modeConcepts;
     }
 
     public boolean isHide() {
@@ -55,7 +55,7 @@ public class StandardSingleSettings {
     public Settings toConfig() {
         Settings config = new Settings(start, duration);
         config.setHide(hide);
-        config.setModes(new HashSet<>(modes));
+        config.setModes(new HashSet<>(modeConcepts));
         config.setSuspensions(
                 suspensions.stream().map(s -> s.toSuspension()).collect(Collectors.toList()));
         return config;
