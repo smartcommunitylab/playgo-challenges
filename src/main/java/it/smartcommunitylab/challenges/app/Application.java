@@ -24,8 +24,10 @@ public class Application {
 
     public static void main(String[] args) {
         Map<String,String> options = getOptions(args);
-        logger.info(getOptions(args));
         
+        logger.info("running on configuration {} and gamification engine url {}",
+                options.get("config"), options.get("url"));
+
         GameEngineInfo gameEngineConf = new GameEngineInfo(options.get("url"), options.get("username"), options.get("password"));
         Challenges challenges = new Challenges(gameEngineConf);
         final String configPath = options.get("config");

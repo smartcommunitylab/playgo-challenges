@@ -58,6 +58,10 @@ public class Challenges {
                     });
             }
             logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
+            challenges.forEach(challenge -> {
+                recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
+            });
+            logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
             return new ValidResult(true);
         }
     }
