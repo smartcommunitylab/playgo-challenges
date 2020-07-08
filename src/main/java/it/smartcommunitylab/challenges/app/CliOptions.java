@@ -8,16 +8,23 @@ class CliOptions {
 
     private static final String OPTION_PREFIX = "--";
     public enum Options {
-        CONFIG("config"), URL("url"), USERNAME("username"), PASSWORD("password");
+        CONFIG("config", true), URL("url", true), USERNAME("username", true), PASSWORD("password",
+                true), ASSIGN("assign", false);
 
         private String value;
+        private boolean required;
 
-        private Options(String value) {
+        private Options(String value, boolean required) {
             this.value = value;
+            this.required = required;
         }
 
         public String getValue() {
             return value;
+        }
+
+        public boolean isRequired() {
+            return required;
         }
     }
 
@@ -28,7 +35,7 @@ class CliOptions {
 
     private void validate(Map<String, String> options) {
         for (Options opt : Options.values()) {
-            if (options.get(opt.getValue()) == null) {
+            if (opt.isRequired() && options.get(opt.getValue()) == null) {
                 throw new IllegalArgumentException(
                         String.format("%s option is required", opt.getValue()));
             }
