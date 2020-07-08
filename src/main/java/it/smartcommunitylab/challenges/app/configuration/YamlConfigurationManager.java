@@ -41,8 +41,14 @@ public class YamlConfigurationManager implements ConfigurationManager {
             return gamesConfiguration.getGames().stream().map(gc -> {
                 ChallengesSettings settings = new ChallengesSettings();
                 settings.setGame(new Game(gc.getGameId()));
+                if (gc.getStandardSingleChallenges() != null) {
                 settings.setStandardSingleChallengeConfig(
                         gc.getStandardSingleChallenges().toChallengeConfig());
+                }
+                if (gc.getStandardGroupChallenges() != null) {
+                settings.setStandardGroupChallengeConfig(
+                        gc.getStandardGroupChallenges().toChallengeConfig());
+                }
                 return settings;
             }).collect(Collectors.toList());
         } catch (IOException e) {

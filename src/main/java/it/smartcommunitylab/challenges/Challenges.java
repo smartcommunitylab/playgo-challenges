@@ -11,6 +11,7 @@ import eu.fbk.das.api.RecommenderSystemAPI;
 import eu.fbk.das.model.ChallengeExpandedDTO;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
+import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
 public class Challenges {
@@ -64,5 +65,10 @@ public class Challenges {
             logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
             return new ValidResult(true);
         }
+    }
+
+    public Result assign(Game game, StandardGroupChallenge standardGroupChallenges) {
+        logger.info("Assign group challenges.....");
+        return new ValidResult(true);
     }
 }

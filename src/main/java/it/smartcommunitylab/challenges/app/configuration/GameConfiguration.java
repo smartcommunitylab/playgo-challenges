@@ -6,6 +6,7 @@ import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 public class GameConfiguration {
     private String gameId;
     private StandardSingleChallengeConfig standardSingleChallenges;
+    private StandardGroupChallengeConfig standardGroupChallenges;
 
     public String getGameId() {
         return gameId;
@@ -30,6 +31,14 @@ public class GameConfiguration {
 
     public StandardSingleChallenge toChallengeConfig() {
         return standardSingleChallenges.toChallengeConfig();
+    }
+
+    public StandardGroupChallengeConfig getStandardGroupChallenges() {
+        return standardGroupChallenges;
+    }
+
+    public void setStandardGroupChallenges(StandardGroupChallengeConfig standardGroupChallenges) {
+        this.standardGroupChallenges = standardGroupChallenges;
     }
 
 

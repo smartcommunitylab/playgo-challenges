@@ -1,0 +1,17 @@
+games:
+  - gameId: 5d9353a3f0856342b2dded7f
+    standardGroupChallenges:
+      settings:
+        start: 2020-11-06 00:00
+        duration: 2d
+        modeConcepts:
+          - Walk_Km
+          - Bike_Km
+          - Bus_Km
+          - Train_Km
+      playerSet:
+      reward:
+        scoreName: green leaves
+        type: fixed
+        value: 100.0
+        maxValue:
