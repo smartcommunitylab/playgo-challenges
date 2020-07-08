@@ -16,7 +16,7 @@ At the moment `game-engine.challenge-gen` is not available on Smartcommunitylab 
 
 `cd game-engine.challenge-gen && git checkout gamification-sdk`
 
-3. Install on locally maven repo
+3. Install on your local maven repo
 
 `mvn clean install -DskipTests`
 
@@ -24,7 +24,7 @@ To create the `playgo-challenges` full standalone version run the command
 
 `mvn clean package -P full-client-jar -DskipTests`
 
-You can find the standalone jar into `target directory`
+You can find the standalone jar `challenges-jar-with-dependencies.jar` into `target` directory
 
 ### Library
 
@@ -46,9 +46,9 @@ java -jar challenges-jar-with-dependencies.jar Application --config <CONFIG_PATH
 --username: valid gamification engine username
 --password: valid gamification engine password
 ```
-
+You can find an example in [bin/assign-challenges.sh][assign_script]
 ### Library
 
 TBD
 
-
+[assign_script]: ./bin/assign-challenges.sh
