@@ -51,7 +51,8 @@ class CliOptions {
         String valuesAsString = options.get(option.getValue());
         if (valuesAsString != null) {
             String[] values = valuesAsString.split(",");
-            return Stream.of(values).map(v -> v.trim()).toArray(String[]::new);
+            return Stream.of(values).filter(v -> !v.isEmpty()).map(v -> v.trim())
+                    .toArray(String[]::new);
         }
         return null;
     }
