@@ -37,7 +37,7 @@ TBD
 You can run playgo-challenges in standalone mode using following command:
 
 ```bash
-java -jar challenges-jar-with-dependencies.jar Application --config <CONFIG_PATH> --url <GAMIFICATION_ENGINE_URL> --username <USERNAME> --password <PASSWORD>
+java -jar challenges-jar-with-dependencies.jar Application --config <CONFIG_PATH> --url <GAMIFICATION_ENGINE_URL> --username <USERNAME> --password <PASSWORD> [--assign <SUPPORTED_VALUES>]
 ```
 
 ```
@@ -45,6 +45,8 @@ java -jar challenges-jar-with-dependencies.jar Application --config <CONFIG_PATH
 --url: url to gamification engine
 --username: valid gamification engine username
 --password: valid gamification engine password
+--assign: (optional, default: all) comma separated string of assignment types to process
+          supported values: standardSingle, standardGroup, specialSingle
 ```
 You can find an example in [bin/assign-challenges.sh][assign_script]
 ### Library
