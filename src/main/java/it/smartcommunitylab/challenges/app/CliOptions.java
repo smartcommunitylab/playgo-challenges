@@ -2,6 +2,7 @@ package it.smartcommunitylab.challenges.app;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 class CliOptions {
     private Map<String, String> options = new HashMap<>();
@@ -44,6 +45,15 @@ class CliOptions {
 
     public String get(Options option) {
         return options.get(option.getValue());
+    }
+
+    public String[] getAsArray(Options option) {
+        String valuesAsString = options.get(option.getValue());
+        if (valuesAsString != null) {
+            String[] values = valuesAsString.split(",");
+            return Stream.of(values).map(v -> v.trim()).toArray(String[]::new);
+        }
+        return null;
     }
 
     private final Map<String, String> getOptions(String[] args) {

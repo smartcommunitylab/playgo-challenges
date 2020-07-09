@@ -15,6 +15,7 @@ import it.smartcommunitylab.challenges.app.configuration.ConfigurationManager;
 import it.smartcommunitylab.challenges.app.configuration.YamlConfigurationManager;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
+import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
 public class Application {
@@ -25,10 +26,8 @@ public class Application {
         CliOptions options = new CliOptions(args);
         logger.info("running on configuration {} and gamification engine url {}",
                 options.get(Options.CONFIG), options.get(Options.URL));
-
-        GameEngineInfo gameEngineConf =
-                new GameEngineInfo(
-                        options.get(Options.URL),
+        final Assigner assigner = new Assigner(options.getAsArray(Options.ASSIGN));
+        GameEngineInfo gameEngineConf = new GameEngineInfo(options.get(Options.URL),
                 options.get(Options.USERNAME), options.get(Options.PASSWORD));
         Challenges challenges = new Challenges(gameEngineConf);
         final String configPath = options.get(Options.CONFIG);
@@ -39,10 +38,23 @@ public class Application {
                     configurationManager.parseConfiguration(new FileInputStream(configPath));
             challengesSettings.forEach(settings -> {
                 final Game game = settings.getGame();
-                final StandardSingleChallenge standardSingleChallenges =
-                        settings.getStandardSingleChallengeConfig();
-                Result result = challenges.assign(game, standardSingleChallenges);
-                logger.info("Terminated assignment {}", result.getResult());
+                if (assigner.isAssignStandardSingle()) {
+                    logger.info("execute standardSingleChallenges assignment");
+                    final StandardSingleChallenge standardSingleChallenges =
+                            settings.getStandardSingleChallengeConfig();
+                    Result result = challenges.assign(game, standardSingleChallenges);
+                    logger.info("Terminated assignment {}", result.getResult());
+                }
+                if (assigner.isAssignStandardGroup()) {
+                    logger.info("execute standardGroupChallenges assignment");
+                    final StandardGroupChallenge standardGroupChallenges =
+                            settings.getStandardGroupChallengeConfig();
+                    Result result = challenges.assign(game, standardGroupChallenges);
+                    logger.info("Terminated assignment {}", result.getResult());
+                }
+                if (assigner.isAssignSpecialSingle()) {
+                    logger.info("execute specialSingleChallenges assignment");
+                }
             });
         } catch (FileNotFoundException e) {
             logger.error("configuration file doesn't exist", e);
