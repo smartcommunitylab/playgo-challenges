@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import it.smartcommunitylab.challenges.bean.GroupSettings;
 import it.smartcommunitylab.challenges.bean.Settings;
+import it.smartcommunitylab.challenges.bean.SpecialSettings;
 
 public class YamlConfigurationManagerTest {
 
@@ -63,5 +64,22 @@ public class YamlConfigurationManagerTest {
         assertThat(config.getStart()).isEqualTo("2020-11-06 00:00:00");
         assertThat(config.getDuration()).isEqualTo(Period.ofDays(2));
         assertThat(conf.getStandardGroupChallengeConfig().getPlayerSet()).isEmpty();
+    }
+
+    @Test
+    public void parse_special_single_challenge_configuration() throws ParseException {
+        ConfigurationManager confManager = new YamlConfigurationManager();
+        List<ChallengesSettings> settings = confManager.parseConfiguration(
+                ClassLoader.getSystemResourceAsStream("config-special-single.yml"));
+        assertThat(settings).hasSize(1);
+        ChallengesSettings conf = settings.get(0);
+        assertThat(conf.getGame().getGameId()).isEqualTo("5d9353a3f0856342b2dded7f");
+        assertThat(conf.getStandardSingleChallengeConfig()).isNull();
+        assertThat(conf.getStandardGroupChallengeConfig()).isNull();
+
+        SpecialSettings config = conf.getSpecialSingleChallengeConfig().getSettings();
+        assertThat(config.getStart()).isEqualTo("2020-05-01 00:00:00");
+        assertThat(config.getDuration()).isEqualTo(Period.ofDays(1));
+        assertThat(conf.getSpecialSingleChallengeConfig().getPlayerSet()).isEmpty();
     }
 }

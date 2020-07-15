@@ -7,6 +7,7 @@ public class GameConfiguration {
     private String gameId;
     private StandardSingleChallengeConfig standardSingleChallenges;
     private StandardGroupChallengeConfig standardGroupChallenges;
+    private SpecialSingleChallengeConfig specialSingleChallenges;
 
     public String getGameId() {
         return gameId;
@@ -39,6 +40,14 @@ public class GameConfiguration {
 
     public void setStandardGroupChallenges(StandardGroupChallengeConfig standardGroupChallenges) {
         this.standardGroupChallenges = standardGroupChallenges;
+    }
+
+    public SpecialSingleChallengeConfig getSpecialSingleChallenges() {
+        return specialSingleChallenges;
+    }
+
+    public void setSpecialSingleChallenges(SpecialSingleChallengeConfig specialSingleChallenges) {
+        this.specialSingleChallenges = specialSingleChallenges;
     }
 
 
