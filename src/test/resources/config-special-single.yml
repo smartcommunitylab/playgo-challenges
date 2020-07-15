@@ -9,7 +9,7 @@ games:
         fields:
           surveyType: finalCountdown
           bonusScore: 100.0
-          link: 
+          link: ""
           bonusPointType: green leaves      
         hide: False
       playerSet:

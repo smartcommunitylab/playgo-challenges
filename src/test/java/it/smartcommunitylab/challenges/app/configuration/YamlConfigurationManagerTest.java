@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.text.ParseException;
 import java.time.Period;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -80,6 +82,11 @@ public class YamlConfigurationManagerTest {
         SpecialSettings config = conf.getSpecialSingleChallengeConfig().getSettings();
         assertThat(config.getStart()).isEqualTo("2020-05-01 00:00:00");
         assertThat(config.getDuration()).isEqualTo(Period.ofDays(1));
+        Map<String, Object> fields = new HashMap<>();
+        fields.put("surveyType", "finalCountdown");
+        fields.put("bonusPointType", "green leaves");
+        fields.put("link", "");
+        assertThat(config.getFields()).containsAllEntriesOf(fields);
         assertThat(conf.getSpecialSingleChallengeConfig().getPlayerSet()).isEmpty();
     }
 }
