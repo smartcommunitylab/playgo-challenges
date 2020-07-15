@@ -1,5 +1,9 @@
 # playgo-challenges
 
+## Requirements
+
+* Jdk 1.8+
+
 ## Build
 
 ### Standalone
