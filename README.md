@@ -41,7 +41,7 @@ java -jar challenges-jar-with-dependencies.jar Application --config <CONFIG_PATH
 ```
 
 ```
---config: the path of config file
+--config: the path of YAML config file
 --url: url to gamification engine
 --username: valid gamification engine username
 --password: valid gamification engine password
@@ -53,4 +53,45 @@ You can find an example in [bin/assign-challenges.sh][assign_script]
 
 TBD
 
+## Configuration file
+
+Configuration file is a YAML file, you can find a realistic example [here][config_sample]
+For every game you can define parameters for three assignement scenarios `standardSingleChallenges`, `standardGroupChallenges` and `specialSingleChallenges`
+
+### StandardSingleChallenges
+
+```
+    standardSingleChallenges:
+      levelStrategies:  # assignment strategy for player level
+        - level:
+            type:  # level name
+            index: # level index
+          strategy: # name of the strategy implemented by challenge-gen
+      settings:
+        start: # begin date of the challenge season for the game, format as: YYYY-MM-DD HH:MM [Europe/Rome timezone] 
+        duration: # duration of the challenges, format X[d,w,m] X -> number, d: days, w: weeks, m:months ex: 7d for seven days
+        suspensions: # a list of time periods in which assignment is suspended
+        - from: # initial date of suspesion period [included date], format as YYYY-MM-DD HH:MM [Europe/Rome timezone]
+          to: # end date of suspension period [excluded date], format as YYYY-MM-DD HH:MM [Europe/Rome timezone]
+        modeConcepts: # list of pointConcept challenge-gen has to consider, ex. Walk_Km
+          -
+        hide: # True to assign a hidden challenge, False otherwise
+      playerSet: # a list of playerIds target of assignment, leave empty to assign to all
+        - 
+      reward: # parameters to calculate the reward amount
+        scoreName: # pointConcept name
+        type: # reward strategy used by challgenge-gen: fixed, bonus, booster 
+        value: # value bound to type field
+        maxValue: # optional, max reward value assignable
+```
+
+### StandardGroupChallenges
+
+TBD
+
+### SpecialSingleChallenges
+
+TBD
+
 [assign_script]: ./bin/assign-challenges.sh
+[config_sample]: src/test/resources/config-simulation.yml]
