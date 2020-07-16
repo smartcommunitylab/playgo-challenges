@@ -48,10 +48,20 @@ class ConfigConverter {
         confs.put("hide", nextChallengeExecution.isHidden());
         return confs;
     }
+    
+    public static Map<String, Object> toGroupChallengeValues(
+            NextExecution nextChallengeExecution) {
+        Map<String, Object> confs = new HashMap<>();
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZ");
+        confs.put("start", dateFormatter.format(nextChallengeExecution.getStart()));
+        confs.put("end", dateFormatter.format(nextChallengeExecution.getEnd()));
+        confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
+        confs.put("exec", new Date());
+        return confs;
+    }
 
 
-    public static String toPlayerSet(StandardSingleChallenge standardSingleChallenges) {
-        final Set<String> playerSet = standardSingleChallenges.getPlayerSet();
+    public static String toPlayerSet(Set<String> playerSet) {
         return playerSet.isEmpty() ? "all" : String.join(",", playerSet);
     }
 
@@ -59,14 +69,15 @@ class ConfigConverter {
         return standardSingleChallenges.getSettings().getModes();
     }
 
-    public static Map<String, String> toRewards(StandardSingleChallenge standardSingleChallenges) {
-        final Reward reward = standardSingleChallenges.getReward();
+    public static Map<String, String> toRewards(Reward reward) {
         Map<String, String> confs = new HashMap<>();
         confs.put("scoreType", reward.getScoreName());
-        confs.put("calcType", reward.getType().toString().toLowerCase());
+        // reward type is null for groupChallenges
+        final String rewardTypeAsString =
+                reward.getType() != null ? reward.getType().toString().toLowerCase() : null;
+        confs.put("calcType", rewardTypeAsString);
         confs.put("calcValue", String.valueOf(reward.getValue()));
         confs.put("maxValue", reward.getMaxValue().map(m -> String.valueOf(m)).orElse(null));
         return confs;
     }
-
 }

@@ -39,3 +39,18 @@ games:
         type: fixed
         value: 100.0
         maxValue:
+    standardGroupChallenges:
+      settings:
+        start: 2019-10-26 00:00
+        duration: 7d
+        modeConcepts:
+          - Walk_Km
+          - Bike_Km
+          - Bus_Km
+          - Train_Km
+      playerSet:
+      reward:
+        scoreName: green leaves
+        type: 
+        value:
+        maxValue:

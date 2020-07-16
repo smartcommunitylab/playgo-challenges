@@ -43,8 +43,10 @@ public class RewardConfig {
 
     public Reward toReward() {
         try {
-            Reward reward = new Reward(scoreName, RewardType.valueOf(type.toUpperCase()),
-                    value);
+            // type is null for standardGroupChallenges
+            final RewardType rewardType =
+                    type != null ? RewardType.valueOf(type.toUpperCase()) : null;
+            Reward reward = new Reward(scoreName, rewardType, value);
             if (maxValue > 0) {
                 reward.setMaxReward(maxValue);
             }

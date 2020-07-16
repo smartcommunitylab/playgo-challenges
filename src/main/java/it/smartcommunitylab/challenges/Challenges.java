@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import eu.fbk.das.api.RecommenderSystemAPI;
 import eu.fbk.das.model.ChallengeExpandedDTO;
+import eu.fbk.das.model.GroupExpandedDTO;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
 import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
@@ -44,9 +45,10 @@ public class Challenges {
                     ConfigConverter.toCreationRules(standardSingleChallenges);
             Map<String, Object> challengeValues =
                     ConfigConverter.toChallengeValues(nextChallengeExecution);
-            String playerSet = ConfigConverter.toPlayerSet(standardSingleChallenges);
-            Map<String, String> rewards = ConfigConverter.toRewards(standardSingleChallenges);
-            Set<String> modes = ConfigConverter.toModes(standardSingleChallenges);
+            String playerSet = ConfigConverter.toPlayerSet(standardSingleChallenges.getPlayerSet());
+            Map<String, String> rewards =
+                    ConfigConverter.toRewards(standardSingleChallenges.getReward());
+            Set<String> modes = standardSingleChallenges.getSettings().getModes();
 
             List<ChallengeExpandedDTO> challenges =
                     recommenderApi.createSingleChallengeWeekly(gameEngineConfs, modes,
@@ -69,6 +71,28 @@ public class Challenges {
 
     public Result assign(Game game, StandardGroupChallenge standardGroupChallenges) {
         logger.info("Assign group challenges.....");
+        final NextExecution nextChallengeExecution = new NextExecution(standardGroupChallenges);
+        Map<String, String> gameEngineConfs =
+                ConfigConverter.toGameEngineConfs(game, gameEngineConf);
+        Map<String, Object> challengeValues =
+                ConfigConverter.toGroupChallengeValues(nextChallengeExecution);
+        String playerSet = ConfigConverter.toPlayerSet(standardGroupChallenges.getPlayerSet());
+        Map<String, String> rewards =
+                ConfigConverter.toRewards(standardGroupChallenges.getReward());
+        Set<String> modes = standardGroupChallenges.getSettings().getModes();
+        // FIXME add to configuration
+        final String assignmentType = null;
+        List<GroupExpandedDTO> challenges = recommenderApi.createCoupleChallengeWeekly(
+                gameEngineConfs, modes, assignmentType, challengeValues, playerSet, rewards);
+        logger.info("Created {} group challenges for game {}", challenges.size(), game.getGameId());
+        if (logger.isDebugEnabled()) {
+            challenges.forEach(c -> logger.debug(c));
+        }
+        challenges.forEach(challenge -> {
+            recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
+        });
+        logger.info("Assigned {} group challenges for game {}", challenges.size(),
+                game.getGameId());
         return new ValidResult(true);
     }
 }
