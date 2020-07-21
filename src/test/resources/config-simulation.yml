@@ -43,6 +43,7 @@ games:
       settings:
         start: 2019-10-26 00:00
         duration: 7d
+        model: groupCooperative
         modeConcepts:
           - Walk_Km
           - Bike_Km

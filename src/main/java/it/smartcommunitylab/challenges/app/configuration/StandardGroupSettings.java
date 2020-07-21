@@ -14,6 +14,7 @@ public class StandardGroupSettings {
             timezone = "Europe/Rome")
     private Date start;
     private Period duration;
+    private String model;
     private List<String> modeConcepts;
 
     public Date getStart() {
@@ -42,8 +43,17 @@ public class StandardGroupSettings {
 
     public GroupSettings toConfig() {
         GroupSettings settings = new GroupSettings(start, duration);
+        settings.setModel(model);
         settings.setModes(new HashSet<>(modeConcepts));
         return settings;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
 

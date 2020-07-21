@@ -66,6 +66,8 @@ public class YamlConfigurationManagerTest {
         assertThat(config.getStart()).isEqualTo("2020-11-06 00:00:00");
         assertThat(config.getDuration()).isEqualTo(Period.ofDays(2));
         assertThat(conf.getStandardGroupChallengeConfig().getPlayerSet()).isEmpty();
+        assertThat(conf.getStandardGroupChallengeConfig().getSettings().getModel())
+                .isEqualTo("groupCompetitiveTime");
     }
 
     @Test

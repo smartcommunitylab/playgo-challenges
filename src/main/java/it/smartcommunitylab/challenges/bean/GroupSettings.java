@@ -8,6 +8,7 @@ import java.util.Set;
 public class GroupSettings {
     private Date start;
     private Period duration;
+    private String model;
     private Set<String> modes;
     
     public GroupSettings(Date start, Period duration) {
@@ -38,6 +39,14 @@ public class GroupSettings {
 
     public void setModes(Set<String> modes) {
         this.modes = modes;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
 }

@@ -4,6 +4,7 @@ games:
       settings:
         start: 2020-11-06 00:00
         duration: 2d
+        model: groupCompetitiveTime
         modeConcepts:
           - Walk_Km
           - Bike_Km

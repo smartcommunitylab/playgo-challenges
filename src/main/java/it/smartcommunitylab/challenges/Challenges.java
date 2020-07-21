@@ -80,8 +80,7 @@ public class Challenges {
         Map<String, String> rewards =
                 ConfigConverter.toRewards(standardGroupChallenges.getReward());
         Set<String> modes = standardGroupChallenges.getSettings().getModes();
-        // FIXME add to configuration
-        final String assignmentType = null;
+        final String assignmentType = standardGroupChallenges.getSettings().getModel();
         List<GroupExpandedDTO> challenges = recommenderApi.createCoupleChallengeWeekly(
                 gameEngineConfs, modes, assignmentType, challengeValues, playerSet, rewards);
         logger.info("Created {} group challenges for game {}", challenges.size(), game.getGameId());
