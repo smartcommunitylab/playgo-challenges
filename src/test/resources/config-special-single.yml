@@ -5,7 +5,7 @@ games:
       settings:
         start: 2020-05-01 00:00
         duration: 1d
-        model: absoluteIncrement
+        model: survey
         fields:
           surveyType: finalCountdown
           bonusScore: 100.0

@@ -15,6 +15,7 @@ import it.smartcommunitylab.challenges.app.configuration.ConfigurationManager;
 import it.smartcommunitylab.challenges.app.configuration.YamlConfigurationManager;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
+import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
@@ -54,6 +55,10 @@ public class Application {
                 }
                 if (assigner.isAssignSpecialSingle()) {
                     logger.info("execute specialSingleChallenges assignment");
+                    final SpecialSingleChallenge specialSingleChallenges =
+                            settings.getSpecialSingleChallengeConfig();
+                    Result result = challenges.assign(game, specialSingleChallenges);
+                    logger.info("Terminated assignment {}", result.getResult());
                 }
             });
         } catch (FileNotFoundException e) {

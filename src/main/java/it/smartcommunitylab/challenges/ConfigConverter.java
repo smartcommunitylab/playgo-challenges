@@ -12,16 +12,18 @@ import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
 import it.smartcommunitylab.challenges.bean.LevelStrategy;
 import it.smartcommunitylab.challenges.bean.Reward;
+import it.smartcommunitylab.challenges.bean.SpecialSettings;
+import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
 class ConfigConverter {
 
     public static Map<String, String> toGameEngineConfs(Game game, GameEngineInfo gameEngineConf) {
         Map<String, String> confs = new HashMap<>();
-        confs.put("gameId", game.getGameId());
-        confs.put("host", gameEngineConf.getUrl());
-        confs.put("user", gameEngineConf.getUsername());
-        confs.put("pass", gameEngineConf.getPassword());
+        confs.put("GAMEID", game.getGameId());
+        confs.put("HOST", gameEngineConf.getUrl());
+        confs.put("USER", gameEngineConf.getUsername());
+        confs.put("PASS", gameEngineConf.getPassword());
         return confs;
     }
 
@@ -57,6 +59,21 @@ class ConfigConverter {
         confs.put("end", dateFormatter.format(nextChallengeExecution.getEnd()));
         confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
         confs.put("exec", new Date());
+        return confs;
+    }
+
+    public static Map<String, Object> toSpecialChallengeValues(NextExecution nextChallengeExecution,
+            SpecialSingleChallenge specialSingleChallenge) {
+        Map<String, Object> confs = new HashMap<>();
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZ");
+        confs.put("start", dateFormatter.format(nextChallengeExecution.getStart()));
+        confs.put("duration", nextChallengeExecution.getDuration().toString().substring(1));
+        confs.put("hide", nextChallengeExecution.isHidden());
+        final SpecialSettings settings = specialSingleChallenge.getSettings();
+        final Map<String, Object> fields = settings.getFields();
+        fields.entrySet().forEach(field -> {
+            confs.put(field.getKey(), field.getValue());
+        });
         return confs;
     }
 

@@ -12,6 +12,7 @@ import eu.fbk.das.model.ChallengeExpandedDTO;
 import eu.fbk.das.model.GroupExpandedDTO;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
+import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
@@ -50,15 +51,13 @@ public class Challenges {
                     ConfigConverter.toRewards(standardSingleChallenges.getReward());
             Set<String> modes = standardSingleChallenges.getSettings().getModes();
 
-            List<ChallengeExpandedDTO> challenges =
-                    recommenderApi.createSingleChallengeWeekly(gameEngineConfs, modes,
-                            creationRules,
-                            challengeValues, playerSet, rewards);
+            List<ChallengeExpandedDTO> challenges = recommenderApi.createSingleChallengeWeekly(
+                    gameEngineConfs, modes, creationRules, challengeValues, playerSet, rewards);
             if (logger.isDebugEnabled()) {
                 challenges.forEach(c -> {
-                        logger.debug("model:{}, s:{}, e:{}, f:{}", c.getModelName(),
-                                c.getStart(), c.getEnd(), c.getData());
-                    });
+                    logger.debug("model:{}, s:{}, e:{}, f:{}", c.getModelName(), c.getStart(),
+                            c.getEnd(), c.getData());
+                });
             }
             logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
             challenges.forEach(challenge -> {
@@ -92,6 +91,35 @@ public class Challenges {
         });
         logger.info("Assigned {} group challenges for game {}", challenges.size(),
                 game.getGameId());
+        return new ValidResult(true);
+    }
+
+
+    public Result assign(Game game, SpecialSingleChallenge specialSingleChallenges) {
+        final NextExecution nextChallengeExecution = new NextExecution(specialSingleChallenges);
+        Map<String, String> gameEngineConfs =
+                ConfigConverter.toGameEngineConfs(game, gameEngineConf);
+        Map<String, Object> challengeValues =
+                ConfigConverter.toSpecialChallengeValues(nextChallengeExecution,
+                        specialSingleChallenges);
+        String playerSet = ConfigConverter.toPlayerSet(specialSingleChallenges.getPlayerSet());
+        Map<String, String> rewards =
+                ConfigConverter.toRewards(specialSingleChallenges.getReward());
+
+        final String model = specialSingleChallenges.getSettings().getModel();
+        List<ChallengeExpandedDTO> challenges = recommenderApi.createSingleChallengeUnaTantum(
+                gameEngineConfs, model, challengeValues, playerSet, rewards);
+        if (logger.isDebugEnabled()) {
+            challenges.forEach(c -> {
+                logger.debug("model:{}, s:{}, e:{}, f:{}", c.getModelName(), c.getStart(),
+                        c.getEnd(), c.getData());
+            });
+        }
+        logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
+        challenges.forEach(challenge -> {
+            recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
+        });
+        logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
         return new ValidResult(true);
     }
 }

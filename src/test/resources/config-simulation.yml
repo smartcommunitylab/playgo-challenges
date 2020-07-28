@@ -55,3 +55,20 @@ games:
         type: 
         value:
         maxValue:
+    specialSingleChallenges: 
+      settings:
+        start: 2020-07-23 00:00
+        duration: 1d
+        model: survey
+        fields:
+          surveyType: finalCountdown
+          bonusScore: 110.0
+          link: ""
+          bonusPointType: green leaves      
+        hide: False
+      playerSet:
+      reward:
+        scoreName: green leaves
+        type: fixed
+        value: 100.0
+        maxValue:

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import it.smartcommunitylab.challenges.bean.GroupSettings;
 import it.smartcommunitylab.challenges.bean.Settings;
+import it.smartcommunitylab.challenges.bean.SpecialSettings;
+import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
@@ -40,6 +42,19 @@ class NextExecution {
         this.end = end;
         this.duration = challengeSettings.getDuration();
         this.hidden = false;
+        this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
+        this.suspended = false;
+    }
+
+    public NextExecution(SpecialSingleChallenge specialSingleChallenge) {
+        final TimeHelper timeHelper = new TimeHelper();
+        final SpecialSettings challengeSettings = specialSingleChallenge.getSettings();
+        final Date nextStart = challengeSettings.getStart();
+        final Date end = timeHelper.calculateEnd(nextStart, challengeSettings.getDuration());
+        this.start = nextStart;
+        this.end = end;
+        this.duration = challengeSettings.getDuration();
+        this.hidden = challengeSettings.isHide();
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.suspended = false;
     }
