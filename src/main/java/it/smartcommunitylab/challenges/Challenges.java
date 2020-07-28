@@ -115,11 +115,13 @@ public class Challenges {
                         c.getEnd(), c.getData());
             });
         }
-        logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
+        logger.info("Created {} challenges of model {} for game {}", challenges.size(), model,
+                game.getGameId());
         challenges.forEach(challenge -> {
             recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
         });
-        logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
+        logger.info("Assigned {} challenges of model {} for game {}", challenges.size(), model,
+                game.getGameId());
         return new ValidResult(true);
     }
 }

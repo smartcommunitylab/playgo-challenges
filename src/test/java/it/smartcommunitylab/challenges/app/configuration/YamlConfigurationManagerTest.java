@@ -13,6 +13,7 @@ import org.junit.Test;
 import it.smartcommunitylab.challenges.bean.GroupSettings;
 import it.smartcommunitylab.challenges.bean.Settings;
 import it.smartcommunitylab.challenges.bean.SpecialSettings;
+import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 
 public class YamlConfigurationManagerTest {
 
@@ -81,7 +82,9 @@ public class YamlConfigurationManagerTest {
         assertThat(conf.getStandardSingleChallengeConfig()).isNull();
         assertThat(conf.getStandardGroupChallengeConfig()).isNull();
 
-        SpecialSettings config = conf.getSpecialSingleChallengeConfig().getSettings();
+        final SpecialSingleChallenge specialSingleChallenge =
+                conf.getSpecialSingleChallengeConfig().get(0);
+        SpecialSettings config = specialSingleChallenge.getSettings();
         assertThat(config.getStart()).isEqualTo("2020-05-01 00:00:00");
         assertThat(config.getDuration()).isEqualTo(Period.ofDays(1));
         Map<String, Object> fields = new HashMap<>();
@@ -89,6 +92,6 @@ public class YamlConfigurationManagerTest {
         fields.put("bonusPointType", "green leaves");
         fields.put("link", "");
         assertThat(config.getFields()).containsAllEntriesOf(fields);
-        assertThat(conf.getSpecialSingleChallengeConfig().getPlayerSet()).isEmpty();
+        assertThat(specialSingleChallenge.getPlayerSet()).isEmpty();
     }
 }

@@ -56,19 +56,38 @@ games:
         value:
         maxValue:
     specialSingleChallenges: 
-      settings:
-        start: 2020-07-23 00:00
-        duration: 1d
-        model: survey
-        fields:
-          surveyType: finalCountdown
-          bonusScore: 110.0
-          link: ""
-          bonusPointType: green leaves      
-        hide: False
-      playerSet:
-      reward:
-        scoreName: green leaves
-        type: fixed
-        value: 100.0
-        maxValue:
+      - settings:
+          start: 2020-07-23 00:00
+          duration: 1d
+          model: survey
+          fields:
+            surveyType: finalCountdown
+            bonusScore: 110.0
+            link: ""
+            bonusPointType: green leaves      
+          hide: False
+        playerSet:
+        reward:
+          scoreName: green leaves
+          type: fixed
+          value: 100.0
+          maxValue:
+      - settings:
+          start: 2020-07-23 00:00
+          duration: 1d
+          model: absoluteIncrement
+          fields:
+            difficulty: 5.0
+            wi: "wi_value"
+            bonusScore: 20.0
+            bonusPointType: "green leaves"
+            periodName: "weekly"
+            target: 5.0
+            counterName: "Walk_Km"
+          hide: False
+        playerSet:
+        reward:
+          scoreName: green leaves
+          type: fixed
+          value: 130.0
+          maxValue:

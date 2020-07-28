@@ -1,5 +1,7 @@
 package it.smartcommunitylab.challenges.app.configuration;
 
+import java.util.List;
+
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
@@ -7,7 +9,7 @@ public class GameConfiguration {
     private String gameId;
     private StandardSingleChallengeConfig standardSingleChallenges;
     private StandardGroupChallengeConfig standardGroupChallenges;
-    private SpecialSingleChallengeConfig specialSingleChallenges;
+    private List<SpecialSingleChallengeConfig> specialSingleChallenges;
 
     public String getGameId() {
         return gameId;
@@ -42,11 +44,12 @@ public class GameConfiguration {
         this.standardGroupChallenges = standardGroupChallenges;
     }
 
-    public SpecialSingleChallengeConfig getSpecialSingleChallenges() {
+    public List<SpecialSingleChallengeConfig> getSpecialSingleChallenges() {
         return specialSingleChallenges;
     }
 
-    public void setSpecialSingleChallenges(SpecialSingleChallengeConfig specialSingleChallenges) {
+    public void setSpecialSingleChallenges(
+            List<SpecialSingleChallengeConfig> specialSingleChallenges) {
         this.specialSingleChallenges = specialSingleChallenges;
     }
 

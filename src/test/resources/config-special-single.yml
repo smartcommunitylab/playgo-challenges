@@ -2,19 +2,19 @@
 games:
   - gameId: 5d9353a3f0856342b2dded7f
     specialSingleChallenges: 
-      settings:
-        start: 2020-05-01 00:00
-        duration: 1d
-        model: survey
-        fields:
-          surveyType: finalCountdown
-          bonusScore: 100.0
-          link: ""
-          bonusPointType: green leaves      
-        hide: False
-      playerSet:
-      reward:
-        scoreName: green leaves
-        type: fixed
-        value: 100.0
-        maxValue:
+      - settings:
+          start: 2020-05-01 00:00
+          duration: 1d
+          model: survey
+          fields:
+            surveyType: finalCountdown
+            bonusScore: 100.0
+            link: ""
+            bonusPointType: green leaves      
+          hide: False
+        playerSet:
+        reward:
+          scoreName: green leaves
+          type: fixed
+          value: 100.0
+          maxValue:

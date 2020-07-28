@@ -55,10 +55,11 @@ public class Application {
                 }
                 if (assigner.isAssignSpecialSingle()) {
                     logger.info("execute specialSingleChallenges assignment");
-                    final SpecialSingleChallenge specialSingleChallenges =
+                    final List<SpecialSingleChallenge> specialSingleChallenges =
                             settings.getSpecialSingleChallengeConfig();
-                    Result result = challenges.assign(game, specialSingleChallenges);
-                    logger.info("Terminated assignment {}", result.getResult());
+                    specialSingleChallenges
+                            .forEach(special -> challenges.assign(game, special));
+                    logger.info("Terminated assignment {}", true);
                 }
             });
         } catch (FileNotFoundException e) {
