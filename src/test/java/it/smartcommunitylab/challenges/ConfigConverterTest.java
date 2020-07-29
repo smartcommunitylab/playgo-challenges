@@ -19,7 +19,7 @@ public class ConfigConverterTest {
         GameEngineInfo engineConfig = new GameEngineInfo("url", "username", "pass");
         Game game = new Game("gameId");
         Map<String, String> result = ConfigConverter.toGameEngineConfs(game, engineConfig);
-        assertThat(result).containsKeys("host", "user", "pass", "gameId");
+        assertThat(result).containsKeys("HOST", "USER", "PASS", "GAMEID");
     }
 
     @Test
