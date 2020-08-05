@@ -56,7 +56,7 @@ class ConfigConverter {
         Map<String, Object> confs = new HashMap<>();
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZ");
         confs.put("start", dateFormatter.format(nextChallengeExecution.getStart()));
-        confs.put("end", dateFormatter.format(nextChallengeExecution.getEnd()));
+        confs.put("duration", nextChallengeExecution.getDuration().toString().substring(1));
         confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
         confs.put("exec", new Date());
         return confs;
