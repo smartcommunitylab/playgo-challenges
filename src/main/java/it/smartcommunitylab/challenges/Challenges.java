@@ -84,7 +84,12 @@ public class Challenges {
                 gameEngineConfs, modes, assignmentType, challengeValues, playerSet, rewards);
         logger.info("Created {} group challenges for game {}", challenges.size(), game.getGameId());
         if (logger.isDebugEnabled()) {
-            challenges.forEach(c -> logger.debug(c));
+            challenges.forEach(c -> {
+                logger.debug("model:{}, instanceName:{}, s:{}, e:{}, attendees: [{},{}]",
+                        c.getChallengeModelName(), c.getInstanceName(), c.getStart(), c.getEnd(),
+                        c.getAttendees().get(0).getPlayerId(),
+                        c.getAttendees().get(1).getPlayerId());
+            });
         }
         challenges.forEach(challenge -> {
             recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
