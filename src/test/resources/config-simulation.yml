@@ -47,8 +47,7 @@ games:
         modeConcepts:
           - Walk_Km
           - Bike_Km
-          - Bus_Km
-          - Train_Km
+          - green leaves
       playerSet:
       reward:
         scoreName: green leaves
