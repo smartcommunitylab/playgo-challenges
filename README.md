@@ -41,7 +41,13 @@ TBD
 You can run playgo-challenges in standalone mode using following command:
 
 ```bash
-java -jar challenges-jar-with-dependencies.jar Application --config <CONFIG_PATH> --url <GAMIFICATION_ENGINE_URL> --username <USERNAME> --password <PASSWORD> [--assign <SUPPORTED_VALUES>]
+java -jar challenges-jar-with-dependencies.jar Application \
+--config <CONFIG_PATH> \
+--url <GAMIFICATION_ENGINE_URL> \
+--username <USERNAME> \
+--password <PASSWORD>\
+[--assign <SUPPORTED_VALUES>] \
+[--execDate <DATE>]
 ```
 
 ```
@@ -51,6 +57,9 @@ java -jar challenges-jar-with-dependencies.jar Application --config <CONFIG_PATH
 --password: valid gamification engine password
 --assign: (optional, default: all) comma separated string of assignment types to process
           supported values: standardSingle, standardGroup, specialSingle
+--execDate: (optional, default: now) date as YYYY-MM-dd. This option is useful for test and debug, it
+            permit to simulate an execution in the given date. 
+            Challenge start and end date and all other time sensitive costraints will be relative to this date.
 ```
 You can find an example in [bin/assign-challenges.sh][assign_script]
 ### Library
