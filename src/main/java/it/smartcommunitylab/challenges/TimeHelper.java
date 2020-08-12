@@ -11,7 +11,26 @@ import it.smartcommunitylab.challenges.bean.Suspension;
 
 public class TimeHelper {
     public static final Clock DEFAULT_CLOCK = new SystemClock();
-    private Clock clock = DEFAULT_CLOCK;
+    private Clock clock;
+
+    public TimeHelper() {
+        clock = DEFAULT_CLOCK;
+    }
+
+    public TimeHelper(ExecDate executionDate) {
+        if (executionDate == null) {
+            throw new IllegalArgumentException("executionDate should not be null");
+        }
+
+        clock = new ExecDateClock(executionDate.getInstant());
+    }
+
+    public TimeHelper(Clock clock) {
+        if (clock == null) {
+            throw new IllegalArgumentException("clock should not be null");
+        }
+        this.clock = clock;
+    }
 
     private Date dateFrom(LocalDateTime datetime) {
         return Date.from(datetime.atZone(ZoneId.systemDefault()).toInstant());

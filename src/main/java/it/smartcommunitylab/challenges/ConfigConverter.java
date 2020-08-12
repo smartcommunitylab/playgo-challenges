@@ -2,7 +2,6 @@ package it.smartcommunitylab.challenges;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,7 @@ class ConfigConverter {
         confs.put("start", dateFormatter.format(nextChallengeExecution.getStart()));
         confs.put("duration", nextChallengeExecution.getDuration().toString().substring(1));
         confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
-        confs.put("exec", new Date());
+        confs.put("exec", nextChallengeExecution.getExecutionDate());
         confs.put("hide", nextChallengeExecution.isHidden());
         return confs;
     }
@@ -58,7 +57,7 @@ class ConfigConverter {
         confs.put("start", dateFormatter.format(nextChallengeExecution.getStart()));
         confs.put("duration", nextChallengeExecution.getDuration().toString().substring(1));
         confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
-        confs.put("exec", new Date());
+        confs.put("exec", nextChallengeExecution.getExecutionDate());
         return confs;
     }
 

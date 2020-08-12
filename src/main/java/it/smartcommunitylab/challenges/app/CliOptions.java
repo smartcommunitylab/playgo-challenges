@@ -10,7 +10,7 @@ class CliOptions {
     private static final String OPTION_PREFIX = "--";
     public enum Options {
         CONFIG("config", true), URL("url", true), USERNAME("username", true), PASSWORD("password",
-                true), ASSIGN("assign", false);
+                true), ASSIGN("assign", false), EXEC_DATE("execDate", false);
 
         private String value;
         private boolean required;

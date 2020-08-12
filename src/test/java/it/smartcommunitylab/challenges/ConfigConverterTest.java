@@ -29,7 +29,8 @@ public class ConfigConverterTest {
         standardSingleChallenges
                 .setSettings(new Settings(DateHelper.dateFromIso("2020-06-20"), Period.ofDays(7)));
         Map<String, Object> result =
-                ConfigConverter.toChallengeValues(new NextExecution(standardSingleChallenges));
+                ConfigConverter.toChallengeValues(
+                        new NextExecution(standardSingleChallenges, new ExecDate("2020-06-11")));
         assertThat(result).containsKeys("start", "duration", "challengeWeek", "exec", "hide");
     }
 }

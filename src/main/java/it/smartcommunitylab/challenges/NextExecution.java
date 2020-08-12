@@ -17,9 +17,10 @@ class NextExecution {
     private boolean hidden;
     private int challengeWeek;
     private boolean suspended;
+    private Date executionDate;
 
-    public NextExecution(StandardSingleChallenge standardSingleChallenge) {
-        final TimeHelper timeHelper = new TimeHelper();
+    public NextExecution(StandardSingleChallenge standardSingleChallenge, ExecDate executionDate) {
+        final TimeHelper timeHelper = new TimeHelper(executionDate);
         final Settings challengeSettings = standardSingleChallenge.getSettings();
         final Date nextStart = timeHelper.calculateNextStart(challengeSettings.getStart(),
                 challengeSettings.getDuration());
@@ -30,10 +31,11 @@ class NextExecution {
         this.hidden = challengeSettings.isHide();
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.suspended = timeHelper.shouldBeSospended(nextStart, standardSingleChallenge);
+        this.executionDate = Date.from(executionDate.getInstant());
     }
 
-    public NextExecution(StandardGroupChallenge standardGroupChallenge) {
-        final TimeHelper timeHelper = new TimeHelper();
+    public NextExecution(StandardGroupChallenge standardGroupChallenge, ExecDate executionDate) {
+        final TimeHelper timeHelper = new TimeHelper(executionDate);
         final GroupSettings challengeSettings = standardGroupChallenge.getSettings();
         final Date nextStart = timeHelper.calculateNextStart(challengeSettings.getStart(),
                 challengeSettings.getDuration());
@@ -44,10 +46,11 @@ class NextExecution {
         this.hidden = false;
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.suspended = false;
+        this.executionDate = Date.from(executionDate.getInstant());
     }
 
-    public NextExecution(SpecialSingleChallenge specialSingleChallenge) {
-        final TimeHelper timeHelper = new TimeHelper();
+    public NextExecution(SpecialSingleChallenge specialSingleChallenge, ExecDate executionDate) {
+        final TimeHelper timeHelper = new TimeHelper(executionDate);
         final SpecialSettings challengeSettings = specialSingleChallenge.getSettings();
         final Date nextStart = challengeSettings.getStart();
         final Date end = timeHelper.calculateEnd(nextStart, challengeSettings.getDuration());
@@ -57,6 +60,7 @@ class NextExecution {
         this.hidden = challengeSettings.isHide();
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.suspended = false;
+        this.executionDate = Date.from(executionDate.getInstant());
     }
 
     public Date getStart() {
@@ -81,6 +85,10 @@ class NextExecution {
 
     public boolean isSuspended() {
         return suspended;
+    }
+
+    public Date getExecutionDate() {
+        return executionDate;
     }
 
 

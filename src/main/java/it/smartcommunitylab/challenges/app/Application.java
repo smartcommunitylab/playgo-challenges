@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import it.smartcommunitylab.challenges.Challenges;
+import it.smartcommunitylab.challenges.ExecDate;
 import it.smartcommunitylab.challenges.Result;
 import it.smartcommunitylab.challenges.app.CliOptions.Options;
 import it.smartcommunitylab.challenges.app.configuration.ChallengesSettings;
@@ -25,8 +26,11 @@ public class Application {
 
     public static void main(String[] args) {
         CliOptions options = new CliOptions(args);
-        logger.info("running on configuration {} and gamification engine url {}",
-                options.get(Options.CONFIG), options.get(Options.URL));
+        final ExecDate executionDate = options.get(Options.EXEC_DATE) != null
+                ? new ExecDate(options.get(Options.EXEC_DATE)) : new ExecDate();
+        logger.info("running on configuration {} and gamification engine url {}, execDate: {}",
+                options.get(Options.CONFIG), options.get(Options.URL),
+                executionDate.getInstantAsString());
         final Assigner assigner = new Assigner(options.getAsArray(Options.ASSIGN));
         GameEngineInfo gameEngineConf = new GameEngineInfo(options.get(Options.URL),
                 options.get(Options.USERNAME), options.get(Options.PASSWORD));
@@ -43,14 +47,15 @@ public class Application {
                     logger.info("execute standardSingleChallenges assignment");
                     final StandardSingleChallenge standardSingleChallenges =
                             settings.getStandardSingleChallengeConfig();
-                    Result result = challenges.assign(game, standardSingleChallenges);
+                    Result result =
+                            challenges.assign(game, standardSingleChallenges, executionDate);
                     logger.info("Terminated assignment {}", result.getResult());
                 }
                 if (assigner.isAssignStandardGroup()) {
                     logger.info("execute standardGroupChallenges assignment");
                     final StandardGroupChallenge standardGroupChallenges =
                             settings.getStandardGroupChallengeConfig();
-                    Result result = challenges.assign(game, standardGroupChallenges);
+                    Result result = challenges.assign(game, standardGroupChallenges, executionDate);
                     logger.info("Terminated assignment {}", result.getResult());
                 }
                 if (assigner.isAssignSpecialSingle()) {
@@ -58,7 +63,7 @@ public class Application {
                     final List<SpecialSingleChallenge> specialSingleChallenges =
                             settings.getSpecialSingleChallengeConfig();
                     specialSingleChallenges
-                            .forEach(special -> challenges.assign(game, special));
+                            .forEach(special -> challenges.assign(game, special, executionDate));
                     logger.info("Terminated assignment {}", true);
                 }
             });

@@ -34,8 +34,10 @@ public class Challenges {
         this.recommenderApi = recommerderApiImpl;
     }
 
-    public Result assign(Game game, StandardSingleChallenge standardSingleChallenges) {
-        final NextExecution nextChallengeExecution = new NextExecution(standardSingleChallenges);
+    public Result assign(Game game, StandardSingleChallenge standardSingleChallenges,
+            ExecDate execDate) {
+        final NextExecution nextChallengeExecution =
+                new NextExecution(standardSingleChallenges, execDate);
         if (nextChallengeExecution.isSuspended()) {
             logger.info("challenge will start in a suspension range, suspend assignment");
             return new ValidResult(true);
@@ -68,9 +70,11 @@ public class Challenges {
         }
     }
 
-    public Result assign(Game game, StandardGroupChallenge standardGroupChallenges) {
+    public Result assign(Game game, StandardGroupChallenge standardGroupChallenges,
+            ExecDate execDate) {
         logger.info("Assign group challenges.....");
-        final NextExecution nextChallengeExecution = new NextExecution(standardGroupChallenges);
+        final NextExecution nextChallengeExecution =
+                new NextExecution(standardGroupChallenges, execDate);
         Map<String, String> gameEngineConfs =
                 ConfigConverter.toGameEngineConfs(game, gameEngineConf);
         Map<String, Object> challengeValues =
@@ -100,8 +104,10 @@ public class Challenges {
     }
 
 
-    public Result assign(Game game, SpecialSingleChallenge specialSingleChallenges) {
-        final NextExecution nextChallengeExecution = new NextExecution(specialSingleChallenges);
+    public Result assign(Game game, SpecialSingleChallenge specialSingleChallenges,
+            ExecDate execDate) {
+        final NextExecution nextChallengeExecution =
+                new NextExecution(specialSingleChallenges, execDate);
         Map<String, String> gameEngineConfs =
                 ConfigConverter.toGameEngineConfs(game, gameEngineConf);
         Map<String, Object> challengeValues =

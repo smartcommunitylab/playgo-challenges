@@ -17,8 +17,8 @@ public class TimeHelperTest {
 
     @Test
     public void calculate_next_start() {
-        TimeHelper timeHelper = new TimeHelper();
-        timeHelper.setClock(new TestClock(DateHelper.dateFromIso("2020-06-11").toInstant()));
+        TimeHelper timeHelper = new TimeHelper(new ExecDate("2020-06-11"));
+        // timeHelper.setClock(new ExecDateClock(DateHelper.dateFromIso("2020-06-11").toInstant()));
         final Period sevenDaysDuration = Period.ofDays(7);
         final Date startGameDate = DateHelper.dateFromIso("2019-10-26");
         final Date nextStart = timeHelper.calculateNextStart(startGameDate, sevenDaysDuration);
@@ -27,8 +27,8 @@ public class TimeHelperTest {
 
     @Test
     public void when_now_is_before_start_then_next_start_is_the_start_date() {
-        TimeHelper timeHelper = new TimeHelper();
-        timeHelper.setClock(new TestClock(DateHelper.dateFromIso("2020-06-01").toInstant()));
+        TimeHelper timeHelper = new TimeHelper(new ExecDate("2020-06-01"));
+        // timeHelper.setClock(new ExecDateClock(DateHelper.dateFromIso("2020-06-01").toInstant()));
         final Period twoDaysDuration = Period.ofDays(2);
         final Date startGameDate = DateHelper.dateFromIso("2020-07-01");
         final Date nextStart = timeHelper.calculateNextStart(startGameDate, twoDaysDuration);
@@ -37,8 +37,8 @@ public class TimeHelperTest {
 
     @Test
     public void when_now_is_the_start_date_then_next_start_is_the_start_date() {
-        TimeHelper timeHelper = new TimeHelper();
-        timeHelper.setClock(new TestClock(DateHelper.dateFromIso("2020-07-01").toInstant()));
+        TimeHelper timeHelper = new TimeHelper(new ExecDate("2020-07-01"));
+        // timeHelper.setClock(new ExecDateClock(DateHelper.dateFromIso("2020-07-01").toInstant()));
         final Period twoDaysDuration = Period.ofDays(2);
         final Date startGameDate = DateHelper.dateFromIso("2020-07-01");
         final Date nextStart = timeHelper.calculateNextStart(startGameDate, twoDaysDuration);
