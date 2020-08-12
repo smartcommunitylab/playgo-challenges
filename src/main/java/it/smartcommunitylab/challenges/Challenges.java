@@ -53,7 +53,7 @@ public class Challenges {
                     ConfigConverter.toRewards(standardSingleChallenges.getReward());
             Set<String> modes = standardSingleChallenges.getSettings().getModes();
 
-            List<ChallengeExpandedDTO> challenges = recommenderApi.createSingleChallengeWeekly(
+            List<ChallengeExpandedDTO> challenges = recommenderApi.createStandardSingleChallenges(
                     gameEngineConfs, modes, creationRules, challengeValues, playerSet, rewards);
             if (logger.isDebugEnabled()) {
                 challenges.forEach(c -> {
@@ -84,7 +84,7 @@ public class Challenges {
                 ConfigConverter.toRewards(standardGroupChallenges.getReward());
         Set<String> modes = standardGroupChallenges.getSettings().getModes();
         final String assignmentType = standardGroupChallenges.getSettings().getModel();
-        List<GroupExpandedDTO> challenges = recommenderApi.createCoupleChallengeWeekly(
+        List<GroupExpandedDTO> challenges = recommenderApi.createStandardGroupChallenges(
                 gameEngineConfs, modes, assignmentType, challengeValues, playerSet, rewards);
         logger.info("Created {} group challenges for game {}", challenges.size(), game.getGameId());
         if (logger.isDebugEnabled()) {
@@ -118,7 +118,7 @@ public class Challenges {
                 ConfigConverter.toRewards(specialSingleChallenges.getReward());
 
         final String model = specialSingleChallenges.getSettings().getModel();
-        List<ChallengeExpandedDTO> challenges = recommenderApi.createSingleChallengeUnaTantum(
+        List<ChallengeExpandedDTO> challenges = recommenderApi.createSpecialSingleChallenges(
                 gameEngineConfs, model, challengeValues, playerSet, rewards);
         if (logger.isDebugEnabled()) {
             challenges.forEach(c -> {
