@@ -100,11 +100,39 @@ For every game you can define parameters for three assignement scenarios `standa
 
 ### StandardGroupChallenges
 
-TBD
+```
+    standardGroupChallenges:
+      settings:
+        start: # begin date of the challenge season for the game, format as: YYYY-MM-DD HH:MM [Europe/Rome timezone] 
+        duration: # duration of the challenges, format X[d,w,m] X -> number, d: days, w: weeks, m:months ex: 7d for seven days
+        model: # group challenge model, valid values: groupCooperative, groupCompetitivePerformance, groupCompetitiveTime
+        modeConcepts: # list of pointConcept challenge-gen has to consider, ex. Walk_Km
+          -
+      playerSet:  # a list of playerIds target of assignment, leave empty to assign to all
+      reward: # parameters to calculate the reward amount
+        scoreName: # pointConcept name
+        type: # unused in group challenge scenario leave empty
+        value: # unused in group challenge scenario leave empty
+        maxValue: # unused in group challenge scenario leave empty
+```
 
 ### SpecialSingleChallenges
 
-TBD
+```
+    specialSingleChallenges: 
+      - settings:
+          start: # begin date of the challenge season for the game, format as: YYYY-MM-DD HH:MM [Europe/Rome timezone]
+          duration: # duration of the challenges, format X[d,w,m] X -> number, d: days, w: weeks, m:months ex: 7d for seven days
+          model: # single challenge model
+          fields: # fields relative to selected model, express as FIELD_NAME: VALUE one for every line
+          hide: # True to assign a hidden challenge, False otherwise
+        playerSet: # a list of playerIds target of assignment, leave empty to assign to all
+        reward: # parameters to calculate the reward amount
+          scoreName: # pointConcept name
+          type: # reward strategy used by challgenge-gen. For special single challenges only valid value is: fixed
+          value: # value bound to type field
+          maxValue: # unused in special single challenge scenario leave empty
+```
 
 [assign_script]: ./bin/assign-challenges.sh
 [config_sample]: src/test/resources/config-simulation.yml]
