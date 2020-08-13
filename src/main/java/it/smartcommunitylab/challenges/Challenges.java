@@ -25,7 +25,6 @@ public class Challenges {
 
     public Challenges(GameEngineInfo gameEngineConf) {
         this.gameEngineConf = gameEngineConf;
-        // use eu.fbk.das.api.sample to test without challenge-gen integration
         recommenderApi = new eu.fbk.das.api.RecommenderSystemImpl();
     }
 
