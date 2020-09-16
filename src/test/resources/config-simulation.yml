@@ -61,9 +61,7 @@ games:
           model: survey
           fields:
             surveyType: finalCountdown
-            bonusScore: 110.0
             link: ""
-            bonusPointType: green leaves      
           hide: False
         playerSet:
         reward:
@@ -77,7 +75,6 @@ games:
           model: absoluteIncrement
           fields:
             difficulty: 5.0
-            wi: "wi_value"
             bonusScore: 20.0
             bonusPointType: "green leaves"
             periodName: "weekly"
