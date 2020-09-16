@@ -128,9 +128,9 @@ For every game you can define parameters for three assignement scenarios `standa
           hide: # True to assign a hidden challenge, False otherwise
         playerSet: # a list of playerIds target of assignment, leave empty to assign to all
         reward: # parameters to calculate the reward amount
-          scoreName: # pointConcept name
+          scoreName: # pointConcept name, it will be used as "bonusPointType" field of the challenge
           type: # reward strategy used by challgenge-gen. For special single challenges only valid value is: fixed
-          value: # value bound to type field
+          value: # value bound to type field, it will be used as "bonusScore" field of the challenge
           maxValue: # unused in special single challenge scenario leave empty
 ```
 
