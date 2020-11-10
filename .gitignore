@@ -18,3 +18,4 @@ buildNumber.properties
 rs.statistics
 
 *.log
+*.log.*
