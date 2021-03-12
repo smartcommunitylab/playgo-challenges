@@ -1,14 +1,16 @@
 package it.smartcommunitylab.challenges.bean;
 
 public class GameEngineInfo {
-    private String url;
-    private String username;
-    private String password;
+    private final String url;
+    private final String username;
+    private final String password;
+    private final String assign;
 
-    public GameEngineInfo(String url, String username, String password) {
+    public GameEngineInfo(String url, String username, String password, String assign) {
         this.url = url;
         this.username = username;
         this.password = password;
+        this.assign = assign;
     }
 
     public String getUrl() {
@@ -21,6 +23,10 @@ public class GameEngineInfo {
 
     public String getPassword() {
         return password;
+    }
+
+    public Boolean getAssign() {
+        return assign != null && assign.equals("true");
     }
 
 }

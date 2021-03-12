@@ -20,6 +20,8 @@ import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
+import static eu.fbk.das.utils.Utils.p;
+
 public class Application {
 
     private static final Logger logger = LogManager.getLogger(Application.class);
@@ -31,9 +33,10 @@ public class Application {
         logger.info("running on configuration {} and gamification engine url {}, execDate: {}",
                 options.get(Options.CONFIG), options.get(Options.URL),
                 executionDate.getInstantAsString());
-        final Assigner assigner = new Assigner(options.getAsArray(Options.ASSIGN));
+        final Tasker tasker = new Tasker(options.getAsArray(Options.TASK));
+        p(options.get(Options.ASSIGN));
         GameEngineInfo gameEngineConf = new GameEngineInfo(options.get(Options.URL),
-                options.get(Options.USERNAME), options.get(Options.PASSWORD));
+                options.get(Options.USERNAME), options.get(Options.PASSWORD), options.get(Options.ASSIGN));
         Challenges challenges = new Challenges(gameEngineConf);
         final String configPath = options.get(Options.CONFIG);
         ConfigurationManager configurationManager = new YamlConfigurationManager();
@@ -43,27 +46,27 @@ public class Application {
                     configurationManager.parseConfiguration(new FileInputStream(configPath));
             challengesSettings.forEach(settings -> {
                 final Game game = settings.getGame();
-                if (assigner.isAssignStandardSingle()) {
+                if (tasker.isAssignStandardSingle()) {
                     logger.info("execute standardSingleChallenges assignment");
                     final StandardSingleChallenge standardSingleChallenges =
                             settings.getStandardSingleChallengeConfig();
                     Result result =
-                            challenges.assign(game, standardSingleChallenges, executionDate);
+                            challenges.generate(game, standardSingleChallenges, executionDate);
                     logger.info("Terminated assignment {}", result.getResult());
                 }
-                if (assigner.isAssignStandardGroup()) {
+                if (tasker.isAssignStandardGroup()) {
                     logger.info("execute standardGroupChallenges assignment");
                     final StandardGroupChallenge standardGroupChallenges =
                             settings.getStandardGroupChallengeConfig();
-                    Result result = challenges.assign(game, standardGroupChallenges, executionDate);
+                    Result result = challenges.generate(game, standardGroupChallenges, executionDate);
                     logger.info("Terminated assignment {}", result.getResult());
                 }
-                if (assigner.isAssignSpecialSingle()) {
+                if (tasker.isAssignSpecialSingle()) {
                     logger.info("execute specialSingleChallenges assignment");
                     final List<SpecialSingleChallenge> specialSingleChallenges =
                             settings.getSpecialSingleChallengeConfig();
                     specialSingleChallenges
-                            .forEach(special -> challenges.assign(game, special, executionDate));
+                            .forEach(special -> challenges.generate(game, special, executionDate));
                     logger.info("Terminated assignment {}", true);
                 }
             });

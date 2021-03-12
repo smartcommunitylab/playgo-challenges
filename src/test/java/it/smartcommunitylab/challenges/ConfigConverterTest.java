@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.Period;
 import java.util.Map;
 
+import it.smartcommunitylab.challenges.app.CliOptions;
 import org.junit.Test;
 
 import it.smartcommunitylab.challenges.bean.Game;
@@ -16,7 +17,7 @@ public class ConfigConverterTest {
 
     @Test
     public void check_game_engine_config() {
-        GameEngineInfo engineConfig = new GameEngineInfo("url", "username", "pass");
+        GameEngineInfo engineConfig = new GameEngineInfo("url", "username", "pass", "");
         Game game = new Game("gameId");
         Map<String, String> result = ConfigConverter.toGameEngineConfs(game, engineConfig);
         assertThat(result).containsKeys("HOST", "USER", "PASS", "GAMEID");

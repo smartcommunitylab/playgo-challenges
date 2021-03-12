@@ -24,8 +24,7 @@ public class Challenges {
 	private RecommenderSystemAPI recommenderApi;
 
 	public Challenges(GameEngineInfo gameEngineConf) {
-		this.gameEngineConf = gameEngineConf;
-		recommenderApi = new eu.fbk.das.api.RecommenderSystemImpl();
+		this(gameEngineConf, new eu.fbk.das.api.RecommenderSystemImpl());
 	}
 
 	Challenges(GameEngineInfo gameEngineConf, RecommenderSystemAPI recommerderApiImpl) {
@@ -33,7 +32,7 @@ public class Challenges {
 		this.recommenderApi = recommerderApiImpl;
 	}
 
-	public Result assign(Game game, StandardSingleChallenge standardSingleChallenges, ExecDate execDate) {
+	public Result generate(Game game, StandardSingleChallenge standardSingleChallenges, ExecDate execDate) {
 		final NextExecution nextChallengeExecution = new NextExecution(standardSingleChallenges, execDate);
 		if (nextChallengeExecution.isSuspended()) {
 			logger.info("challenge will start in a suspension range, suspend assignment");
@@ -55,16 +54,18 @@ public class Challenges {
 				});
 			}
 			logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
-			challenges.forEach(challenge -> {
-				recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
-			});
-			logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
+			if (this.gameEngineConf.getAssign()) {
+				challenges.forEach(challenge -> {
+					// recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
+				});
+				logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
+			}
 			return new ValidResult(true);
 		}
 	}
 
-	public Result assign(Game game, StandardGroupChallenge standardGroupChallenges, ExecDate execDate) {
-		logger.info("Assign group challenges.....");
+	public Result generate(Game game, StandardGroupChallenge standardGroupChallenges, ExecDate execDate) {
+		logger.info("Generate group challenges.....");
 		final NextExecution nextChallengeExecution = new NextExecution(standardGroupChallenges, execDate);
 		Map<String, String> gameEngineConfs = ConfigConverter.toGameEngineConfs(game, gameEngineConf);
 		Map<String, Object> challengeValues = ConfigConverter.toGroupChallengeValues(nextChallengeExecution);
@@ -82,14 +83,16 @@ public class Challenges {
 						c.getAttendees().get(1).getPlayerId());
 			});
 		}
-		challenges.forEach(challenge -> {
-			recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
-		});
-		logger.info("Assigned {} group challenges for game {}", challenges.size(), game.getGameId());
+		if (this.gameEngineConf.getAssign()) {
+			challenges.forEach(challenge -> {
+				// recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
+			});
+			logger.info("Assigned {} group challenges for game {}", challenges.size(), game.getGameId());
+		}
 		return new ValidResult(true);
 	}
 
-	public Result assign(Game game, SpecialSingleChallenge specialSingleChallenges, ExecDate execDate) {
+	public Result generate(Game game, SpecialSingleChallenge specialSingleChallenges, ExecDate execDate) {
 		final NextExecution nextChallengeExecution = new NextExecution(specialSingleChallenges, execDate);
 		Map<String, String> gameEngineConfs = ConfigConverter.toGameEngineConfs(game, gameEngineConf);
 		Map<String, Object> challengeValues = ConfigConverter.toSpecialChallengeValues(nextChallengeExecution,
@@ -107,10 +110,12 @@ public class Challenges {
 			});
 		}
 		logger.info("Created {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());
-		challenges.forEach(challenge -> {
-			recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
-		});
-		logger.info("Assigned {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());
+		if (this.gameEngineConf.getAssign()) {
+			challenges.forEach(challenge -> {
+				// recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
+			});
+			logger.info("Assigned {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());
+		}
 		return new ValidResult(true);
 	}
 }

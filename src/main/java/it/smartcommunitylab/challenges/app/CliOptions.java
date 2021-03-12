@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-class CliOptions {
+public class CliOptions {
     private Map<String, String> options = new HashMap<>();
 
     private static final String OPTION_PREFIX = "--";
     public enum Options {
-        CONFIG("config", true), URL("url", true), USERNAME("username", true), PASSWORD("password",
-                true), ASSIGN("assign", false), EXEC_DATE("execDate", false);
+            CONFIG("config", true), URL("url", true),
+            USERNAME("username", true), PASSWORD("password",true),
+            TASK("task", false), EXEC_DATE("execDate", false),
+            ASSIGN("assign", false);
 
         private String value;
         private boolean required;

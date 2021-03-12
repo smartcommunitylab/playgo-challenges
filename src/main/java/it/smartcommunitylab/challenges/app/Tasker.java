@@ -3,7 +3,7 @@ package it.smartcommunitylab.challenges.app;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-class Assigner {
+class Tasker {
 
     public static final String STANDARD_SINGLE_OPTION = "standardSingle";
     public static final String STANDARD_GROUP_OPTION = "standardGroup";
@@ -12,7 +12,7 @@ class Assigner {
     private boolean assignStandardGroup;
     private boolean assignSpecialSingle;
 
-    public Assigner(String[] assignments) {
+    public Tasker(String[] assignments) {
         if (assignments == null || assignments.length == 0) {
             assignStandardSingle = assignStandardGroup = assignSpecialSingle = true;
         } else {
