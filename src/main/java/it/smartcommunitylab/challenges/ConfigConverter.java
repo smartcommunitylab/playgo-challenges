@@ -23,6 +23,8 @@ class ConfigConverter {
         confs.put("HOST", gameEngineConf.getUrl());
         confs.put("USER", gameEngineConf.getUsername());
         confs.put("PASS", gameEngineConf.getPassword());
+        confs.put("API_USER", gameEngineConf.getApiUser());
+        confs.put("API_PASS", gameEngineConf.getApiPass());
         return confs;
     }
 

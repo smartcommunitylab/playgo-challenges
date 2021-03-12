@@ -11,7 +11,7 @@ public class MainTest {
 
     @Test
     public void instantiate_library() {
-        GameEngineInfo gameEngineConf = new GameEngineInfo("engineUrl", "my-user", "p@ssW0rd", "");
+        GameEngineInfo gameEngineConf = new GameEngineInfo("engineUrl", "my-user", "p@ssW0rd", "", "", "");
         Challenges challenges = new Challenges(gameEngineConf);
         assertThat(challenges).isNotNull();
     }

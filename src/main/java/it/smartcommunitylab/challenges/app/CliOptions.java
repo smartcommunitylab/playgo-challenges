@@ -12,6 +12,7 @@ public class CliOptions {
             CONFIG("config", true), URL("url", true),
             USERNAME("username", true), PASSWORD("password",true),
             TASK("task", false), EXEC_DATE("execDate", false),
+            API_USER("api_user", true), API_PASS("api_pass",true),
             ASSIGN("assign", false);
 
         private String value;

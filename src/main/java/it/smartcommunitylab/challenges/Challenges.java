@@ -33,6 +33,7 @@ public class Challenges {
 	}
 
 	public Result generate(Game game, StandardSingleChallenge standardSingleChallenges, ExecDate execDate) {
+		logger.info("Generate standard single challenges.....");
 		final NextExecution nextChallengeExecution = new NextExecution(standardSingleChallenges, execDate);
 		if (nextChallengeExecution.isSuspended()) {
 			logger.info("challenge will start in a suspension range, suspend assignment");

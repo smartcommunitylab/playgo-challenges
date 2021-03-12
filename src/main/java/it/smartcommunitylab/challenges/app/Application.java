@@ -36,7 +36,8 @@ public class Application {
         final Tasker tasker = new Tasker(options.getAsArray(Options.TASK));
         p(options.get(Options.ASSIGN));
         GameEngineInfo gameEngineConf = new GameEngineInfo(options.get(Options.URL),
-                options.get(Options.USERNAME), options.get(Options.PASSWORD), options.get(Options.ASSIGN));
+                options.get(Options.USERNAME), options.get(Options.PASSWORD),
+                options.get(Options.ASSIGN), options.get(Options.API_USER), options.get(Options.API_PASS));
         Challenges challenges = new Challenges(gameEngineConf);
         final String configPath = options.get(Options.CONFIG);
         ConfigurationManager configurationManager = new YamlConfigurationManager();
