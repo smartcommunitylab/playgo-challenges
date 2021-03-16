@@ -72,8 +72,11 @@ java -jar challenges-jar-with-dependencies.jar Application \
 --url <GAMIFICATION_ENGINE_URL> \
 --username <USERNAME> \
 --password <PASSWORD>\
-[--assign <SUPPORTED_VALUES>] \
+--api_user <USERNAME> \
+--api_pass <PASSWORD>\
+[--task <SUPPORTED_VALUES>] \
 [--execDate <DATE>]
+[--assign true]
 ```
 
 ```
@@ -81,11 +84,14 @@ java -jar challenges-jar-with-dependencies.jar Application \
 --url: url to gamification engine
 --username: valid gamification engine username
 --password: valid gamification engine password
---assign: (optional, default: all) comma separated string of assignment types to process
+--api_user: valid api username
+--api_pass: valid api password
+--task: (optional, default: all) comma separated string of assignment types to process
           supported values: standardSingle, standardGroup, specialSingle
 --execDate: (optional, default: now) date as YYYY-MM-dd. This option is useful for test and debug, it
             permit to simulate an execution in the given date. 
             Challenge start and end date and all other time sensitive costraints will be relative to this date.
+--assign: (optional, default: none) assigns the generated challenges at the end of the task
 ```
 You can find an example in [bin/assign-challenges.sh][assign_script]
 ### Library
