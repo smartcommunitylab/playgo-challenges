@@ -34,7 +34,6 @@ public class Application {
                 options.get(Options.CONFIG), options.get(Options.URL),
                 executionDate.getInstantAsString());
         final Tasker tasker = new Tasker(options.getAsArray(Options.TASK));
-        p(options.get(Options.ASSIGN));
         GameEngineInfo gameEngineConf = new GameEngineInfo(options.get(Options.URL),
                 options.get(Options.USERNAME), options.get(Options.PASSWORD),
                 options.get(Options.ASSIGN), options.get(Options.API_USER), options.get(Options.API_PASS));
@@ -53,14 +52,14 @@ public class Application {
                             settings.getStandardSingleChallengeConfig();
                     Result result =
                             challenges.generate(game, standardSingleChallenges, executionDate);
-                    logger.info("Terminated assignment {}", result.getResult());
+                    logger.info("Terminated task {}", result.getResult());
                 }
                 if (tasker.isAssignStandardGroup()) {
                     logger.info("execute standardGroupChallenges assignment");
                     final StandardGroupChallenge standardGroupChallenges =
                             settings.getStandardGroupChallengeConfig();
                     Result result = challenges.generate(game, standardGroupChallenges, executionDate);
-                    logger.info("Terminated assignment {}", result.getResult());
+                    logger.info("Terminated task {}", result.getResult());
                 }
                 if (tasker.isAssignSpecialSingle()) {
                     logger.info("execute specialSingleChallenges assignment");
@@ -68,7 +67,7 @@ public class Application {
                             settings.getSpecialSingleChallengeConfig();
                     specialSingleChallenges
                             .forEach(special -> challenges.generate(game, special, executionDate));
-                    logger.info("Terminated assignment {}", true);
+                    logger.info("Terminated task {}", true);
                 }
             });
         } catch (FileNotFoundException e) {
