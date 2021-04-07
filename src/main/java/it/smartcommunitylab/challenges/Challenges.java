@@ -59,7 +59,7 @@ public class Challenges {
 			logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
 			if (this.gameEngineConf.getAssign()) {
 				challenges.forEach(challenge -> {
-					// recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
+					recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
 				});
 				logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
 			}
@@ -88,7 +88,7 @@ public class Challenges {
 		}
 		if (this.gameEngineConf.getAssign()) {
 			challenges.forEach(challenge -> {
-				// recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
+				recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
 			});
 			logger.info("Assigned {} group challenges for game {}", challenges.size(), game.getGameId());
 		}
@@ -115,7 +115,7 @@ public class Challenges {
 		logger.info("Created {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());
 		if (this.gameEngineConf.getAssign()) {
 			challenges.forEach(challenge -> {
-				// recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
+				 recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
 			});
 			logger.info("Assigned {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());
 		}
