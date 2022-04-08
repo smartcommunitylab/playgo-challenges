@@ -3,7 +3,7 @@ package it.smartcommunitylab.challenges.app;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-class Tasker {
+public class Tasker {
 
     public static final String STANDARD_SINGLE_OPTION = "standardSingle";
     public static final String STANDARD_GROUP_OPTION = "standardGroup";

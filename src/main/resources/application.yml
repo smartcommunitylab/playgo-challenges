@@ -1,0 +1,28 @@
+server:
+    port: ${SERVER_PORT:8020}
+    servlet:
+      context-path: ${SERVER_CONTEXTPATH:/challenge-generator}
+
+config:
+  file: ${CONFIG_PATH:/home/dev/gamification/challenge-assignment-ferrara-v1.0.yml}
+  url: ${GAMIFICATION_URL:http://localhost:8010/gamification}
+  username: long-rovereto
+  password: rov
+  assign: true
+  execDate: ${EXECUTION_DATE:2022-04-02}
+  task: ${TASK:}
+  
+openapi:
+   version: 1.0.0
+   license: Apache License, Version 2.0
+   licenseUrl: http://www.apache.org/licenses/LICENSE-2.0
+   contact:
+      name: DS Lab
+      url: www.smartcommunitylab.it
+      email: info@smartcommunitylab.it
+                      
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+  api-docs:
+    path: /challenge-generator/v3/api-docs
