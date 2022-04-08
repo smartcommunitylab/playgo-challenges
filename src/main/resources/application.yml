@@ -6,8 +6,8 @@ server:
 config:
   file: ${CONFIG_PATH:/home/dev/gamification/challenge-assignment-ferrara-v1.0.yml}
   url: ${GAMIFICATION_URL:http://localhost:8010/gamification}
-  username: long-rovereto
-  password: rov
+  username:
+  password:
   assign: true
   execDate: ${EXECUTION_DATE:2022-04-02}
   task: ${TASK:}
