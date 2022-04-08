@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* Jdk 1.8+
+* Jdk 11 (Tested with Java 11.0.5)
 
 ## Build
 
@@ -29,6 +29,42 @@ To create the `playgo-challenges` full standalone version run the command
 `mvn clean package -P full-client-jar -DskipTests`
 
 You can find the standalone jar `challenges-jar-with-dependencies.jar` into `target` directory
+
+
+### Web application
+
+
+### Basic Auth
+The application is protected with Basic Auth mode, the credentials of which is configured in users.yml file.
+
+```shell
+src/main/resources/users.yml
+```
+
+By default the application starts on port 8020. The configuration can be changed in application.yml file.
+
+```shell
+src/main/resources/application.yml
+```
+
+or can be defined as environment variable during application launch.
+
+
+### Run
+
+In order to start web engine, it is required to run the following command from project root(profile specific).
+
+```shell
+java -jar target\challenges.jar --spring.profiles.active=sec
+```
+
+### API Console
+In order to access the API console based on Spring Doc, open in browser the following url
+
+```shell
+http://localhost:8020/challenge-generator/swagger-ui/index.html
+```
+
 
 ### Library
 
@@ -168,3 +204,6 @@ For every game you can define parameters for three assignement scenarios `standa
 
 [assign_script]: ./bin/assign-challenges.sh
 [config_sample]: src/test/resources/config-simulation.yml]
+
+
+
