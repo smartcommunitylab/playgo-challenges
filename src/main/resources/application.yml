@@ -4,13 +4,9 @@ server:
       context-path: ${SERVER_CONTEXTPATH:/challenge-generator}
 
 config:
-  file: ${CONFIG_PATH:/home/dev/gamification/challenge-assignment-ferrara-v1.0.yml}
   url: ${GAMIFICATION_URL:http://localhost:8010/gamification}
-  username:
-  password:
-  assign: true
-  execDate: ${EXECUTION_DATE:2022-04-02}
-  task: ${TASK:}
+  username: ${USERNAME:}
+  password: ${PASSWORD:}
   
 openapi:
    version: 1.0.0
