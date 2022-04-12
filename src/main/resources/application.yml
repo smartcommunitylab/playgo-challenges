@@ -7,6 +7,8 @@ config:
   url: ${GAMIFICATION_URL:http://localhost:8010/gamification}
   username: ${USERNAME:}
   password: ${PASSWORD:}
+  api_user: ${API_USER:}
+  api_pass: ${API_PASS:}
   
 openapi:
    version: 1.0.0

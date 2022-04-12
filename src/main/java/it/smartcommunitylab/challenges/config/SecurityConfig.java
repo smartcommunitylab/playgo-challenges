@@ -16,7 +16,6 @@ import it.smartcommunitylab.challenges.sec.UsersProvider;
 
 @Configuration
 @EnableWebSecurity
-@Profile({"sec"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final Logger logger = LogManager.getLogger(SecurityConfig.class);
