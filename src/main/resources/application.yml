@@ -4,9 +4,10 @@ server:
       context-path: ${SERVER_CONTEXTPATH:/challenge-generator}
 
 config:
-  url: ${GAMIFICATION_URL:http://localhost:8010/gamification}
+  url: ${GAMIFICATION_URL:}
   username: ${USERNAME:}
   password: ${PASSWORD:}
+  url_stats: ${GAMIFICATION_STATS_URL:}
   api_user: ${API_USER:}
   api_pass: ${API_PASS:}
   
