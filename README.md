@@ -65,6 +65,114 @@ In order to access the API console based on Spring Doc, open in browser the foll
 http://localhost:8020/challenge-generator/swagger-ui/index.html
 ```
 
+### Sample Invocation
+
+POST /api/generate/ 
+
+Request body
+
+```shell
+[{
+	"gameId": "$gameId",
+	"standardSingleChallenge": {
+		"levelStrategies": [
+			{
+				"level": {
+					"type": "Green Warrior",
+					"index": 0
+				},
+				"strategy": "empty"
+			},
+			{
+				"level": {
+					"type": "Green Warrior",
+					"index": 1
+				},
+				"strategy": "fixedOne"
+			},
+			{
+				"level": {
+					"type": "Green Warrior",
+					"index": 2
+				},
+				"strategy": "choiceTwoV2"
+			},
+			{
+				"level": {
+					"type": "Green Warrior",
+					"index": 3
+				},
+				"strategy": "choiceThreeV2"
+			}
+		],
+		"settings": {
+			"start": "2020-09-26 00:00",
+			"duration": "P7D",
+			"modeConcepts": [
+				"Walk_Km",
+				"Bike_Km"
+			],
+			"hide": true,
+			"suspensions": []
+		},
+		"playerSet": [],
+		"reward": {
+			"scoreName": "green leaves",
+			"type": "FIXED",
+			"value": 100.0
+		}
+	},
+	"standardGroupChallenge": {
+		"settings": {
+			"start": "2020-09-26 00:00",
+			"duration": "P7D",
+			"model": "groupCooperative",
+			"modeConcepts": [
+				"Walk_Km",
+				"Bike_Km",
+				"green leaves"
+			]
+		},
+		"playerSet": [],
+		"reward": {
+			"scoreName": "green leaves"			
+		}
+	},
+	"specialSingleChallenge": [{
+		"settings": {
+          "start": "2020-12-12 00:00",
+			"duration": "P7D",
+			"model": "survey",
+			"hide": false,
+			"fields": {
+				"surveyType": "bellaCoincidenza",
+				"link": ""
+			}
+		},
+		"playerSet": [],
+		"reward": {
+			"scoreName": "green leaves",
+			"type": "FIXED",
+			"value": 250.0,
+			"maxValue": 0
+		}
+	}]
+}
+]
+```
+
+Note: Duration is java.time.Period with following valid inputs
+
+```
+"P2Y"             -- Period.ofYears(2)
+"P3M"             -- Period.ofMonths(3)
+"P4W"             -- Period.ofWeeks(4)
+"P5D"             -- Period.ofDays(5)
+"P1Y2M3D"         -- Period.of(1, 2, 3)
+"P1Y2M3W4D"       -- Period.of(1, 2, 25)
+"P-1Y2M"          -- Period.of(-1, 2, 0)
+"-P1Y2M"          -- Period.of(-1, -2, 0)
+```
 
 ### Library
 
