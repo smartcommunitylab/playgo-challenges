@@ -40,7 +40,7 @@ public class ChallengeManager {
 				executionDate.getInstantAsString());
 		final Tasker tasker = new Tasker(!isEmptyString(task) ? task.split(",") : new String[0]);
 		GameEngineInfo gameEngineConf = new GameEngineInfo(env.getProperty("config.url"),
-				env.getProperty("config.username"), env.getProperty("config.password"), assign, null, null);
+				env.getProperty("config.username"), env.getProperty("config.password"), assign, env.getProperty("config.api_user"), env.getProperty("config.api_pass"));
 		Challenges challenges = new Challenges(gameEngineConf);
 		List<ChallengesSettings> challengesSettings = parseConfiguration(gameConfigs);
 		challengesSettings.forEach(settings -> {
