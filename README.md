@@ -57,6 +57,12 @@ src/main/resources/application.yml
 
 or can be defined as environment variable during application launch.
 
+`$GAMIFICATION_URL <url of gamification engine for e.g. http://localhost:8010/gamification>`
+
+`$USERNAME <gamification engine basic auth username>`
+
+`$PASSWORD <gamification engine basic auth password>`
+
 
 ### Run
 
