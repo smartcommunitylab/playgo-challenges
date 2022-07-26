@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import it.smartcommunitylab.challenges.bean.ConfigurationStub;
 import it.smartcommunitylab.challenges.manager.ChallengeManager;
+import it.smartcommunitylab.challenges.manager.ScheduleManager;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -23,6 +24,8 @@ public class ChallengeController {
 	
 	@Autowired
 	private ChallengeManager challengeSrv;
+	@Autowired
+	private ScheduleManager scheduleManager;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/generate")
 	@Operation(summary = "generate challenge")
@@ -34,5 +37,11 @@ public class ChallengeController {
 		logger.info("/api/generate - invoked automatic challenge generation task");
 		challengeSrv.invokeGenerator(gameConfigs, execDate, task, assign);
 	}
-
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/reschedule")
+	@Operation(summary = "reschedule challenge")
+	public void reschedule() {
+		logger.info("/api/reschedule - force reset of scheduling tasks");
+		scheduleManager.init();
+	}
 }

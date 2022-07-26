@@ -7,9 +7,9 @@ config:
   url: ${GAMIFICATION_URL:}
   username: ${USERNAME:}
   password: ${PASSWORD:}
-  url_stats: ${GAMIFICATION_STATS_URL:}
-  api_user: ${API_USER:}
-  api_pass: ${API_PASS:}
+  challengeUrl: ${CHALLENGE_URL:}
+  scheduleUrl: ${SCHEDULE_URL:}
+  postgresUrl: ${CONN_URL:}
   
 openapi:
    version: 1.0.0

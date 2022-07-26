@@ -19,48 +19,52 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import it.smartcommunitylab.challenges.bean.Game;
 
 public class YamlConfigurationManager implements ConfigurationManager {
-    private static final Logger logger = LogManager.getLogger(YamlConfigurationManager.class);
-    private ObjectMapper mapper;
+	private static final Logger logger = LogManager.getLogger(YamlConfigurationManager.class);
+	private ObjectMapper mapper;
 
-    public YamlConfigurationManager() {
-        mapper = new ObjectMapper(new YAMLFactory());
-        mapper.findAndRegisterModules();
-        mapper.configOverride(List.class)
-                .setSetterInfo(JsonSetter.Value.forValueNulls(Nulls.AS_EMPTY));
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(Period.class, new PeriodDeserializer());
-        mapper.registerModule(module);
-    }
+	public YamlConfigurationManager() {
+		mapper = new ObjectMapper(new YAMLFactory());
+		mapper.findAndRegisterModules();
+		mapper.configOverride(List.class).setSetterInfo(JsonSetter.Value.forValueNulls(Nulls.AS_EMPTY));
+		SimpleModule module = new SimpleModule();
+		module.addDeserializer(Period.class, new PeriodDeserializer());
+		mapper.registerModule(module);
+	}
 
+	@Override
+	public List<ChallengesSettings> parseConfiguration(InputStream source) {
+		try {
+			GamesConfiguration gamesConfiguration = mapper.readValue(source, GamesConfiguration.class);
+			return gamesConfiguration.getGames().stream().map(gc -> {
+				ChallengesSettings settings = new ChallengesSettings();
+				settings.setGame(new Game(gc.getGameId()));
+				if (gc.getStandardSingleChallenges() != null) {
+					settings.setStandardSingleChallengeConfig(gc.getStandardSingleChallenges().toChallengeConfig());
+				}
+				if (gc.getStandardGroupChallenges() != null) {
+					settings.setStandardGroupChallengeConfig(gc.getStandardGroupChallenges().toChallengeConfig());
+				}
+				if (gc.getSpecialSingleChallenges() != null) {
+					settings.setSpecialSingleChallengeConfig(gc.getSpecialSingleChallenges().stream()
+							.map(special -> special.toChallengeConfig()).collect(Collectors.toList()));
+				}
+				return settings;
+			}).collect(Collectors.toList());
+		} catch (IOException e) {
+			logger.error(e);
+			return Collections.emptyList();
+		}
 
-    @Override
-    public List<ChallengesSettings> parseConfiguration(InputStream source) {
-        try {
-            GamesConfiguration gamesConfiguration =
-                    mapper.readValue(source, GamesConfiguration.class);
-            return gamesConfiguration.getGames().stream().map(gc -> {
-                ChallengesSettings settings = new ChallengesSettings();
-                settings.setGame(new Game(gc.getGameId()));
-                if (gc.getStandardSingleChallenges() != null) {
-                settings.setStandardSingleChallengeConfig(
-                        gc.getStandardSingleChallenges().toChallengeConfig());
-                }
-                if (gc.getStandardGroupChallenges() != null) {
-                settings.setStandardGroupChallengeConfig(
-                        gc.getStandardGroupChallenges().toChallengeConfig());
-                }
-                if (gc.getSpecialSingleChallenges() != null) {
-                    settings.setSpecialSingleChallengeConfig(
-                            gc.getSpecialSingleChallenges().stream()
-                                    .map(special -> special.toChallengeConfig())
-                                    .collect(Collectors.toList()));
-                }
-                return settings;
-            }).collect(Collectors.toList());
-        } catch (IOException e) {
-            logger.error(e);
-            return Collections.emptyList();
-        }
+	}
 
-    }
+	public List<Schedule> parseScheduleConfiguration(InputStream source) {
+		try {
+			ScheduleConfiguration settings = mapper.readValue(source, ScheduleConfiguration.class);
+			return settings.getSchedules();
+		} catch (IOException e) {
+			logger.error(e);
+			return Collections.emptyList();
+		}
+
+	}
 }

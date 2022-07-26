@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface ConfigurationManager {
     List<ChallengesSettings> parseConfiguration(InputStream source);
+    List<Schedule> parseScheduleConfiguration(InputStream source);
 
 }
