@@ -29,21 +29,22 @@ public class StandardSingleChallengeTask implements Runnable {
 		this.generate(game, standardSingleChallenge);
 	}
 
-	public StandardSingleChallengeTask(Game game, GameEngineInfo gameEngineConf, StandardSingleChallenge standardSingleChallenges) {
-		this(game, standardSingleChallenges, gameEngineConf, new eu.fbk.das.api.RecommenderSystemImpl());
+	public StandardSingleChallengeTask(Game game, GameEngineInfo gameEngineConf,
+			StandardSingleChallenge standardSingleChallenges) {
+		this(game, gameEngineConf, standardSingleChallenges, new eu.fbk.das.api.RecommenderSystemImpl());
 	}
 
-	StandardSingleChallengeTask(Game game, StandardSingleChallenge standardSingleChallenge,
-			GameEngineInfo gameEngineConf, RecommenderSystemAPI recommerderApiImpl) {
-		this.gameEngineConf = gameEngineConf;
-		this.recommenderApi = recommerderApiImpl;
+	StandardSingleChallengeTask(Game game, GameEngineInfo gameEngineConf,
+			StandardSingleChallenge standardSingleChallenge, RecommenderSystemAPI recommerderApiImpl) {
 		this.game = game;
+		this.gameEngineConf = gameEngineConf;
 		this.standardSingleChallenge = standardSingleChallenge;
+		this.recommenderApi = recommerderApiImpl;
 	}
 
 	public Result generate(Game game, StandardSingleChallenge standardSingleChallenges) {
-		logger.info("Generate standard single challenges.....");
-		final NextExecution nextChallengeExecution = new NextExecution(standardSingleChallenges, null);
+		logger.info("Generate standard single challenge.....");
+		final NextExecution nextChallengeExecution = new NextExecution(standardSingleChallenges, new ExecDate());
 		if (nextChallengeExecution.isSuspended()) {
 			logger.info("challenge will start in a suspension range, suspend assignment");
 			return new ValidResult(true);
