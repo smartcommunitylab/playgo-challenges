@@ -26,7 +26,7 @@ public class StandardSingleChallengeTask implements Runnable {
 	public void run() {
 		System.out.println(System.currentTimeMillis() + " Runnable Task (StandardSingleChallengeTask)" + " on thread "
 				+ Thread.currentThread().getName());
-		this.generate(game, standardSingleChallenge);
+		this.generate(game, gameEngineConf, standardSingleChallenge);
 	}
 
 	public StandardSingleChallengeTask(Game game, GameEngineInfo gameEngineConf,
@@ -42,8 +42,8 @@ public class StandardSingleChallengeTask implements Runnable {
 		this.recommenderApi = recommerderApiImpl;
 	}
 
-	public Result generate(Game game, StandardSingleChallenge standardSingleChallenges) {
-		logger.info("Generate standard single challenge.....");
+	public Result generate(Game game, GameEngineInfo gameEngineConf, StandardSingleChallenge standardSingleChallenges) {
+		logger.info("Generate standard single challenge for gameId " + game.getGameId());
 		final NextExecution nextChallengeExecution = new NextExecution(standardSingleChallenges, new ExecDate());
 		if (nextChallengeExecution.isSuspended()) {
 			logger.info("challenge will start in a suspension range, suspend assignment");

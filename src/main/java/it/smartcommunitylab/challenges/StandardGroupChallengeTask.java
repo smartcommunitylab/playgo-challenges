@@ -26,7 +26,7 @@ public class StandardGroupChallengeTask implements Runnable {
 	public void run() {
 		System.out.println(System.currentTimeMillis() + " Runnable Task (StandardGroupChallengeTask)" + " on thread "
 				+ Thread.currentThread().getName());
-		this.generate(game, standardGroupChallenge);
+		this.generate(game, gameEngineConf, standardGroupChallenge);
 	}
 
 	public StandardGroupChallengeTask(Game game, GameEngineInfo gameEngineConf,
@@ -42,8 +42,8 @@ public class StandardGroupChallengeTask implements Runnable {
 		this.recommenderApi = recommerderApiImpl;
 	}
 
-	public Result generate(Game game, StandardGroupChallenge standardGroupChallenges) {
-		logger.info("Generate group challenge.....");
+	public Result generate(Game game, GameEngineInfo gameEngineConf, StandardGroupChallenge standardGroupChallenges) {
+		logger.info("Generate group challenge for gameId " + game.getGameId());
 		final NextExecution nextChallengeExecution = new NextExecution(standardGroupChallenges, new ExecDate());
 		Map<String, String> gameEngineConfs = ConfigConverter.toGameEngineConfs(game, gameEngineConf);
 		Map<String, Object> challengeValues = ConfigConverter.toGroupChallengeValues(nextChallengeExecution);
