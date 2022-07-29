@@ -1,7 +1,5 @@
 package it.smartcommunitylab.challenges.manager;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +14,6 @@ import it.smartcommunitylab.challenges.ExecDate;
 import it.smartcommunitylab.challenges.Result;
 import it.smartcommunitylab.challenges.app.Tasker;
 import it.smartcommunitylab.challenges.app.configuration.ChallengesSettings;
-import it.smartcommunitylab.challenges.app.configuration.ConfigurationManager;
-import it.smartcommunitylab.challenges.app.configuration.YamlConfigurationManager;
 import it.smartcommunitylab.challenges.bean.ConfigurationStub;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
@@ -39,8 +35,13 @@ public class ChallengeManager {
 		logger.info("running on gamification engine url {}, execDate: {}", env.getProperty("config.url"),
 				executionDate.getInstantAsString());
 		final Tasker tasker = new Tasker(!isEmptyString(task) ? task.split(",") : new String[0]);
-		GameEngineInfo gameEngineConf = new GameEngineInfo(env.getProperty("config.url"),
-				env.getProperty("config.username"), env.getProperty("config.password"), assign, env.getProperty("config.api_user"), env.getProperty("config.api_pass"));
+		GameEngineInfo gameEngineConf = new GameEngineInfo(
+				env.getProperty("config.url"),
+				assign, 
+				env.getProperty("config.api_user"), 
+				env.getProperty("config.api_pass"),
+				env.getProperty("config.postgresUrl")
+				);
 		Challenges challenges = new Challenges(gameEngineConf);
 		List<ChallengesSettings> challengesSettings = parseConfiguration(gameConfigs);
 		challengesSettings.forEach(settings -> {
@@ -84,53 +85,6 @@ public class ChallengeManager {
 			}
 			return settings;
 		}).collect(Collectors.toList());
-	}
-
-	public void invokeGenerator() {
-		logger.info(env.getProperty("config.execDate"));
-		final ExecDate executionDate = env.getProperty("config.execDate") != null
-				? new ExecDate(env.getProperty("config.execDate"))
-				: new ExecDate();
-		logger.info("running on configuration {} and gamification engine url {}, execDate: {}",
-				env.getProperty("config.file"), env.getProperty("config.url"), executionDate.getInstantAsString());
-		final Tasker tasker = new Tasker(
-				!isEmptyString(env.getProperty("config.task")) ? env.getProperty("config.task").split(",")
-						: new String[0]);
-		GameEngineInfo gameEngineConf = new GameEngineInfo(env.getProperty("config.url"),
-				env.getProperty("config.username"), env.getProperty("config.password"),
-				env.getProperty("config.assign"), null, null);
-		Challenges challenges = new Challenges(gameEngineConf);
-		final String configPath = env.getProperty("config.file");
-		ConfigurationManager configurationManager = new YamlConfigurationManager();
-		List<ChallengesSettings> challengesSettings;
-		try {
-			challengesSettings = configurationManager.parseConfiguration(new FileInputStream(configPath));
-			challengesSettings.forEach(settings -> {
-				final Game game = settings.getGame();
-				if (tasker.isAssignStandardSingle()) {
-					logger.info("execute standardSingleChallenges assignment");
-					final StandardSingleChallenge standardSingleChallenges = settings
-							.getStandardSingleChallengeConfig();
-					Result result = challenges.generate(game, standardSingleChallenges, executionDate);
-					logger.info("Terminated task {}", result.getResult());
-				}
-				if (tasker.isAssignStandardGroup()) {
-					logger.info("execute standardGroupChallenges assignment");
-					final StandardGroupChallenge standardGroupChallenges = settings.getStandardGroupChallengeConfig();
-					Result result = challenges.generate(game, standardGroupChallenges, executionDate);
-					logger.info("Terminated task {}", result.getResult());
-				}
-				if (tasker.isAssignSpecialSingle()) {
-					logger.info("execute specialSingleChallenges assignment");
-					final List<SpecialSingleChallenge> specialSingleChallenges = settings
-							.getSpecialSingleChallengeConfig();
-					specialSingleChallenges.forEach(special -> challenges.generate(game, special, executionDate));
-					logger.info("Terminated task {}", true);
-				}
-			});
-		} catch (FileNotFoundException e) {
-			logger.error("configuration file doesn't exist", e);
-		}
 	}
 
 	boolean isEmptyString(String string) {

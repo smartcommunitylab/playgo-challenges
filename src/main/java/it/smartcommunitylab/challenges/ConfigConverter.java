@@ -22,10 +22,9 @@ class ConfigConverter {
         Map<String, String> confs = new HashMap<>();
         confs.put("GAMEID", game.getGameId());
         confs.put("HOST", gameEngineConf.getUrl());
-        confs.put("USER", gameEngineConf.getUsername());
-        confs.put("PASS", gameEngineConf.getPassword());
         confs.put("API_USER", gameEngineConf.getApiUser());
         confs.put("API_PASS", gameEngineConf.getApiPass());
+        confs.put("POSTGRESURL", gameEngineConf.getPostgresUrl());
         return confs;
     }
 

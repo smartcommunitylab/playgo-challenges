@@ -1,44 +1,47 @@
 package it.smartcommunitylab.challenges.bean;
 
 public class GameEngineInfo {
-    private final String url;
-    private final String username;
-    private final String password;
-    private final String assign;
-    private final String api_user;
-    private final String api_pass;
+	private final String url;
+	private final String assign;
+	private final String api_user;
+	private final String api_pass;
+	private final String postgresUrl;
 
-    public GameEngineInfo(String url, String username, String password, String assign, String api_user, String api_pass) {
-        this.url = url;
-        this.username = username;
-        this.password = password;
-        this.assign = assign;
-        this.api_user = api_user;
-        this.api_pass = api_pass;
-    }
+	public GameEngineInfo(String url, String assign, String api_user, String api_pass,
+			String postgresUrl) {
+		this.url = url;
+		this.assign = assign;
+		this.api_user = api_user;
+		this.api_pass = api_pass;
+		this.postgresUrl = postgresUrl;
+	}
 
-    public String getUrl() {
-        return url;
-    }
+	public String getUrl() {
+		return url;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public Boolean getAssign() {
+		return assign != null && assign.equals("true");
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getApiUser() {
+		return api_user;
+	}
 
-    public Boolean getAssign() {
-        return assign != null && assign.equals("true");
-    }
+	public String getApiPass() {
+		return api_pass;
+	}
 
-    public String getApiUser() {
-        return api_user;
-    }
+	public String getApi_user() {
+		return api_user;
+	}
 
-    public String getApiPass() {
-        return api_pass;
-    }
+	public String getApi_pass() {
+		return api_pass;
+	}
+
+	public String getPostgresUrl() {
+		return postgresUrl;
+	}
 
 }

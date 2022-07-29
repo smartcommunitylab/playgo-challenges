@@ -17,7 +17,7 @@ public class ConfigConverterTest {
 
     @Test
     public void check_game_engine_config() {
-        GameEngineInfo engineConfig = new GameEngineInfo("url", "username", "pass", "", "", "");
+        GameEngineInfo engineConfig = new GameEngineInfo("url", "true", "username", "pass", "postgresUrl");
         Game game = new Game("gameId");
         Map<String, String> result = ConfigConverter.toGameEngineConfs(game, engineConfig);
         assertThat(result).containsKeys("HOST", "USER", "PASS", "GAMEID");

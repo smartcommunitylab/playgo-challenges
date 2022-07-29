@@ -34,11 +34,8 @@ public class ScheduleManager {
 	private Environment env;
 	@Autowired
 	private ThreadPoolTaskScheduler scheduler;
-	@Autowired
-	private ScheduledAnnotationBeanPostProcessor postProcessor;
 	private List<ChallengesSettings> challengesSettings;
-	private static final String SCHEDULED_TASKS = "scheduledTasks";
-	private static final Logger logger = LogManager.getLogger(ScheduleManager.class);
+		private static final Logger logger = LogManager.getLogger(ScheduleManager.class);
 
 	@PostConstruct
 	public void init() {
@@ -60,10 +57,12 @@ public class ScheduleManager {
 							.filter(gc -> gc.getGame().getGameId().equals(schedule.getGameId())).findFirst();
 					if (!gcs.isEmpty()) {
 						ChallengesSettings gc = gcs.get();
-						GameEngineInfo gameEngineConf = new GameEngineInfo(env.getProperty("config.url"),
-								env.getProperty("config.username"), env.getProperty("config.password"),
-								schedule.getAssign(), env.getProperty("config.api_user"),
-								env.getProperty("config.api_pass"));
+						GameEngineInfo gameEngineConf = new GameEngineInfo(
+								env.getProperty("config.url"),
+								schedule.getAssign(),
+								env.getProperty("config.api_user"),
+								env.getProperty("config.api_pass"),
+								env.getProperty("config.postgresUrl"));
 						CronTrigger trigger = new CronTrigger(schedule.getExpression());
 						if (schedule.getTask().equalsIgnoreCase(Tasker.SPECIAL_SINGLE_OPTION)) {
 							gc.getSpecialSingleChallengeConfig().forEach(special -> 

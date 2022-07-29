@@ -10,10 +10,10 @@ public class CliOptions {
     private static final String OPTION_PREFIX = "--";
     public enum Options {
             CONFIG("config", true), URL("url", true),
-            USERNAME("username", true), PASSWORD("password",true),
             TASK("task", false), EXEC_DATE("execDate", false),
             API_USER("api_user", true), API_PASS("api_pass",true),
-            ASSIGN("assign", false);
+            ASSIGN("assign", false),
+            POSTGRESURL("postgresUrl", true);
 
         private String value;
         private boolean required;
