@@ -53,8 +53,35 @@ By default the application starts on port 8020. The configuration can be changed
 ```shell
 src/main/resources/application.yml
 ```
+The challenge configuration file can be specified either by overriding the config.challengeUrl property or by explicitly specifying $CHALLENGE_URL environment variable. The file description is detailed below in the configuration file section.
 
-or can be defined as environment variable during application launch.
+The schedule configuration file can be specified either by overriding the config.scheduleUrl property or by explicity specifcying the $SCHEDULE_URL environment variable. The file
+allows to specify list of schedules for challenges per game using cron expression.
+
+```
+schedules:
+ - gameId: 62555de98d3ac50d84315d70
+   expression: 0 48 * * * *
+   task: standardSingle
+   assign: true
+
+ - gameId: 62555de98d3ac50d84315d70
+   expression: 0 49 * * * *
+   task: standardGroup
+   assign: true
+   
+ - gameId: 62555de98d3ac50d84315d70
+   expression: 0 52 * * * *
+   task: specialSingle
+   assign: true
+   
+ - gameId: 62e3877b5b171200f39f8c49
+   expression: 0 45 * * * *
+   task: specialSingle
+   assign: true
+```
+
+The following set of properties can be overridden in application.yml file or can be defined as environment variable during application launch.
 
 `$GAMIFICATION_URL <url of gamification engine for e.g. http://localhost:8010/gamification>`
 
@@ -70,7 +97,8 @@ or can be defined as environment variable during application launch.
 
 ### Run
 
-In order to start web engine, it is required to run the following command from project root(profile specific).
+In order to start web engine, it is required to run the following command from project root(profile specific). The web application on launch reads the challenge configuration file
+and schedule challenge generation tasks based on scheduing configuration defined for the game inside schedule.yml file.
 
 ```shell
 java -jar target\challenges.jar --spring.profiles.active=sec --config.url=http://localhost:8010/gamification --config.api_user=long-rovereto --config.api_pass=rov --config.challengeUrl=/home/dev/gamification/challenge-assignment-ferrara-v1.0.yml --config.scheduleUrl=/home/dev/gamification/schedule.yml --config.postgresUrl=jdbc:postgresql://localhost:5432/gamification?user=postgres&password=root
@@ -84,6 +112,10 @@ http://localhost:8020/challenge-generator/swagger-ui/index.html
 ```
 
 ### Sample Invocation
+
+GET /api/reschedule'
+
+The API reset the schedules for challenge generation tasks.
 
 POST /api/generate/ 
 
