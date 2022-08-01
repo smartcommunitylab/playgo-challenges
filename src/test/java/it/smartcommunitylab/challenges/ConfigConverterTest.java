@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.Period;
 import java.util.Map;
 
-import it.smartcommunitylab.challenges.app.CliOptions;
 import org.junit.Test;
 
 import it.smartcommunitylab.challenges.bean.Game;

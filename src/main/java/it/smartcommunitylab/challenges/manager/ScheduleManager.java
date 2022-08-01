@@ -3,17 +3,15 @@ package it.smartcommunitylab.challenges.manager;
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.scheduling.config.ScheduledTask;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
@@ -35,15 +33,22 @@ public class ScheduleManager {
 	@Autowired
 	private ThreadPoolTaskScheduler scheduler;
 	private List<ChallengesSettings> challengesSettings;
-		private static final Logger logger = LogManager.getLogger(ScheduleManager.class);
+	@Value("${config.challengeUrl}")
+	private String configPath;	
+	@Value("${config.scheduleUrl}")
+	private String schedulePath;	
 
+	private static final Logger logger = LogManager.getLogger(ScheduleManager.class);
+		
 	@PostConstruct
 	public void init() {
 
 		clean();
-
-		String configPath = env.getProperty("config.challengeUrl");
-		String schedulePath = env.getProperty("config.scheduleUrl");
+		
+		logger.info("config.challengeUrl->" + configPath);
+		logger.info("config.scheduleUrl->" + schedulePath);
+		logger.info("config.url->" + env.getProperty("config.url"));
+		logger.info("config.postgresUrl->" + env.getProperty("config.postgresUrl"));
 
 		ConfigurationManager configurationManager = new YamlConfigurationManager();
 		List<Schedule> scheduleSettings;

@@ -32,15 +32,7 @@ public class GameEngineInfo {
 		return api_pass;
 	}
 
-	public String getApi_user() {
-		return api_user;
-	}
-
-	public String getApi_pass() {
-		return api_pass;
-	}
-
-	public String getPostgresUrl() {
+    public String getPostgresUrl() {
 		return postgresUrl;
 	}
 

@@ -34,9 +34,8 @@ Move to project directory
 
 Build the project
  
-`mvn clean package -P full-client-jar -DskipTests`
+`mvn clean install -DskipTests`
 
-You can find the standalone jar `challenges-jar-with-dependencies.jar` into `target` directory
 
 
 ### Web application
@@ -59,17 +58,22 @@ or can be defined as environment variable during application launch.
 
 `$GAMIFICATION_URL <url of gamification engine for e.g. http://localhost:8010/gamification>`
 
-`$USERNAME <gamification engine basic auth username>`
+`$API_USER <gamification engine basic auth username>`
 
-`$PASSWORD <gamification engine basic auth password>`
+`$API_PASS <gamification engine basic auth password>`
 
+`$CHALLENGE_URL <url/path of challenge configuration yaml file.>`
+
+`$SCHEDULE_URL <url/path of challenge scheduler configuration yaml file.>`
+
+`$POSTGRES_URL <connection url of postgres instance for e.g. jdbc:postgresql://localhost:5432/gamification?user=postgres&password=root>`
 
 ### Run
 
 In order to start web engine, it is required to run the following command from project root(profile specific).
 
 ```shell
-java -jar target\challenges.jar --spring.profiles.active=sec
+java -jar target\challenges.jar --spring.profiles.active=sec --config.url=http://localhost:8010/gamification --config.api_user=long-rovereto --config.api_pass=rov --config.challengeUrl=/home/dev/gamification/challenge-assignment-ferrara-v1.0.yml --config.scheduleUrl=/home/dev/gamification/schedule.yml --config.postgresUrl=jdbc:postgresql://localhost:5432/gamification?user=postgres&password=root
 ```
 
 ### API Console
@@ -188,69 +192,6 @@ Note: Duration is java.time.Period with following valid inputs
 "-P1Y2M"          -- Period.of(-1, -2, 0)
 ```
 
-### Library
-
-#### How to deploy 
-
-To deploy a new version of challenges on the Smartcommunitylab Nexus you have to configure a valid user into your `~/.m2/settings.xml`
-
-##### Deploy Snapshot
-
-```bash
-mvn clean install  deploy:deploy-file  \
--Dmaven.test.skip=true \
--Dpackaging=jar \
--DrepositoryId=SmartCommunityLab-snapshots \
--DpomFile=pom.xml \
--Durl=http://repository.smartcommunitylab.it/content/repositories/snapshots \
--Dfile=target/challenges.jar
-```
-
-##### Deploy Release
-
-```bash
-mvn clean install  deploy:deploy-file  \
--Dmaven.test.skip=true \
--Dpackaging=jar \
--DrepositoryId=SmartCommunityLab-releases \
--DpomFile=pom.xml \
--Durl=http://repository.smartcommunitylab.it/content/repositories/releases \
--Dfile=target/challenges.jar
-```
-
-## Usage
-
-### Standalone usage
-
-You can run playgo-challenges in standalone mode using following command:
-
-```bash
-java -jar challenges-jar-with-dependencies.jar Application \
---config <CONFIG_PATH> \
---url <GAMIFICATION_ENGINE_URL> \
---username <USERNAME> \
---password <PASSWORD>\
---api_user <USERNAME> \
---api_pass <PASSWORD>\
-[--task <SUPPORTED_VALUES>] \
-[--execDate <DATE>]
-[--assign true]
-```
-
-```
---config: the path of YAML config file
---url: url to gamification engine
---username: valid gamification engine username
---password: valid gamification engine password
---api_user: valid api username
---api_pass: valid api password
---task: (optional, default: all) comma separated string of assignment types to process
-          supported values: standardSingle, standardGroup, specialSingle
---execDate: (optional, default: now) date as YYYY-MM-dd. This option is useful for test and debug, it
-            permit to simulate an execution in the given date. 
-            Challenge start and end date and all other time sensitive costraints will be relative to this date.
---assign: (optional, default: none) assigns the generated challenges at the end of the task
-```
 You can find an example in [bin/assign-challenges.sh][assign_script]
 ### Library
 
