@@ -30,7 +30,6 @@ public class ChallengeManager {
 	private static final Logger logger = LogManager.getLogger(ChallengeManager.class);
 
 	public void invokeGenerator(List<ConfigurationStub> gameConfigs, String execDate, String task, String assign) {
-		logger.info(env.getProperty("config.execDate"));
 		final ExecDate executionDate = execDate != null ? new ExecDate(execDate) : new ExecDate();
 		logger.info("running on gamification engine url {}, execDate: {}", env.getProperty("config.url"),
 				executionDate.getInstantAsString());
