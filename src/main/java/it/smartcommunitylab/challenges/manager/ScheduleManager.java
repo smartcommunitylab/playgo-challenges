@@ -48,8 +48,7 @@ public class ScheduleManager {
 		logger.info("config.challengeUrl->" + configPath);
 		logger.info("config.scheduleUrl->" + schedulePath);
 		logger.info("config.url->" + env.getProperty("config.url"));
-		logger.info("config.postgresUrl->" + env.getProperty("config.postgresUrl"));
-
+	
 		ConfigurationManager configurationManager = new YamlConfigurationManager();
 		List<Schedule> scheduleSettings;
 		try {
