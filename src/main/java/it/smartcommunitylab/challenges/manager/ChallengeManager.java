@@ -60,7 +60,9 @@ public class ChallengeManager {
 			if (tasker.isAssignSpecialSingle()) {
 				logger.info("execute specialSingleChallenges assignment");
 				final List<SpecialSingleChallenge> specialSingleChallenges = settings.getSpecialSingleChallengeConfig();
-				specialSingleChallenges.forEach(special -> challenges.generate(game, special, executionDate));
+				if (specialSingleChallenges != null && !specialSingleChallenges.isEmpty()) {
+					specialSingleChallenges.forEach(special -> challenges.generate(game, special, executionDate));
+				}
 				logger.info("Terminated task {}", true);
 			}
 		});

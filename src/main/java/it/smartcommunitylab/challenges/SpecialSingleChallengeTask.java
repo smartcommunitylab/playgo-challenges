@@ -61,10 +61,12 @@ public class SpecialSingleChallengeTask implements Runnable {
 		}
 		logger.info("Created {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());
 		if (this.gameEngineConf.getAssign()) {
-			challenges.forEach(challenge -> {
-				recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
-			});
-			logger.info("Assigned {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());
+			if (challenges != null && !challenges.isEmpty()) {
+				challenges.forEach(challenge -> {
+					recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
+				});
+				logger.info("Assigned {} challenges of model {} for game {}", challenges.size(), model, game.getGameId());	
+			}			
 		}
 		return new ValidResult(true);
 	}
