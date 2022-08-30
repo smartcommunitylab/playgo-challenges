@@ -38,7 +38,7 @@ public class ChallengeController {
 		challengeSrv.invokeGenerator(gameConfigs, execDate, task, assign);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/reschedule")
+	@RequestMapping(method = RequestMethod.PUT, value = "/reschedule")
 	@Operation(summary = "reschedule challenge")
 	public void reschedule() {
 		logger.info("/api/reschedule - force reset of scheduling tasks");

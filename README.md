@@ -111,18 +111,24 @@ In order to access the API console based on Spring Doc, open in browser the foll
 http://localhost:8020/challenge-generator/swagger-ui/index.html
 ```
 
-### Sample Invocation
-
-GET /api/reschedule'
+### PUT /api/reschedule
 
 The API reset the schedules for challenge generation tasks.
 
-POST /api/generate/ 
+```
+curl -v -u "username:pass" -X "PUT" "http://localhost:8020/challenge-generator/api/reschedule" -H "accept: */*"
+```
+
+### POST /api/generate/ 
 
 Request body
 
-```shell
-[{
+```
+curl -v -u "username:pass" -X 'POST' \
+  'http://localhost:8020/challenge-generator/api/generate' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '[{
 	"gameId": "$gameId",
 	"standardSingleChallenge": {
 		"levelStrategies": [
@@ -156,7 +162,7 @@ Request body
 			}
 		],
 		"settings": {
-			"start": "2020-09-26 00:00",
+			"start": "2022-08-01 00:00",
 			"duration": "P7D",
 			"modeConcepts": [
 				"Walk_Km",
@@ -174,7 +180,7 @@ Request body
 	},
 	"standardGroupChallenge": {
 		"settings": {
-			"start": "2020-09-26 00:00",
+			"start": "2022-08-01 00:00",
 			"duration": "P7D",
 			"model": "groupCooperative",
 			"modeConcepts": [
@@ -187,28 +193,10 @@ Request body
 		"reward": {
 			"scoreName": "green leaves"			
 		}
-	},
-	"specialSingleChallenge": [{
-		"settings": {
-          "start": "2020-12-12 00:00",
-			"duration": "P7D",
-			"model": "survey",
-			"hide": false,
-			"fields": {
-				"surveyType": "bellaCoincidenza",
-				"link": ""
-			}
-		},
-		"playerSet": [],
-		"reward": {
-			"scoreName": "green leaves",
-			"type": "FIXED",
-			"value": 250.0,
-			"maxValue": 0
-		}
-	}]
+	}
 }
-]
+]'
+
 ```
 
 Note: Duration is java.time.Period with following valid inputs
