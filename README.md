@@ -95,6 +95,7 @@ The following set of properties can be overridden in application.yml file or can
 
 `$POSTGRES_URL <connection url of postgres instance for e.g. jdbc:postgresql://localhost:5432/gamification?user=postgres&password=root>`
 
+`$security.usersFile <url/path of security yaml file with credentials of basic auth.>`
 ### Run
 
 In order to start web engine, it is required to run the following command from project root(profile specific). The web application on launch reads the challenge configuration file
