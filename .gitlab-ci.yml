@@ -39,6 +39,8 @@ maven-build:
   #     - master
   script:
     - mvn -DskipTests=true clean package
+  artifacts:
+    expire_in: 1 week
 
 backend-container-build:
   stage: container-build
@@ -51,7 +53,9 @@ backend-container-build:
     - docker push $CONTAINER_IMAGE_LATEST
   only:
     - scheduler-postgress-stats
-
+  artifacts:
+    expire_in: 1 week
+    
 container_scanning:
   stage: container-scan
   variables:
@@ -60,6 +64,8 @@ container_scanning:
     GIT_STRATEGY: fetch
     DOCKER_USER: ""
     DOCKER_PASSWORD: ""
+  artifacts:
+    expire_in: 1 week
 
 deploy-dev:
   stage: deploy
@@ -72,3 +78,5 @@ deploy-dev:
     - kubectl -n playngo-dev rollout status deployment challenges-generator
   only:
     - scheduler-postgress-stats
+  artifacts:
+    expire_in: 1 week
