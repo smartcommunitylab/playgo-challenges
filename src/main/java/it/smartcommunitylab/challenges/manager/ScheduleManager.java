@@ -1,6 +1,7 @@
 package it.smartcommunitylab.challenges.manager;
 
 import java.io.FileInputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Component;
 
 import it.smartcommunitylab.challenges.SpecialSingleChallengeTask;
@@ -68,6 +70,9 @@ public class ScheduleManager {
 								env.getProperty("config.api_pass"),
 								env.getProperty("config.postgresUrl"));
 						CronTrigger trigger = new CronTrigger(schedule.getExpression());
+						SimpleTriggerContext triggerContext = new SimpleTriggerContext();
+						triggerContext.update(null, null, new Date());
+						Date nextFireAt = trigger.nextExecutionTime(triggerContext);
 						if (schedule.getTask().equalsIgnoreCase(Tasker.SPECIAL_SINGLE_OPTION)) {
 							gc.getSpecialSingleChallengeConfig().forEach(special -> 
 							scheduler.schedule(new SpecialSingleChallengeTask(gc.getGame(), gameEngineConf, special),
@@ -81,9 +86,9 @@ public class ScheduleManager {
 						}
 						logger.info("schedule imposed for gameId(" + schedule.getGameId() + ") - cron("
 								+ schedule.getExpression() + ") - task(" + schedule.getTask() + ") - assign("
-								+ schedule.getAssign() + ")");
+								+ schedule.getAssign() + ") - fireTime " + nextFireAt);
 					} else {
-						logger.error("scheduling failed - missing schedule mapped game configuration");
+						logger.error("scheduling failed - missing schedule mapped game configuration for id - " + schedule.getGameId());
 					}
 
 				}
