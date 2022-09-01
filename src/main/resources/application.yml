@@ -25,3 +25,6 @@ springdoc:
     disable-swagger-default-url: true
   api-docs:
     path: /challenge-generator/v3/api-docs
+    
+security:
+  usersFile: ${USERS_FILE:}
