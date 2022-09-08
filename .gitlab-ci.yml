@@ -52,7 +52,7 @@ backend-container-build:
     - docker push $CONTAINER_IMAGE
     - docker push $CONTAINER_IMAGE_LATEST
   only:
-    - scheduler-postgress-stats
+    - playAndGo-prod
   artifacts:
     expire_in: 1 week
     
@@ -77,6 +77,6 @@ deploy-dev:
     - kubectl -n playngo-dev set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
     - kubectl -n playngo-dev rollout status deployment challenges-generator
   only:
-    - scheduler-postgress-stats
+    - playAndGo-prod
   artifacts:
     expire_in: 1 week
