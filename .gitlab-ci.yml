@@ -8,7 +8,8 @@ stages:
   - container-build
   - test
   - container-scan
-  - deploy
+  - deploy-dev
+  - deploy-prod
 
 include:
   - template: Security/Container-Scanning.gitlab-ci.yml
@@ -52,7 +53,8 @@ backend-container-build:
     - docker push $CONTAINER_IMAGE
     - docker push $CONTAINER_IMAGE_LATEST
   only:
-    - scheduler-postgress-stats
+    - dev
+    - prod
   artifacts:
     expire_in: 1 week
     
@@ -68,8 +70,10 @@ container_scanning:
     expire_in: 1 week
 
 deploy-dev:
-  stage: deploy
-  image: smartcommunitylab/kubectl-alpine:latest
+  stage: deploy-dev
+  image: 
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
   environment:
     name: platform-new
   script:
@@ -77,6 +81,22 @@ deploy-dev:
     - kubectl -n playngo-dev set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
     - kubectl -n playngo-dev rollout status deployment challenges-generator
   only:
-    - scheduler-postgress-stats
+    - dev
+  artifacts:
+    expire_in: 1 week
+
+deploy-prod:
+  stage: deploy-prod
+  image: 
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  environment:
+    name: platform-new
+  script:
+    - echo "deploy backend"
+    - kubectl -n playngo-prod set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
+    - kubectl -n playngo-prod rollout status deployment challenges-generator
+  only:
+    - prod
   artifacts:
     expire_in: 1 week
