@@ -1,20 +1,10 @@
 schedules:
- - gameId: 62555de98d3ac50d84315d70
-   expression: 0 20 * * * *
+ - gameId: 62752181ae6e2235a9544463
+   expression: 0 0 5 31 2 *
    task: standardSingle
    assign: true
 
- - gameId: 62555de98d3ac50d84315d70
-   expression: 0 23 * * * *
+ - gameId: 62752181ae6e2235a9544463
+   expression: 0 0 5 31 2 *
    task: standardGroup
-   assign: true
-   
- - gameId: 62555de98d3ac50d84315d70
-   expression: 0 25 * * * *
-   task: specialSingle
-   assign: true
-   
- - gameId: 62e3877b5b171200f39f8c49
-   expression: 0 29 * * * *
-   task: specialSingle
    assign: true
