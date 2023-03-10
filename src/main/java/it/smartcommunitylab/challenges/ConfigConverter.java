@@ -29,15 +29,22 @@ class ConfigConverter {
     }
 
     public static Map<String, String> toCreationRules(
-            StandardSingleChallenge standardSingleChallenges) {
-        final List<LevelStrategy> creationRules = standardSingleChallenges.getLevelStrategies();
-        Map<String, String> confs = new HashMap<>();
-        creationRules.forEach(cr -> {
-            confs.put(String.valueOf(cr.getLevel().getIndex()), cr.getStrategy());
-        });
-        // for other cases use the last one configured
-        confs.put("other", creationRules.get(creationRules.size() - 1).getStrategy());
-        return confs;
+            StandardSingleChallenge standardSingleChallenges, Boolean isLevelStrategy) {
+    	
+    	Map<String, String> confs = new HashMap<>();
+    	if (isLevelStrategy) {
+    		final List<LevelStrategy> creationRules = standardSingleChallenges.getLevelStrategies();
+            creationRules.forEach(cr -> {
+                confs.put(String.valueOf(cr.getLevel().getIndex()), cr.getStrategy());
+            });
+            // for other cases use the last one configured
+            confs.put("other", creationRules.get(creationRules.size() - 1).getStrategy());            	
+    	} else {
+    		standardSingleChallenges.getWeekStrategies().forEach(weekStrategy -> {
+    			confs.put(String.valueOf(weekStrategy.getIndex()), weekStrategy.getStrategy());
+    		});
+    	}
+    	return confs;
     }
 
     public static Map<String, Object> toChallengeValues(

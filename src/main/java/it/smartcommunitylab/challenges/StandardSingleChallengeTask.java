@@ -1,5 +1,6 @@
 package it.smartcommunitylab.challenges;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -50,14 +51,22 @@ public class StandardSingleChallengeTask implements Runnable {
 			return new ValidResult(true);
 		} else {
 			Map<String, String> gameEngineConfs = ConfigConverter.toGameEngineConfs(game, gameEngineConf);
-			Map<String, String> creationRules = ConfigConverter.toCreationRules(standardSingleChallenges);
+			Map<String, String> creationRules = new HashMap<String, String>();
+			Boolean isLevelStrategy = false;
+			if (standardSingleChallenges.getLevelStrategies() != null && !standardSingleChallenges.getLevelStrategies().isEmpty()) {
+				isLevelStrategy = true;
+				creationRules = ConfigConverter.toCreationRules(standardSingleChallenges, true);	
+			} else {
+				creationRules = ConfigConverter.toCreationRules(standardSingleChallenges, false);
+			}
+			
 			Map<String, Object> challengeValues = ConfigConverter.toChallengeValues(nextChallengeExecution);
 			String playerSet = ConfigConverter.toPlayerSet(standardSingleChallenges.getPlayerSet());
 			Map<String, String> rewards = ConfigConverter.toRewards(standardSingleChallenges.getReward());
 			Set<String> modes = standardSingleChallenges.getSettings().getModes();
 
 			List<ChallengeExpandedDTO> challenges = recommenderApi.createStandardSingleChallenges(gameEngineConfs,
-					modes, creationRules, challengeValues, playerSet, rewards);
+					modes, creationRules, isLevelStrategy, challengeValues, playerSet, rewards);
 			if (logger.isDebugEnabled()) {
 				challenges.stream().map(c -> new it.smartcommunitylab.challenges.Challenge(c)).forEach(c -> {
 					logger.debug("playerId:{}, instanceName:{}, model:{}, s:{}, e:{}, f:{}", c.playerId(),
