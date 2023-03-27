@@ -16,7 +16,7 @@ At the moment `game-engine.challenge-gen` is not available on Smartcommunitylab 
 
 `git clone https://github.com/smartcommunitylab/game-engine.challenge-gen.git`
 
-2. Move to the right branch 
+2. Move to the right branch
 
 `cd game-engine.challenge-gen`
 
