@@ -28,7 +28,7 @@ To create the `playgo-challenges` full standalone version run the command after 
 
 `git clone https://github.com/smartcommunitylab/playgo-challenges.git`
 
-Move to project directory
+Move to project directory 
 
 `cd playgo-challenges`
 
