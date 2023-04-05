@@ -48,10 +48,11 @@ backend-container-build:
     name: $CI_COMMIT_REF_NAME
   script:
     - docker login -u $DHUB_USER -p $DHUB_PASS
-    - DOCKER_BUILDKIT=1 docker build -f Dockerfile -t $CONTAINER_IMAGE -t $CONTAINER_IMAGE_LATEST .
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --build-arg REPO=$CI_COMMIT_REF_NAME -t $CONTAINER_IMAGE -t $CONTAINER_IMAGE_LATEST .
     - docker push $CONTAINER_IMAGE
     - docker push $CONTAINER_IMAGE_LATEST
   only:
+    - playAndGo-dev
     - playAndGo-prod
   artifacts:
     expire_in: 1 week
@@ -76,6 +77,20 @@ deploy-dev:
     - echo "deploy backend"
     - kubectl -n playngo-dev set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
     - kubectl -n playngo-dev rollout status deployment challenges-generator
+  only:
+    - playAndGo-dev
+  artifacts:
+    expire_in: 1 week
+
+deploy-prod:
+  stage: deploy
+  image: smartcommunitylab/kubectl-alpine:latest
+  environment:
+    name: platform-new
+  script:
+    - echo "deploy backend"
+    - kubectl -n playngo-prod set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
+    - kubectl -n playngo-prod rollout status deployment challenges-generator
   only:
     - playAndGo-prod
   artifacts:
