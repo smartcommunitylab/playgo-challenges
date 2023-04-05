@@ -53,6 +53,7 @@ backend-container-build:
     - docker push $CONTAINER_IMAGE_LATEST
   only:
     - playAndGo-dev
+    - playAndGo-prod
   artifacts:
     expire_in: 1 week
     
@@ -78,5 +79,19 @@ deploy-dev:
     - kubectl -n playngo-dev rollout status deployment challenges-generator
   only:
     - playAndGo-dev
+  artifacts:
+    expire_in: 1 week
+
+deploy-prod:
+  stage: deploy
+  image: smartcommunitylab/kubectl-alpine:latest
+  environment:
+    name: platform-new
+  script:
+    - echo "deploy backend"
+    - kubectl -n playngo-prod set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
+    - kubectl -n playngo-prod rollout status deployment challenges-generator
+  only:
+    - playAndGo-prod
   artifacts:
     expire_in: 1 week
