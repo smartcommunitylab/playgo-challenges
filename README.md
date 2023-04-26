@@ -20,7 +20,7 @@ At the moment `game-engine.challenge-gen` is not available on Smartcommunitylab 
 
 `cd game-engine.challenge-gen`
 
-3. Install on your local maven repo
+3. Install on your local maven repo 
 
 `mvn clean install -DskipTests`
 
