@@ -1,4 +1,5 @@
 FROM maven:3-eclipse-temurin-11-alpine AS build
+ARG REPO
 RUN apk --no-cache add git
 RUN git clone -b $REPO https://github.com/smartcommunitylab/game-engine.challenge-gen.git && cd game-engine.challenge-gen && mvn clean install -Dmaven.test.skip=true
 ADD pom.xml /tmp
