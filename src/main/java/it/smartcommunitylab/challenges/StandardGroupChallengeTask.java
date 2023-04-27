@@ -51,6 +51,7 @@ public class StandardGroupChallengeTask implements Runnable {
 		Map<String, String> rewards = ConfigConverter.toRewards(standardGroupChallenges.getReward());
 		Set<String> modes = standardGroupChallenges.getSettings().getModes();
 		final String assignmentType = standardGroupChallenges.getSettings().getModel();
+		System.out.println("version:1.3.0-SNAPSHOT");
 		List<GroupExpandedDTO> challenges = recommenderApi.createStandardGroupChallenges(gameEngineConfs, modes,
 				assignmentType, challengeValues, playerSet, rewards);
 		logger.info("Created {} group challenges for game {}", challenges.size(), game.getGameId());
