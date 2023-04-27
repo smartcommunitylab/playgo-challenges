@@ -56,6 +56,8 @@ public class StandardSingleChallengeTask implements Runnable {
 			Map<String, String> rewards = ConfigConverter.toRewards(standardSingleChallenges.getReward());
 			Set<String> modes = standardSingleChallenges.getSettings().getModes();
 
+			System.out.println("version:1.3.0-SNAPSHOT");
+			
 			List<ChallengeExpandedDTO> challenges = recommenderApi.createStandardSingleChallenges(gameEngineConfs,
 					modes, creationRules, challengeValues, playerSet, rewards);
 			if (logger.isDebugEnabled()) {
