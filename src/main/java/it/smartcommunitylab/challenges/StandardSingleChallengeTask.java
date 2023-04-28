@@ -60,6 +60,21 @@ public class StandardSingleChallengeTask implements Runnable {
 			
 			List<ChallengeExpandedDTO> challenges = recommenderApi.createStandardSingleChallenges(gameEngineConfs,
 					modes, creationRules, challengeValues, playerSet, rewards);
+			
+			
+			Set<String> distinctPlayers = new java.util.HashSet<String>();
+			for (ChallengeExpandedDTO ch: challenges) {
+				distinctPlayers.add(String.valueOf(ch.getInfo("pId")));
+			}
+			
+			java.util.Iterator itr = distinctPlayers.iterator();
+			while(itr.hasNext()){
+			        System.out.print(itr.next()+",\n");
+			    
+			}
+			
+			System.out.println("distinct player count: " + distinctPlayers.size());
+			
 			if (logger.isDebugEnabled()) {
 				challenges.stream().map(c -> new it.smartcommunitylab.challenges.Challenge(c)).forEach(c -> {
 					logger.debug("playerId:{}, instanceName:{}, model:{}, s:{}, e:{}, f:{}", c.playerId(),
