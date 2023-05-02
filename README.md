@@ -12,7 +12,7 @@
 
 At the moment `game-engine.challenge-gen` is not available on Smartcommunitylab Nexus, so you have to install locally manually
 
-1. Clone the project
+1. Clone the project 
 
 `git clone https://github.com/smartcommunitylab/game-engine.challenge-gen.git`
 
