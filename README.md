@@ -45,7 +45,7 @@ Build the project
 The application is protected with Basic Auth mode, the credentials of which is configured in users.yml file.
 
 ```shell
-src/main/resources/users.yml
+src/main/resources/users.yml 
 ```
 
 By default the application starts on port 8020. The configuration can be changed in application.yml file.
