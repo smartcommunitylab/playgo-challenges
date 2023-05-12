@@ -32,7 +32,7 @@ Move to project directory
 
 `cd playgo-challenges`
 
-Build the project
+Build the project 
  
 `mvn clean install -DskipTests`
 
