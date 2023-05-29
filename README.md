@@ -1,5 +1,9 @@
 # playgo-challenges
 
+## Architecture
+
+![](https://github.com/smartcommunitylab/playgo-challenges/blob/master/wiki/images/architecture.jpg)
+
 ## Requirements
 
 * Jdk 11 (Tested with Java 11.0.5)
