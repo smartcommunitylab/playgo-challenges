@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  challenge-generator:
+    build:
+      context: .
+      args:
+        - REPO=master
+    container_name: challenge-generator
+    ports:
+      - "8020:8020"
