@@ -9,3 +9,6 @@ services:
     container_name: challenge-generator
     ports:
       - "8020:8020"
+    env_file: challenge-gen.env
+    volumes:
+      - ./config:/home/challenges/config

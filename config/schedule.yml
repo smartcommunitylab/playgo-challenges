@@ -1,0 +1,10 @@
+schedules:
+ - gameId: 6437ddadf8e59353e50d143e
+   expression: 0 58 08 ? * THU
+   task: standardSingle
+   assign: false
+
+ - gameId: 6437ddadf8e59353e50d143e
+   expression: 0 00 14 ? * FRI
+   task: standardGroup
+   assign: false
