@@ -294,4 +294,21 @@ For every game you can define parameters for three assignement scenarios `standa
 [config_sample]: src/test/resources/config-simulation.yml]
 
 
+## Docker installation
+
+### Requirements
+
+* docker > 1.18
+* docker-compose > 1.25.0
+   
+
+You can find configurations into [challenge-gen.env]([https://github.com/smartcommunitylab/smartcampus.gamification/blob/master/gamification.env](https://github.com/smartcommunitylab/playgo-challenges/blob/master/challenge-gen.env)).
+
+### Run
+
+1. run `docker-compose up -d` from the root folder.
+
+**NOTE**
+* challenge-generator will be up and running on host port **8020** 
+* APIs can be invoked using the url prefix **http://localhost:8020/challenge-generator/swagger-ui/index.html**
 
