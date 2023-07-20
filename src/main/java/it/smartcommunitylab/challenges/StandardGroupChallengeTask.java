@@ -47,6 +47,7 @@ public class StandardGroupChallengeTask implements Runnable {
 		final NextExecution nextChallengeExecution = new NextExecution(standardGroupChallenges, new ExecDate());
 		Map<String, String> gameEngineConfs = ConfigConverter.toGameEngineConfs(game, gameEngineConf);
 		Map<String, Object> challengeValues = ConfigConverter.toGroupChallengeValues(nextChallengeExecution);
+		challengeValues.put("minLevel", standardGroupChallenge.getSettings().getMinLevel());
 		String playerSet = ConfigConverter.toPlayerSet(standardGroupChallenges.getPlayerSet());
 		Map<String, String> rewards = ConfigConverter.toRewards(standardGroupChallenges.getReward());
 		Set<String> modes = standardGroupChallenges.getSettings().getModes();
