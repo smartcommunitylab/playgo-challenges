@@ -5,8 +5,8 @@ server:
 
 config:
   url: ${GAMIFICATION_URL:}
-  api_user: ${API_USER:}
-  api_pass: ${API_PASS:}
+  api_user: ${GAMIFICATION_USERNAME:}
+  api_pass: ${GAMIFICATION_PASSWORD:}
   challengeUrl: ${CHALLENGE_URL:}
   scheduleUrl: ${SCHEDULE_URL:}
   postgresUrl: ${POSTGRES_URL:}
