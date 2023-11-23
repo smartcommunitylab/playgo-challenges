@@ -60,26 +60,30 @@ container_scanning:
     DOCKER_PASSWORD: ""
   artifacts:
     expire_in: 1 week
-
+  dependencies:
+    - backend-container-build
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+    
 spotbugs-sast:
   rules:
-     - if: '$CI_COMMIT_REF_NAME == "main"'
+     - if: '$CI_COMMIT_REF_NAME == "master"'
 
 semgrep-sast:
   rules:
-     - if: '$CI_COMMIT_REF_NAME == "main"'
+     - if: '$CI_COMMIT_REF_NAME == "master"'
 
 nodejs-scan-sast:
   rules:
-     - if: '$CI_COMMIT_REF_NAME == "main"'
+     - if: '$CI_COMMIT_REF_NAME == "master"'
 
 gemnasium-maven-dependency_scanning:
   rules:
-     - if: '$CI_COMMIT_REF_NAME == "main"'
+     - if: '$CI_COMMIT_REF_NAME == "master"'
 
 gemnasium-dependency_scanning:
   rules:
-     - if: '$CI_COMMIT_REF_NAME == "main"'
+     - if: '$CI_COMMIT_REF_NAME == "master"'
 
 deploy-dev:
   stage: deploy
