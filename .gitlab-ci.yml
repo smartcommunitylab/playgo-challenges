@@ -1,13 +1,11 @@
-image: docker:19
+image: docker:latest
 
 services:
   - docker:dind
 
 stages:
   - build
-  - container-build
   - test
-  - container-scan
   - deploy
 
 include:
@@ -21,31 +19,25 @@ variables:
   DOCKER_DRIVER: overlay
   CONTAINER_IMAGE: smartcommunitylab/challenges-generator:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
   CONTAINER_IMAGE_LATEST: smartcommunitylab/challenges-generator:$CI_COMMIT_REF_NAME-latest
-  # MAVEN_CLI_OPTS: -DskipTests --batch-mode
+  CS_IMAGE: smartcommunitylab/challenges-generator:$CI_COMMIT_REF_NAME-latest
+  CONTAINER_CACHE_IMAGE: smartcommunitylab/challenges-generator:cache
   SAST_JAVA_VERSION: 11
 
-# maven-test:
-#   image: maven:3-openjdk-8
-#   stage: test
-#   script:
-#     - mvn $MAVEN_REPO test
-
-maven-build:
-  image: maven:3-eclipse-temurin-11-alpine
+update-backend-cache-image:
   stage: build
-  # only:
-  #   refs:
-  #     - dev
-  #     - master
+  variables:
+    BUILDKIT_PROGRESS: plain
+    DOCKER_BUILDKIT: 1 
   script:
-    - mvn -DskipTests=true clean package
-  artifacts:
-    expire_in: 1 week
+    - docker login -u $DHUB_USER -p $DHUB_PASS
+    - docker build --build-arg REPO=$CI_COMMIT_REF_NAME -f Dockerfile-cache -t $CONTAINER_CACHE_IMAGE .
+    - docker push $CONTAINER_CACHE_IMAGE
+  rules:
+    - changes:
+      - pom.xml
 
 backend-container-build:
-  stage: container-build
-  environment:
-    name: $CI_COMMIT_REF_NAME
+  stage: build
   script:
     - docker login -u $DHUB_USER -p $DHUB_PASS
     - DOCKER_BUILDKIT=1 docker build -f Dockerfile --build-arg REPO=$CI_COMMIT_REF_NAME -t $CONTAINER_IMAGE -t $CONTAINER_IMAGE_LATEST .
@@ -54,11 +46,12 @@ backend-container-build:
   only:
     - playAndGo-dev
     - playAndGo-prod
+    - master
   artifacts:
     expire_in: 1 week
     
 container_scanning:
-  stage: container-scan
+  stage: test
   variables:
     DOCKER_IMAGE: smartcommunitylab/challenges-generator:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
     DOCKERFILE_PATH: "Dockerfile"
@@ -67,12 +60,36 @@ container_scanning:
     DOCKER_PASSWORD: ""
   artifacts:
     expire_in: 1 week
+  dependencies:
+    - backend-container-build
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+    
+spotbugs-sast:
+  rules:
+     - if: '$CI_COMMIT_REF_NAME == "master"'
+
+semgrep-sast:
+  rules:
+     - if: '$CI_COMMIT_REF_NAME == "master"'
+
+nodejs-scan-sast:
+  rules:
+     - if: '$CI_COMMIT_REF_NAME == "master"'
+
+gemnasium-maven-dependency_scanning:
+  rules:
+     - if: '$CI_COMMIT_REF_NAME == "master"'
+
+gemnasium-dependency_scanning:
+  rules:
+     - if: '$CI_COMMIT_REF_NAME == "master"'
 
 deploy-dev:
   stage: deploy
   image: smartcommunitylab/kubectl-alpine:latest
   environment:
-    name: platform-new
+    name: dslab
   script:
     - echo "deploy backend"
     - kubectl -n playngo-dev set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
@@ -86,7 +103,7 @@ deploy-prod:
   stage: deploy
   image: smartcommunitylab/kubectl-alpine:latest
   environment:
-    name: platform-new
+    name: dslab
   script:
     - echo "deploy backend"
     - kubectl -n playngo-prod set image deployments/challenges-generator challenges-generator=$CONTAINER_IMAGE --record=true
