@@ -1,0 +1,128 @@
+games:
+  - gameId: 62555de98d3ac50d84315d70
+    standardSingleChallenges:
+      levelStrategies:
+        - level:
+            type: Green Warrior
+            index: 0
+          strategy: empty
+        - level:
+            type: Green Warrior
+            index: 1
+          strategy: fixedOne
+        - level:
+            type: Green Warrior
+            index: 2
+          strategy: choiceTwoV2
+        - level:
+            type: Green Warrior
+            index: 3
+          strategy: choiceThreeV2
+      settings:
+        start: '2020-09-26 00:00'
+        duration: 7d
+        suspensions: null
+        modeConcepts:
+          - Walk_Km
+          - Bike_Km
+        hide: true
+      playerSet: null
+      reward:
+        scoreName: green leaves
+        type: fixed
+        value: 100
+        maxValue: null
+    standardGroupChallenges:
+      settings:
+        start: '2020-09-26 00:00'
+        duration: 7d
+        model: groupCooperative
+        modeConcepts:
+          - Walk_Km
+          - Bike_Km
+          - green leaves
+      playerSet: null
+      reward:
+        scoreName: green leaves
+        type: null
+        value: null
+        maxValue: null
+    specialSingleChallenges:
+      - settings:
+          start: '2020-12-12 00:00'
+          duration: 7d
+          model: survey
+          fields:
+            surveyType: bellaCoincidenza
+            link: ''
+          hide: false
+        playerSet: null
+        reward:
+          scoreName: green leaves
+          type: fixed
+          value: 250
+          maxValue: null
+  - gameId: 62e3877b5b171200f39f8c49
+    standardSingleChallenges:
+      weekStrategies:
+        - index: 0
+          challenges:
+            - challenge:
+                playerSet:
+                  - team
+                challengeTyp: increment
+                strategy: fixedOne
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 100
+                  maxValue: null
+            - challenge:
+                playerSet:
+                  - member
+                challengeTyp: repetitiveBehavior
+                strategy: fixedOne
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 100
+                  maxValue: null
+        - index: 1
+          challenges: null
+        - index: 2
+          challenges:
+            - challenge:
+                playerSet:
+                  - NK
+                challengeTyp: increment
+                strategy: fixedOne
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 100
+                  maxValue: null
+            - challenge:
+                playerSet:
+                  - team
+                challengeTyp: groupCooperative
+                strategy: fixedOne
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 100
+                  maxValue: null
+    settings:
+      start: '2020-09-26 00:00'
+      duration: 7d
