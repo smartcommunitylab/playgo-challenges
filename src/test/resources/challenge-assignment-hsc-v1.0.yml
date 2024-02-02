@@ -63,7 +63,7 @@ games:
           value: 250
           maxValue: null
   - gameId: 62e3877b5b171200f39f8c49
-    standardSingleChallenges:
+    highSchoolChallenges:
       weekStrategies:
         - index: 0
           challenges:
