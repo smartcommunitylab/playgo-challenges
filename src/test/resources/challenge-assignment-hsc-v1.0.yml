@@ -68,61 +68,59 @@ games:
         - index: 0
           challenges:
             - challenge:
-                playerSet:
-                  - team
                 challengeTyp: increment
                 strategy: fixedOne
-                pointConcepts:
-                  - Walk_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 100
-                  maxValue: null
-            - challenge:
-                playerSet:
-                  - member
-                challengeTyp: repetitiveBehavior
-                strategy: fixedOne
-                pointConcepts:
-                  - Walk_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 100
-                  maxValue: null
-        - index: 1
-          challenges: null
-        - index: 2
-          challenges:
-            - challenge:
                 playerSet:
                   - NK
-                challengeTyp: increment
-                strategy: fixedOne
                 pointConcepts:
                   - Walk_Km
                   - Bike_Km
                 reward:
                   scoreName: green leaves
                   type: fixed
-                  value: 100
+                  value: 250
                   maxValue: null
             - challenge:
+                challengeTyp: repetitiveBehavior
+                strategy: fixedOne
                 playerSet:
-                  - team
+                  - Team
+                pointConcepts:
+                  - Train_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 150
+                  maxValue: null
+        - index: 1
+          challenges:
+            - challenge:
                 challengeTyp: groupCooperative
                 strategy: fixedOne
+                playerSet:
+                  - NK
                 pointConcepts:
                   - Walk_Km
                   - Bike_Km
                 reward:
                   scoreName: green leaves
                   type: fixed
-                  value: 100
+                  value: 250
                   maxValue: null
-    settings:
-      start: '2020-09-26 00:00'
-      duration: 7d
+            - challenge:
+                challengeTyp: percentageIncrement
+                strategy: fixedOne
+                playerSet:
+                  - Team
+                pointConcepts:
+                  - Train_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 150
+                  maxValue: null
+      settings:
+        start: '2020-09-26 00:00'
+        duration: 7d
