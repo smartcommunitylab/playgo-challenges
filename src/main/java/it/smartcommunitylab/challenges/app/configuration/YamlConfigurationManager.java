@@ -48,6 +48,9 @@ public class YamlConfigurationManager implements ConfigurationManager {
 					settings.setSpecialSingleChallengeConfig(gc.getSpecialSingleChallenges().stream()
 							.map(special -> special.toChallengeConfig()).collect(Collectors.toList()));
 				}
+				if (gc.getHighSchoolChallenges() != null) {
+					settings.setHighSchoolChallengeConfig(gc.getHighSchoolChallenges().toChallengeConfig());
+				}
 				return settings;
 			}).collect(Collectors.toList());
 		} catch (IOException e) {

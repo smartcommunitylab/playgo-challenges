@@ -1,8 +1,10 @@
 package it.smartcommunitylab.challenges.app.configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.smartcommunitylab.challenges.bean.Challenge;
+import it.smartcommunitylab.challenges.bean.WeekStrategy;
 
 public class WeekStrategyConfig {
 	private int index;
@@ -35,6 +37,18 @@ public class WeekStrategyConfig {
 
 	public void setChallenges(List<ChallengesConfig> challenges) {
 		this.challenges = challenges;
+	}
+
+	public List<Challenge> toChallenges() {
+		List<Challenge> temp = new ArrayList<>();
+		for (ChallengesConfig chg: challenges) {
+			temp.add(chg.getChallenge());
+		}
+		return temp;
+	}
+
+	public WeekStrategy toCreationRule() {
+		return new WeekStrategy(index, toChallenges());
 	}
 
 }
