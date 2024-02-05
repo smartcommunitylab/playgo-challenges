@@ -8,6 +8,7 @@ public class Tasker {
     public static final String STANDARD_SINGLE_OPTION = "standardSingle";
     public static final String STANDARD_GROUP_OPTION = "standardGroup";
     public static final String SPECIAL_SINGLE_OPTION = "specialSingle";
+    public static final String HSC_CHALLENGE_OPTION = "hsc";
     private boolean assignStandardSingle;
     private boolean assignStandardGroup;
     private boolean assignSpecialSingle;

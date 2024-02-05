@@ -3,7 +3,7 @@ package it.smartcommunitylab.challenges.app.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.smartcommunitylab.challenges.bean.Challenge;
+import eu.fbk.das.rs.challenges.Challenge;
 import it.smartcommunitylab.challenges.bean.WeekStrategy;
 
 public class WeekStrategyConfig {

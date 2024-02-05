@@ -1,5 +1,5 @@
 schedules:
  - gameId: 63eb47e2f3ffe74ae078d250
-   expression: 0 20 * * * *
-   task: standardSingle
+   expression:  0 13 14 ? * MON
+   task: hsc
    assign: false

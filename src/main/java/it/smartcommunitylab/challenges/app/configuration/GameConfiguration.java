@@ -10,7 +10,7 @@ public class GameConfiguration {
 	private StandardSingleChallengeConfig standardSingleChallenges;
 	private StandardGroupChallengeConfig standardGroupChallenges;
 	private List<SpecialSingleChallengeConfig> specialSingleChallenges;
-	private HighSchoolChallengeConfig highSchoolChallenges;
+	private HighSchoolChallengeConfig highSchoolChallenge;
 
 	public String getGameId() {
 		return gameId;
@@ -52,12 +52,12 @@ public class GameConfiguration {
 		this.specialSingleChallenges = specialSingleChallenges;
 	}
 
-	public HighSchoolChallengeConfig getHighSchoolChallenges() {
-		return highSchoolChallenges;
+	public HighSchoolChallengeConfig getHighSchoolChallenge() {
+		return highSchoolChallenge;
 	}
 
-	public void setHighSchoolChallenges(HighSchoolChallengeConfig highSchoolChallenges) {
-		this.highSchoolChallenges = highSchoolChallenges;
+	public void setHighSchoolChallenge(HighSchoolChallengeConfig highSchoolChallenge) {
+		this.highSchoolChallenge = highSchoolChallenge;
 	}
 
 }

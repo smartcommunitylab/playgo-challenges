@@ -2,6 +2,8 @@ package it.smartcommunitylab.challenges.bean;
 
 import java.util.List;
 
+import eu.fbk.das.rs.challenges.Challenge;
+
 public class WeekStrategy {
 	private int index;
 	private List<Challenge> challenge;
