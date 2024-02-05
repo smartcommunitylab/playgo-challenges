@@ -1,5 +1,5 @@
 games:
-  - gameId: 6437ddadf8e59353e50d143e 
+  - gameId: 62555de98d3ac50d84315d70
     standardSingleChallenges:
       levelStrategies:
         - level:
@@ -19,48 +19,108 @@ games:
             index: 3
           strategy: choiceThreeV2
       settings:
-        start: 2023-04-17 00:00
+        start: '2020-09-26 00:00'
         duration: 7d
-        suspensions:
+        suspensions: null
         modeConcepts:
           - Walk_Km
           - Bike_Km
-          - green leaves
-        hide: True
-      playerSet:
+        hide: true
+      playerSet: null
       reward:
         scoreName: green leaves
         type: fixed
-        value: 100.0
-        maxValue:
+        value: 100
+        maxValue: null
     standardGroupChallenges:
       settings:
-        start: 2023-04-17 00:00
+        start: '2020-09-26 00:00'
         duration: 7d
         model: groupCooperative
         modeConcepts:
           - Walk_Km
           - Bike_Km
           - green leaves
-      playerSet:
+      playerSet: null
       reward:
         scoreName: green leaves
-        type: 
-        value:
-        maxValue:
-    specialSingleChallenges: 
+        type: null
+        value: null
+        maxValue: null
+    specialSingleChallenges:
       - settings:
-          start: 2023-04-17 00:00
+          start: '2020-12-12 00:00'
           duration: 7d
           model: survey
           fields:
             surveyType: bellaCoincidenza
-            link : ""    
-          hide: False
-        playerSet:
+            link: ''
+          hide: false
+        playerSet: null
         reward:
           scoreName: green leaves
           type: fixed
-          value: 250.0
-          maxValue: 
- 
+          value: 250
+          maxValue: null
+  - gameId: 63eb47e2f3ffe74ae078d250
+    highSchoolChallenge:
+      weekStrategies:
+        - index: 0
+          challenges:
+            - challenge:
+                challengeTyp: increment
+                strategy: fixedOne
+                playerSet:
+                  - NK
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 250
+                  maxValue: null
+            - challenge:
+                challengeTyp: repetitiveBehavior
+                strategy: fixedOne
+                playerSet:
+                  - Team
+                pointConcepts:
+                  - Train_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 150
+                  maxValue: null
+        - index: 1
+          challenges:
+            - challenge:
+                challengeTyp: groupCooperative
+                strategy: fixedOne
+                playerSet:
+                  - NK
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 250
+                  maxValue: null
+            - challenge:
+                challengeTyp: percentageIncrement
+                strategy: fixedOne
+                playerSet:
+                  - Team
+                pointConcepts:
+                  - Train_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 150
+                  maxValue: null
+      settings:
+        start: '2024-01-26 00:00'
+        duration: 7d
