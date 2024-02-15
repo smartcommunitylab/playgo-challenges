@@ -65,7 +65,7 @@ games:
   - gameId: 63eb47e2f3ffe74ae078d250
     highSchoolChallenge:
       weekStrategies:
-        - index: 0
+        - index: 1
           challenges:
             - challenge:
                 challengeTyp: increment
@@ -84,7 +84,7 @@ games:
                 challengeTyp: repetitiveBehavior
                 strategy: fixedOne
                 playerSet:
-                  - Team
+                  - team
                 pointConcepts:
                   - Train_Km
                   - Bike_Km
@@ -93,7 +93,7 @@ games:
                   type: fixed
                   value: 150
                   maxValue: null
-        - index: 1
+        - index: 2
           challenges:
             - challenge:
                 challengeTyp: groupCooperative
@@ -112,7 +112,7 @@ games:
                 challengeTyp: percentageIncrement
                 strategy: fixedOne
                 playerSet:
-                  - Team
+                  - team
                 pointConcepts:
                   - Train_Km
                   - Bike_Km
@@ -121,6 +121,19 @@ games:
                   type: fixed
                   value: 150
                   maxValue: null
+            - challenge:
+                challengeTyp: groupCooperativeTime
+                strategy: fixedOne
+                playerSet:
+                  - member
+                pointConcepts:
+                  - Train_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 150
+                  maxValue: null     
       settings:
-        start: '2024-01-26 00:00'
+        start: '2024-02-06 00:00'
         duration: 7d
