@@ -3,6 +3,7 @@ package it.smartcommunitylab.challenges.app.configuration;
 import java.util.List;
 
 import it.smartcommunitylab.challenges.bean.Game;
+import it.smartcommunitylab.challenges.bean.HighSchoolChallenge;
 import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
@@ -12,6 +13,7 @@ public class ChallengesSettings {
     private StandardSingleChallenge standardSingleChallengeConfig;
     private StandardGroupChallenge standardGroupChallengeConfig;
     private List<SpecialSingleChallenge> specialSingleChallengeConfig;
+    private HighSchoolChallenge highSchoolChallengeConfig;
 
     public Game getGame() {
         return game;
@@ -48,4 +50,12 @@ public class ChallengesSettings {
         this.specialSingleChallengeConfig = specialSingleChallengeConfig;
     }
 
+	public HighSchoolChallenge getHighSchoolChallengeConfig() {
+		return highSchoolChallengeConfig;
+	}
+
+	public void setHighSchoolChallengeConfig(HighSchoolChallenge highSchoolChallengeConfig) {
+		this.highSchoolChallengeConfig = highSchoolChallengeConfig;
+	}
+    
 }

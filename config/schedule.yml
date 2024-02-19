@@ -8,3 +8,8 @@ schedules:
    expression: 0 00 14 ? * FRI
    task: standardGroup
    assign: false
+   
+ - gameId: 63eb47e2f3ffe74ae078d250
+   expression:  0 30 14 ? * MON
+   task: hsc
+   assign: false

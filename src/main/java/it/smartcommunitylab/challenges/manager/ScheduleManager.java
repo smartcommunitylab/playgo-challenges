@@ -17,6 +17,7 @@ import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Component;
 
+import it.smartcommunitylab.challenges.HSCChallengeTask;
 import it.smartcommunitylab.challenges.SpecialSingleChallengeTask;
 import it.smartcommunitylab.challenges.StandardGroupChallengeTask;
 import it.smartcommunitylab.challenges.StandardSingleChallengeTask;
@@ -83,6 +84,9 @@ public class ScheduleManager {
 						} else if (schedule.getTask().equalsIgnoreCase(Tasker.STANDARD_GROUP_OPTION)) {
 							scheduler.schedule(new StandardGroupChallengeTask(gc.getGame(), gameEngineConf,
 									gc.getStandardGroupChallengeConfig()), trigger);
+						} else if (schedule.getTask().equalsIgnoreCase(Tasker.HSC_CHALLENGE_OPTION)) {
+							scheduler.schedule(new HSCChallengeTask(gc.getGame(), gameEngineConf,
+									gc.getHighSchoolChallengeConfig()), trigger);
 						}
 						logger.info("schedule imposed for gameId(" + schedule.getGameId() + ") - cron("
 								+ schedule.getExpression() + ") - task(" + schedule.getTask() + ") - assign("

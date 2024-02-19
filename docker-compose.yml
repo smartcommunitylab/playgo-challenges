@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        - REPO=master
+        - REPO=hsc-challenge
     container_name: challenge-generator
     ports:
       - "8020:8020"

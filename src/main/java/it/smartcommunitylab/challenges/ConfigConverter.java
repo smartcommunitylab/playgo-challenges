@@ -10,11 +10,13 @@ import java.util.Set;
 import eu.fbk.das.utils.Utils;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
+import it.smartcommunitylab.challenges.bean.HighSchoolChallenge;
 import it.smartcommunitylab.challenges.bean.LevelStrategy;
 import it.smartcommunitylab.challenges.bean.Reward;
 import it.smartcommunitylab.challenges.bean.SpecialSettings;
 import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
+import it.smartcommunitylab.challenges.bean.WeekStrategy;
 
 class ConfigConverter {
 
@@ -96,6 +98,16 @@ class ConfigConverter {
         confs.put("calcType", rewardTypeAsString);
         confs.put("calcValue", String.valueOf(reward.getValue()));
         confs.put("maxValue", reward.getMaxValue().map(m -> String.valueOf(m)).orElse(null));
+        return confs;
+    }
+    
+    public static Map<String, List<eu.fbk.das.rs.challenges.Challenge>> toCreationRules(
+            HighSchoolChallenge hscChallenge) {
+        final List<WeekStrategy> creationRules = hscChallenge.getWeekStrategies();
+        Map<String, List<eu.fbk.das.rs.challenges.Challenge>> confs = new HashMap<>();
+        creationRules.forEach(cr -> {
+            confs.put(String.valueOf(cr.getIndex()), cr.getChallenge());
+        });
         return confs;
     }
 }
