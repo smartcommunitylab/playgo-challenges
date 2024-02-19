@@ -62,16 +62,56 @@ games:
           type: fixed
           value: 250
           maxValue: null
-  - gameId: 63eb47e2f3ffe74ae078d250
+  - gameId: 63caa5b9adaefe48f4ad99ae
     highSchoolChallenge:
       weekStrategies:
         - index: 1
           challenges:
             - challenge:
-                challengeTyp: increment
+                challengeTyp: percentageIncrement
                 strategy: fixedOne
                 playerSet:
-                  - NK
+                  - team
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 250
+                  maxValue: null
+            - challenge:
+                challengeTyp: percentageIncrement
+                strategy: fixedOne
+                playerSet:
+                  - member
+                pointConcepts:
+                  - Train_Trips
+                  - Bus_Trips
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 150
+                  maxValue: null
+            - challenge:
+                challengeTyp: percentageIncrement
+                strategy: fixedOne
+                playerSet:
+                  - team
+                pointConcepts:
+                  - green leaves
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 200
+                  maxValue: null
+        - index: 2
+          challenges:
+            - challenge:
+                challengeTyp: repetitiveBehavior
+                strategy: fixedOne
+                playerSet:
+                  - team
                 pointConcepts:
                   - Walk_Km
                   - Bike_Km
@@ -84,55 +124,26 @@ games:
                 challengeTyp: repetitiveBehavior
                 strategy: fixedOne
                 playerSet:
-                  - team
-                pointConcepts:
-                  - Train_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 150
-                  maxValue: null
-        - index: 2
-          challenges:
-            - challenge:
-                challengeTyp: groupCooperative
-                strategy: fixedOne
-                playerSet:
-                  - NK
-                pointConcepts:
-                  - Walk_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 250
-                  maxValue: null
-            - challenge:
-                challengeTyp: percentageIncrement
-                strategy: fixedOne
-                playerSet:
-                  - team
-                pointConcepts:
-                  - Train_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 150
-                  maxValue: null
-            - challenge:
-                challengeTyp: groupCooperativeTime
-                strategy: fixedOne
-                playerSet:
                   - member
                 pointConcepts:
-                  - Train_Km
-                  - Bike_Km
+                  - Train_Trips
+                  - Bus_Trips
                 reward:
                   scoreName: green leaves
                   type: fixed
                   value: 150
+                  maxValue: null
+            - challenge:
+                challengeTyp: repetitiveBehavior
+                strategy: fixedOne
+                playerSet:
+                  - team
+                pointConcepts:
+                  - green leaves
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 200
                   maxValue: null
         - index: 3
           challenges:
@@ -140,35 +151,22 @@ games:
           challenges:
         - index: 5
           challenges:
-          challenges:
         - index: 6
           challenges:
-            - challenge:
-                challengeTyp: percentageIncrement
-                strategy: fixedOne
-                playerSet:
-                  - team
-                pointConcepts:
-                  - Train_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 150
-                  maxValue: null
-            - challenge:
-                challengeTyp: groupCooperativeTime
-                strategy: fixedOne
-                playerSet:
-                  - member
-                pointConcepts:
-                  - Train_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 150
-                  maxValue: null 
+        - index: 7
+          challenges:
+        - index: 8
+          challenges:
+        - index: 9
+          challenges:
+        - index: 10
+          challenges:
+        - index: 11
+          challenges:
+        - index: 12
+          challenges:
+        - index: 13
+          challenges:                   
       settings:
-        start: '2024-01-06 00:00'
+        start: '2024-02-26 00:00'
         duration: 7d
