@@ -1,5 +1,6 @@
 package it.smartcommunitylab.challenges;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class HSCChallengeTask implements Runnable {
 	}
 
 	public Result generate(Game game, GameEngineInfo gameEngineConf, HighSchoolChallenge highSchoolChallenge) {
-		logger.info("Generate HSC challenge for gameId " + game.getGameId());
+		logger.info("Generate HSC challenge for gameId {}", game.getGameId());
 		final NextExecution nextChallengeExecution = new NextExecution(highSchoolChallenge, new ExecDate());
 		if (nextChallengeExecution.isSuspended()) {
 			logger.info("challenge will start in a suspension range, suspend assignment");
@@ -60,13 +61,13 @@ public class HSCChallengeTask implements Runnable {
 				distinctPlayers.add(String.valueOf(ch.getInfo("pId")));
 			}
 
-			java.util.Iterator itr = distinctPlayers.iterator();
+			Iterator<String> itr = distinctPlayers.iterator();
 			while (itr.hasNext()) {
-				System.out.print(itr.next() + ",\n");
+				logger.info(itr.next());
 
 			}
 
-			System.out.println("distinct player count: " + distinctPlayers.size());
+			logger.info("distinct player count: {}", distinctPlayers.size());
 
 			if (logger.isDebugEnabled()) {
 				challenges.stream().map(c -> new it.smartcommunitylab.challenges.Challenge(c)).forEach(c -> {
@@ -75,10 +76,10 @@ public class HSCChallengeTask implements Runnable {
 				});
 			}
 			logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
-			if (this.gameEngineConf.getAssign()) {
-				challenges.forEach(challenge -> {
-					recommenderApi.assignSingleChallenge(gameEngineConfs, challenge);
-				});
+			if (Boolean.TRUE.equals(this.gameEngineConf.getAssign())) {
+				challenges.forEach(challenge -> 
+					recommenderApi.assignSingleChallenge(gameEngineConfs, challenge)
+				);
 				logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
 			}
 			return new ValidResult(true);

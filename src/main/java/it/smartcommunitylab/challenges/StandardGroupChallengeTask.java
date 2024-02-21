@@ -43,7 +43,7 @@ public class StandardGroupChallengeTask implements Runnable {
 	}
 
 	public Result generate(Game game, GameEngineInfo gameEngineConf, StandardGroupChallenge standardGroupChallenges) {
-		logger.info("Generate group challenge for gameId " + game.getGameId());
+		logger.info("Generate group challenge for gameId {}", game.getGameId());
 		final NextExecution nextChallengeExecution = new NextExecution(standardGroupChallenges, new ExecDate());
 		Map<String, String> gameEngineConfs = ConfigConverter.toGameEngineConfs(game, gameEngineConf);
 		Map<String, Object> challengeValues = ConfigConverter.toGroupChallengeValues(nextChallengeExecution);
@@ -52,7 +52,7 @@ public class StandardGroupChallengeTask implements Runnable {
 		Map<String, String> rewards = ConfigConverter.toRewards(standardGroupChallenges.getReward());
 		Set<String> modes = standardGroupChallenges.getSettings().getModes();
 		final String assignmentType = standardGroupChallenges.getSettings().getModel();
-		System.out.println("version:1.3.0-SNAPSHOT");
+		
 		List<GroupExpandedDTO> challenges = recommenderApi.createStandardGroupChallenges(gameEngineConfs, modes,
 				assignmentType, challengeValues, playerSet, rewards);
 		logger.info("Created {} group challenges for game {}", challenges.size(), game.getGameId());
@@ -63,7 +63,7 @@ public class StandardGroupChallengeTask implements Runnable {
 						c.getAttendees().get(1).getPlayerId());
 			});
 		}
-		if (this.gameEngineConf.getAssign()) {
+		if (Boolean.TRUE.equals(this.gameEngineConf.getAssign())) {
 			challenges.forEach(challenge -> {
 				recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
 			});
