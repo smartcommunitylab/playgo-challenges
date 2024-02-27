@@ -4,6 +4,7 @@ import java.time.Period;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -16,6 +17,7 @@ public class StandardGroupSettings {
 	private String model;
 	private List<String> modeConcepts;
 	private int minLevel;
+	private Map<String, Integer> modeMax;
 
 	public Date getStart() {
 		return start;
@@ -41,8 +43,16 @@ public class StandardGroupSettings {
 		this.modeConcepts = modeConcepts;
 	}
 
+	public Map<String, Integer> getModeMax() {
+		return modeMax;
+	}
+
+	public void setModeMax(Map<String, Integer> modeMax) {
+		this.modeMax = modeMax;
+	}
+
 	public GroupSettings toConfig() {
-		GroupSettings settings = new GroupSettings(start, duration);
+		GroupSettings settings = new GroupSettings(start, duration, modeMax);
 		settings.setModel(model);
 		settings.setModes(new HashSet<>(modeConcepts));
 		settings.setMinLevel(minLevel);

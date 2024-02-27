@@ -4,6 +4,7 @@ import java.time.Period;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,6 +19,7 @@ public class StandardSingleSettings {
     private List<String> modeConcepts;
     private boolean hide;
     private List<SuspensionConfig> suspensions;
+    private Map<String, Integer> modeMax;
 
     public Date getStart() {
         return start;
@@ -51,9 +53,16 @@ public class StandardSingleSettings {
         this.hide = hide;
     }
 
+    public Map<String, Integer> getModeMax() {
+		return modeMax;
+	}
 
-    public Settings toConfig() {
-        Settings config = new Settings(start, duration);
+	public void setModeMax(Map<String, Integer> modeMax) {
+		this.modeMax = modeMax;
+	}
+
+	public Settings toConfig() {
+        Settings config = new Settings(start, duration, modeMax);
         config.setHide(hide);
         config.setModes(new HashSet<>(modeConcepts));
         config.setSuspensions(

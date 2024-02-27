@@ -1,5 +1,5 @@
 games:
-  - gameId: 62555de98d3ac50d84315d70
+  - gameId: 640ef0a3d82bd2057035f94e
     standardSingleChallenges:
       levelStrategies:
         - level:
@@ -19,12 +19,19 @@ games:
             index: 3
           strategy: choiceThreeV2
       settings:
-        start: '2020-09-26 00:00'
+        start: '2023-03-13 00:00'
         duration: 7d
         suspensions: null
         modeConcepts:
           - Walk_Km
           - Bike_Km
+          - green leaves
+        modeMax:
+          Walk_Km: 70
+          Bike_Km: 210
+          Train_Trips: 56
+          Bus_Trips: 56
+          green leaves: 3000
         hide: true
       playerSet: null
       reward:
@@ -34,13 +41,20 @@ games:
         maxValue: null
     standardGroupChallenges:
       settings:
-        start: '2020-09-26 00:00'
+        start: '2023-03-13 00:00'
         duration: 7d
         model: groupCooperative
+        minLevel: 4
         modeConcepts:
           - Walk_Km
           - Bike_Km
           - green leaves
+        modeMax:
+          Walk_Km: 70
+          Bike_Km: 210
+          Train_Trips: 56
+          Bus_Trips: 56
+          green leaves: 3000
       playerSet: null
       reward:
         scoreName: green leaves
@@ -49,7 +63,7 @@ games:
         maxValue: null
     specialSingleChallenges:
       - settings:
-          start: '2020-12-12 00:00'
+          start: '2023-03-13 00:00'
           duration: 7d
           model: survey
           fields:
@@ -68,7 +82,7 @@ games:
         - index: 1
           challenges:
             - challenge:
-                challengeTyp: percentageIncrement
+                challengeTyp: groupCooperative
                 strategy: fixedOne
                 playerSet:
                   - team
@@ -146,27 +160,33 @@ games:
                   value: 200
                   maxValue: null
         - index: 3
-          challenges:
+          challenges: null
         - index: 4
-          challenges:
+          challenges: null
         - index: 5
-          challenges:
+          challenges: null
         - index: 6
-          challenges:
+          challenges: null
         - index: 7
-          challenges:
+          challenges: null
         - index: 8
-          challenges:
+          challenges: null
         - index: 9
-          challenges:
+          challenges: null
         - index: 10
-          challenges:
+          challenges: null
         - index: 11
-          challenges:
+          challenges: null
         - index: 12
-          challenges:
+          challenges: null
         - index: 13
-          challenges:                   
+          challenges: null
       settings:
         start: '2024-02-26 00:00'
         duration: 7d
+        modeMax:
+          Walk_Km: 70
+          Bike_Km: 210
+          Train_Trips: 56
+          Bus_Trips: 56
+          green leaves: 3000

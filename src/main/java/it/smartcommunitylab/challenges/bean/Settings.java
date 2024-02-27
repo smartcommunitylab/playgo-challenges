@@ -3,8 +3,10 @@ package it.smartcommunitylab.challenges.bean;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Settings {
@@ -13,6 +15,7 @@ public class Settings {
     private Set<String> modes;
     private boolean hide;
     private List<Suspension> suspensions;
+    private Map<String, Integer> modeMax;
 
     public Settings(Date start, Period duration) {
         if (start == null) {
@@ -26,9 +29,26 @@ public class Settings {
         this.duration = duration;
         suspensions = new ArrayList<>();
         modes = new HashSet<>();
+        modeMax = new HashMap<>();
     }
 
-    public Set<String> getModes() {
+    
+    public Settings(Date start, Period duration, Map<String, Integer> modeMax) {
+    	 if (start == null) {
+             throw new IllegalArgumentException("settings date start is required");
+         }
+
+         if (duration == null) {
+             throw new IllegalArgumentException("settings duration is required");
+         }
+         this.start = start;
+         this.duration = duration;
+         suspensions = new ArrayList<>();
+         modes = new HashSet<>();
+         this.modeMax = modeMax;
+	}
+
+	public Set<String> getModes() {
         return modes;
     }
 
@@ -64,6 +84,16 @@ public class Settings {
             this.suspensions = suspensions;
         }
     }
+
+	public Map<String, Integer> getModeMax() {
+		return modeMax;
+	}
+
+	public void setModeMax(Map<String, Integer> modeMax) {
+		this.modeMax = modeMax;
+	}
+    
+    
 
 
 }
