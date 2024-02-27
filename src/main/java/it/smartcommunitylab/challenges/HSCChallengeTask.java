@@ -10,9 +10,11 @@ import org.apache.logging.log4j.Logger;
 
 import eu.fbk.das.api.RecommenderSystemAPI;
 import eu.fbk.das.model.ChallengeExpandedDTO;
+import eu.fbk.das.model.GroupExpandedDTO;
 import it.smartcommunitylab.challenges.bean.Game;
 import it.smartcommunitylab.challenges.bean.GameEngineInfo;
 import it.smartcommunitylab.challenges.bean.HighSchoolChallenge;
+import it.smartcommunitylab.model.ext.GroupChallengeDTO.AttendeeDTO;
 
 public class HSCChallengeTask implements Runnable {
 
@@ -53,34 +55,34 @@ public class HSCChallengeTask implements Runnable {
 			Map<String, List<eu.fbk.das.rs.challenges.Challenge>> creationRules = ConfigConverter
 					.toCreationRules(highSchoolChallenge);
 			Map<String, Object> challengeValues = ConfigConverter.toChallengeValues(nextChallengeExecution);
-
-			List<ChallengeExpandedDTO> challenges = recommenderApi.createHSCChallenges(gameEngineConfs, creationRules, challengeValues);
-
+			List<ChallengeExpandedDTO> singleChallenges = recommenderApi.createHSCSingleChallenges(gameEngineConfs, creationRules, challengeValues);
+			List<GroupExpandedDTO> groupChallenges = recommenderApi.createHSCGroupChallenges(gameEngineConfs, creationRules, challengeValues);
 			Set<String> distinctPlayers = new java.util.HashSet<String>();
-			for (ChallengeExpandedDTO ch : challenges) {
+			for (ChallengeExpandedDTO ch : singleChallenges) {
 				distinctPlayers.add(String.valueOf(ch.getInfo("pId")));
 			}
-
+			for (GroupExpandedDTO ch : groupChallenges) {
+				for (AttendeeDTO id: ch.getAttendees()) {
+					distinctPlayers.add(id.getPlayerId());	
+				}				
+			}
 			Iterator<String> itr = distinctPlayers.iterator();
 			while (itr.hasNext()) {
 				logger.info(itr.next());
 
 			}
-
 			logger.info("distinct player count: {}", distinctPlayers.size());
-
-			if (logger.isDebugEnabled()) {
-				challenges.stream().map(c -> new it.smartcommunitylab.challenges.Challenge(c)).forEach(c -> {
-					logger.debug("playerId:{}, instanceName:{}, model:{}, s:{}, e:{}, f:{}", c.playerId(),
-							c.instanceName(), c.modelName(), c.start(), c.end(), c.data());
-				});
-			}
-			logger.info("Created {} challenges for game {}", challenges.size(), game.getGameId());
+			logger.info("Created {} single challenges for game {}", singleChallenges.size(), game.getGameId());
+			logger.info("Created {} group challenges for game {}", groupChallenges.size(), game.getGameId());
 			if (Boolean.TRUE.equals(this.gameEngineConf.getAssign())) {
-				challenges.forEach(challenge -> 
+				singleChallenges.forEach(challenge -> 
 					recommenderApi.assignSingleChallenge(gameEngineConfs, challenge)
 				);
-				logger.info("Assigned {} challenges for game {}", challenges.size(), game.getGameId());
+				logger.info("Assigned {} single challenges for game {}", singleChallenges.size(), game.getGameId());
+				groupChallenges.forEach(challenge -> {
+					recommenderApi.assignGroupChallenge(gameEngineConfs, challenge);
+				});
+				logger.info("Assigned {} group challenges for game {}", groupChallenges.size(), game.getGameId());
 			}
 			return new ValidResult(true);
 		}

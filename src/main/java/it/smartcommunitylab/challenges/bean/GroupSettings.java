@@ -3,6 +3,7 @@ package it.smartcommunitylab.challenges.bean;
 import java.time.Period;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class GroupSettings {
@@ -11,6 +12,7 @@ public class GroupSettings {
 	private String model;
 	private Set<String> modes;
 	private int minLevel;
+	 private Map<String, Integer> modeMax;
 
 	public GroupSettings(Date start, Period duration) {
 		if (start == null) {
@@ -23,6 +25,20 @@ public class GroupSettings {
 		this.start = start;
 		this.duration = duration;
 		modes = new HashSet<>();
+	}
+	
+	public GroupSettings(Date start, Period duration, Map<String, Integer> modeMax) {
+   	 if (start == null) {
+            throw new IllegalArgumentException("settings date start is required");
+        }
+
+        if (duration == null) {
+            throw new IllegalArgumentException("settings duration is required");
+        }
+        this.start = start;
+		this.duration = duration;
+		modes = new HashSet<>();
+        this.modeMax = modeMax;
 	}
 
 	public Date getStart() {
@@ -57,4 +73,12 @@ public class GroupSettings {
 		this.minLevel = minLevel;
 	}
 
+	public Map<String, Integer> getModeMax() {
+		return modeMax;
+	}
+
+	public void setModeMax(Map<String, Integer> modeMax) {
+		this.modeMax = modeMax;
+	}
+	
 }

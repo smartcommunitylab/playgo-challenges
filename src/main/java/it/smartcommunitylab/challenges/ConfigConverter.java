@@ -51,6 +51,7 @@ class ConfigConverter {
         confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
         confs.put("exec", nextChallengeExecution.getExecutionDate());
         confs.put("hide", nextChallengeExecution.isHidden());
+        confs.put("modeMax", nextChallengeExecution.getModeMax());
         return confs;
     }
     
@@ -62,6 +63,7 @@ class ConfigConverter {
         confs.put("duration", nextChallengeExecution.getDuration().toString().substring(1));
         confs.put("challengeWeek", nextChallengeExecution.getChallengeWeek());
         confs.put("exec", nextChallengeExecution.getExecutionDate());
+        confs.put("modeMax", nextChallengeExecution.getModeMax());
         return confs;
     }
 

@@ -2,6 +2,7 @@ package it.smartcommunitylab.challenges;
 
 import java.time.Period;
 import java.util.Date;
+import java.util.Map;
 
 import it.smartcommunitylab.challenges.bean.GroupSettings;
 import it.smartcommunitylab.challenges.bean.HighSchoolChallenge;
@@ -19,6 +20,7 @@ class NextExecution {
     private int challengeWeek;
     private boolean suspended;
     private Date executionDate;
+    private Map<String, Integer> modeMax;
 
     public NextExecution(StandardSingleChallenge standardSingleChallenge, ExecDate executionDate) {
         final TimeHelper timeHelper = new TimeHelper(executionDate);
@@ -33,6 +35,7 @@ class NextExecution {
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.suspended = timeHelper.shouldBeSospended(nextStart, standardSingleChallenge);
         this.executionDate = Date.from(executionDate.getInstant());
+        this.modeMax = challengeSettings.getModeMax();
     }
 
     public NextExecution(StandardGroupChallenge standardGroupChallenge, ExecDate executionDate) {
@@ -48,6 +51,7 @@ class NextExecution {
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.suspended = false;
         this.executionDate = Date.from(executionDate.getInstant());
+        this.modeMax = challengeSettings.getModeMax();
     }
 
     public NextExecution(SpecialSingleChallenge specialSingleChallenge, ExecDate executionDate) {
@@ -75,6 +79,7 @@ class NextExecution {
         this.duration = challengeSettings.getDuration();
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.executionDate = Date.from(executionDate.getInstant());
+        this.modeMax = challengeSettings.getModeMax();
     }
 
     public Date getStart() {
@@ -105,5 +110,8 @@ class NextExecution {
         return executionDate;
     }
 
+	public Map<String, Integer> getModeMax() {
+		return modeMax;
+	}
 
 }
