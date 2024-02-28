@@ -27,6 +27,7 @@ class ConfigConverter {
         confs.put("API_USER", gameEngineConf.getApiUser());
         confs.put("API_PASS", gameEngineConf.getApiPass());
         confs.put("POSTGRESURL", gameEngineConf.getPostgresUrl());
+        confs.put("ASSIGN", gameEngineConf.getAssign().toString());
         return confs;
     }
 
