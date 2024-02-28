@@ -48,7 +48,7 @@ public class HSCChallengeTask implements Runnable {
 		logger.info("Generate HSC challenge for gameId {}", game.getGameId());
 		final NextExecution nextChallengeExecution = new NextExecution(highSchoolChallenge, new ExecDate());
 		if (nextChallengeExecution.isSuspended()) {
-			logger.info("challenge will start in a suspension  range, suspend assignment");
+			logger.info("challenge will start in a suspension range, suspend assignment");
 			return new ValidResult(true);
 		} else {
 			Map<String, String> gameEngineConfs = ConfigConverter.toGameEngineConfs(game, gameEngineConf);
