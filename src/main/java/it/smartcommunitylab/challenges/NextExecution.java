@@ -21,6 +21,7 @@ class NextExecution {
     private boolean suspended;
     private Date executionDate;
     private Map<String, Integer> modeMax;
+    private Map<String, Integer> modeMin;
 
     public NextExecution(StandardSingleChallenge standardSingleChallenge, ExecDate executionDate) {
         final TimeHelper timeHelper = new TimeHelper(executionDate);
@@ -36,6 +37,7 @@ class NextExecution {
         this.suspended = timeHelper.shouldBeSospended(nextStart, standardSingleChallenge);
         this.executionDate = Date.from(executionDate.getInstant());
         this.modeMax = challengeSettings.getModeMax();
+        this.modeMin = challengeSettings.getModeMin();
     }
 
     public NextExecution(StandardGroupChallenge standardGroupChallenge, ExecDate executionDate) {
@@ -52,6 +54,7 @@ class NextExecution {
         this.suspended = false;
         this.executionDate = Date.from(executionDate.getInstant());
         this.modeMax = challengeSettings.getModeMax();
+        this.modeMin = challengeSettings.getModeMin();
     }
 
     public NextExecution(SpecialSingleChallenge specialSingleChallenge, ExecDate executionDate) {
@@ -80,6 +83,7 @@ class NextExecution {
         this.challengeWeek = timeHelper.weekDifference(challengeSettings.getStart(), nextStart);
         this.executionDate = Date.from(executionDate.getInstant());
         this.modeMax = challengeSettings.getModeMax();
+        this.modeMin = challengeSettings.getModeMin();
     }
 
     public Date getStart() {
@@ -114,4 +118,8 @@ class NextExecution {
 		return modeMax;
 	}
 
+	public Map<String, Integer> getModeMin() {
+		return modeMin;
+	}
+	
 }
