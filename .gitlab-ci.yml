@@ -40,7 +40,7 @@ backend-container-build:
   stage: build
   script:
     - docker login -u $DHUB_USER -p $DHUB_PASS
-    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --build-arg REPO=$CI_COMMIT_REF_NAME -t $CONTAINER_IMAGE -t $CONTAINER_IMAGE_LATEST .
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --build-arg REPO=$CI_COMMIT_REF_NAME -t $CONTAINER_IMAGE -t $CONTAINER_IMAGE_LATEST . --no-cache
     - docker push $CONTAINER_IMAGE
     - docker push $CONTAINER_IMAGE_LATEST
   only:
