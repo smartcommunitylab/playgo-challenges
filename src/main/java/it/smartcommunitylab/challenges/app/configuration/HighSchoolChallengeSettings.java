@@ -13,6 +13,7 @@ public class HighSchoolChallengeSettings {
 	private Date start;
 	private Period duration;
 	private Map<String, Integer> modeMax;
+	private Map<String, Integer> modeMin;
 
 	public Date getStart() {
 		return start;
@@ -36,11 +37,17 @@ public class HighSchoolChallengeSettings {
 	public void setModeMax(Map<String, Integer> modeMax) {
 		this.modeMax = modeMax;
 	}
+	
+	public Map<String, Integer> getModeMin() {
+		return modeMin;
+	}
+
+	public void setModeMin(Map<String, Integer> modeMin) {
+		this.modeMin = modeMin;
+	}
 
 	public Settings toConfig() {
-		return new Settings(start, duration, modeMax);
+		return new Settings(start, duration, modeMax, modeMin);
 	}
-	
-	
 
 }

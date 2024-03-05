@@ -16,8 +16,6 @@ import it.smartcommunitylab.challenges.bean.SpecialSingleChallenge;
 import it.smartcommunitylab.challenges.bean.StandardGroupChallenge;
 import it.smartcommunitylab.challenges.bean.StandardSingleChallenge;
 
-import static eu.fbk.das.utils.Utils.p;
-
 public class Challenges {
 
 	private static Logger logger = LogManager.getLogger(Challenges.class);

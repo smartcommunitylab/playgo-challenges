@@ -20,6 +20,7 @@ public class StandardSingleSettings {
     private boolean hide;
     private List<SuspensionConfig> suspensions;
     private Map<String, Integer> modeMax;
+    private Map<String, Integer> modeMin;
 
     public Date getStart() {
         return start;
@@ -61,8 +62,16 @@ public class StandardSingleSettings {
 		this.modeMax = modeMax;
 	}
 
+	public Map<String, Integer> getModeMin() {
+		return modeMin;
+	}
+
+	public void setModeMin(Map<String, Integer> modeMin) {
+		this.modeMin = modeMin;
+	}
+
 	public Settings toConfig() {
-        Settings config = new Settings(start, duration, modeMax);
+        Settings config = new Settings(start, duration, modeMax, modeMin);
         config.setHide(hide);
         config.setModes(new HashSet<>(modeConcepts));
         config.setSuspensions(

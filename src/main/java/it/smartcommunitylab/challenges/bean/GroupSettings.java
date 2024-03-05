@@ -12,7 +12,8 @@ public class GroupSettings {
 	private String model;
 	private Set<String> modes;
 	private int minLevel;
-	 private Map<String, Integer> modeMax;
+	private Map<String, Integer> modeMax;
+	private Map<String, Integer> modeMin;
 
 	public GroupSettings(Date start, Period duration) {
 		if (start == null) {
@@ -27,18 +28,19 @@ public class GroupSettings {
 		modes = new HashSet<>();
 	}
 	
-	public GroupSettings(Date start, Period duration, Map<String, Integer> modeMax) {
-   	 if (start == null) {
-            throw new IllegalArgumentException("settings date start is required");
-        }
+	public GroupSettings(Date start, Period duration, Map<String, Integer> modeMax, Map<String, Integer> modeMin) {
+		if (start == null) {
+			throw new IllegalArgumentException("settings date start is required");
+		}
 
-        if (duration == null) {
-            throw new IllegalArgumentException("settings duration is required");
-        }
-        this.start = start;
+		if (duration == null) {
+			throw new IllegalArgumentException("settings duration is required");
+		}
+		this.start = start;
 		this.duration = duration;
 		modes = new HashSet<>();
-        this.modeMax = modeMax;
+		this.modeMax = modeMax;
+		this.modeMin = modeMin;
 	}
 
 	public Date getStart() {
@@ -79,6 +81,14 @@ public class GroupSettings {
 
 	public void setModeMax(Map<String, Integer> modeMax) {
 		this.modeMax = modeMax;
+	}
+
+	public Map<String, Integer> getModeMin() {
+		return modeMin;
+	}
+
+	public void setModeMin(Map<String, Integer> modeMin) {
+		this.modeMin = modeMin;
 	}
 	
 }

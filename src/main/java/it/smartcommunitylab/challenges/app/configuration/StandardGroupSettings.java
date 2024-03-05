@@ -18,6 +18,7 @@ public class StandardGroupSettings {
 	private List<String> modeConcepts;
 	private int minLevel;
 	private Map<String, Integer> modeMax;
+	private Map<String, Integer> modeMin;
 
 	public Date getStart() {
 		return start;
@@ -50,9 +51,17 @@ public class StandardGroupSettings {
 	public void setModeMax(Map<String, Integer> modeMax) {
 		this.modeMax = modeMax;
 	}
+	
+	public Map<String, Integer> getModeMin() {
+		return modeMin;
+	}
+
+	public void setModeMin(Map<String, Integer> modeMin) {
+		this.modeMin = modeMin;
+	}
 
 	public GroupSettings toConfig() {
-		GroupSettings settings = new GroupSettings(start, duration, modeMax);
+		GroupSettings settings = new GroupSettings(start, duration, modeMax, modeMin);
 		settings.setModel(model);
 		settings.setModes(new HashSet<>(modeConcepts));
 		settings.setMinLevel(minLevel);
