@@ -15,8 +15,8 @@ public class Settings {
     private Set<String> modes;
     private boolean hide;
     private List<Suspension> suspensions;
-    private Map<String, Integer> modeMax;
-    private Map<String, Integer> modeMin;
+    private Map<String, Double> modeMax;
+    private Map<String, Double> modeMin;
 
     public Settings(Date start, Period duration) {
         if (start == null) {
@@ -34,7 +34,7 @@ public class Settings {
         modeMin = new HashMap<>();
     }
 
-	public Settings(Date start, Period duration, Map<String, Integer> modeMax, Map<String, Integer> modeMin) {
+	public Settings(Date start, Period duration, Map<String, Double> modeMax, Map<String, Double> modeMin) {
 		if (start == null) {
 			throw new IllegalArgumentException("settings date start is required");
 		}
@@ -87,19 +87,19 @@ public class Settings {
         }
     }
 
-	public Map<String, Integer> getModeMax() {
+	public Map<String, Double> getModeMax() {
 		return modeMax;
 	}
 
-	public void setModeMax(Map<String, Integer> modeMax) {
+	public void setModeMax(Map<String, Double> modeMax) {
 		this.modeMax = modeMax;
 	}
 
-	public Map<String, Integer> getModeMin() {
+	public Map<String, Double> getModeMin() {
 		return modeMin;
 	}
 
-	public void setModeMin(Map<String, Integer> modeMin) {
+	public void setModeMin(Map<String, Double> modeMin) {
 		this.modeMin = modeMin;
 	}
     

@@ -20,8 +20,8 @@ class NextExecution {
     private int challengeWeek;
     private boolean suspended;
     private Date executionDate;
-    private Map<String, Integer> modeMax;
-    private Map<String, Integer> modeMin;
+    private Map<String, Double> modeMax;
+    private Map<String, Double> modeMin;
 
     public NextExecution(StandardSingleChallenge standardSingleChallenge, ExecDate executionDate) {
         final TimeHelper timeHelper = new TimeHelper(executionDate);
@@ -114,11 +114,11 @@ class NextExecution {
         return executionDate;
     }
 
-	public Map<String, Integer> getModeMax() {
+	public Map<String, Double> getModeMax() {
 		return modeMax;
 	}
 
-	public Map<String, Integer> getModeMin() {
+	public Map<String, Double> getModeMin() {
 		return modeMin;
 	}
 	
