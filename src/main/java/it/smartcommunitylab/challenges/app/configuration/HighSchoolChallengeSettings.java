@@ -12,8 +12,8 @@ public class HighSchoolChallengeSettings {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Europe/Rome")
 	private Date start;
 	private Period duration;
-	private Map<String, Integer> modeMax;
-	private Map<String, Integer> modeMin;
+	private Map<String, Double> modeMax;
+	private Map<String, Double> modeMin;
 
 	public Date getStart() {
 		return start;
@@ -30,19 +30,19 @@ public class HighSchoolChallengeSettings {
 	public void setDuration(Period duration) {
 		this.duration = duration;
 	}
-	public Map<String, Integer> getModeMax() {
+	public Map<String, Double> getModeMax() {
 		return modeMax;
 	}
 
-	public void setModeMax(Map<String, Integer> modeMax) {
+	public void setModeMax(Map<String, Double> modeMax) {
 		this.modeMax = modeMax;
 	}
 	
-	public Map<String, Integer> getModeMin() {
+	public Map<String, Double> getModeMin() {
 		return modeMin;
 	}
 
-	public void setModeMin(Map<String, Integer> modeMin) {
+	public void setModeMin(Map<String, Double> modeMin) {
 		this.modeMin = modeMin;
 	}
 

@@ -33,11 +33,11 @@ games:
           Bus_Trips: 56
           green leaves: 3000
         modeMin:
-          Walk_Km: 1
-          Bike_Km: 5
-          Train_Trips: 1
-          Bus_Trips: 1
-          green leaves: 50  
+          Walk_Km: 1.0
+          Bike_Km: 5.0
+          Train_Trips: 1.0
+          Bus_Trips: 1.0
+          green leaves: 50.0  
         hide: true
       playerSet: null
       reward:
@@ -62,11 +62,11 @@ games:
           Bus_Trips: 56
           green leaves: 3000
         modeMin:
-          Walk_Km: 1
-          Bike_Km: 5
-          Train_Trips: 1
-          Bus_Trips: 1
-          green leaves: 50
+          Walk_Km: 1.0
+          Bike_Km: 5.0
+          Train_Trips: 1.0
+          Bus_Trips: 1.0
+          green leaves: 50.0
       playerSet: null
       reward:
         scoreName: green leaves
@@ -88,52 +88,41 @@ games:
           type: fixed
           value: 250
           maxValue: null
-  - gameId: 63caa5b9adaefe48f4ad99ae
+  - gameId: 65bd100506b8ea7318e21584
     highSchoolChallenge:
       weekStrategies:
+        - index: 0
+          challenges: null
         - index: 1
-          challenges:
-            - challenge:
-                challengeTyp: percentageIncrement
-                strategy: fixedOne
-                playerSet:
-                  - team
-                pointConcepts:
-                  - Walk_Km
-                  - Bike_Km
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 250
-                  maxValue: null
-            - challenge:
-                challengeTyp: percentageIncrement
-                strategy: fixedOne
-                playerSet:
-                  - member
-                pointConcepts:
-                  - Train_Trips
-                  - Bus_Trips
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 150
-                  maxValue: null
-            - challenge:
-                challengeTyp: percentageIncrement
-                strategy: fixedOne
-                playerSet:
-                  - team
-                pointConcepts:
-                  - green leaves
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 200
-                  maxValue: null
+          challenges: null
         - index: 2
           challenges:
             - challenge:
+                challengeTyp: percentageIncrement
+                strategy: fixedOne
+                playerSet:
+                  - team
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 1500
+                  maxValue: null
+            - challenge:
+                challengeTyp: percentageIncrement
+                strategy: fixedOne
+                playerSet:
+                  - team
+                pointConcepts:
+                  - green leaves
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 1500
+                  maxValue: null
+            - challenge:
                 challengeTyp: repetitiveBehavior
                 strategy: fixedOne
                 playerSet:
@@ -144,20 +133,7 @@ games:
                 reward:
                   scoreName: green leaves
                   type: fixed
-                  value: 250
-                  maxValue: null
-            - challenge:
-                challengeTyp: repetitiveBehavior
-                strategy: fixedOne
-                playerSet:
-                  - member
-                pointConcepts:
-                  - Train_Trips
-                  - Bus_Trips
-                reward:
-                  scoreName: green leaves
-                  type: fixed
-                  value: 150
+                  value: 1500
                   maxValue: null
             - challenge:
                 challengeTyp: repetitiveBehavior
@@ -169,10 +145,8 @@ games:
                 reward:
                   scoreName: green leaves
                   type: fixed
-                  value: 200
+                  value: 1500
                   maxValue: null
-        - index: 3
-          challenges:
             - challenge:
                 challengeTyp: groupCooperative
                 strategy: fixedOne
@@ -184,20 +158,45 @@ games:
                 reward:
                   scoreName: green leaves
                   type: fixed
-                  value: 250
+                  value: 1500
+                  maxValue: null
+            - challenge:
+                challengeTyp: groupCooperative
+                strategy: fixedOne
+                playerSet:
+                  - team
+                pointConcepts:
+                  - green leaves
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 1500
+                  maxValue: null
                   maxValue: null
             - challenge:
                 challengeTyp: groupCompetitiveTime
                 strategy: fixedOne
                 playerSet:
-                  - member
+                  - team
                 pointConcepts:
-                  - Train_Trips
-                  - Bus_Trips
+                  - Walk_Km
+                  - Bike_Km
                 reward:
                   scoreName: green leaves
                   type: fixed
-                  value: 150
+                  value: 1500
+                  maxValue: null
+            - challenge:
+                challengeTyp: groupCompetitiveTime
+                strategy: fixedOne
+                playerSet:
+                  - team
+                pointConcepts:
+                  - green leaves
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 1500
                   maxValue: null
             - challenge:
                 challengeTyp: groupCompetitivePerformance
@@ -209,8 +208,23 @@ games:
                 reward:
                   scoreName: green leaves
                   type: fixed
-                  value: 200
+                  value: 1500
                   maxValue: null
+            - challenge:
+                challengeTyp: groupCompetitivePerformance
+                strategy: fixedOne
+                playerSet:
+                  - team
+                pointConcepts:
+                  - Walk_Km
+                  - Bike_Km
+                reward:
+                  scoreName: green leaves
+                  type: fixed
+                  value: 1500
+                  maxValue: null
+        - index: 3
+          challenges: null  
         - index: 4
           challenges: null
         - index: 5
@@ -225,24 +239,19 @@ games:
           challenges: null
         - index: 10
           challenges: null
-        - index: 11
-          challenges: null
-        - index: 12
-          challenges: null
-        - index: 13
-          challenges: null
       settings:
-        start: '2024-02-19 00:00'
+        start: '2024-02-26 00:00'
         duration: 7d
         modeMax:
-          Walk_Km: 70
-          Bike_Km: 210
-          Train_Trips: 56
-          Bus_Trips: 56
-          green leaves: 3000
+          Walk_Km: 35
+          Bike_Km: 70
+          Train_Trips: 10
+          Bus_Trips: 20
+          green leaves: 210
         modeMin:
-          Walk_Km: 1
-          Bike_Km: 5
-          Train_Trips: 1
-          Bus_Trips: 1
-          green leaves: 50
+          Walk_Km: 1.0
+          Bike_Km: 1.0
+          Train_Trips: 1.0
+          Bus_Trips: 1.0
+          green leaves: 10.0
+
