@@ -10,7 +10,7 @@
 
 ## Build
 
-### Standalone
+### Standalone 
 
 `playgo-challenges` uses `game-engine.challenge-gen` to work.
 
