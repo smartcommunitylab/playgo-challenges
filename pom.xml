@@ -39,7 +39,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 			<exclusions>
-				<!-- Exclude logback dependency, with log4j 1.x library doesn't work 
+				<!-- Exclude logback dependency, with log4j 1.x library doesn't
+				work 
 					correctly -->
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
@@ -72,7 +73,8 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 
-		<!-- explicit declaration because challenge-gen import an old version (2.5.4) -->
+		<!-- explicit declaration because challenge-gen import an old version
+		(2.5.4) -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-jaxb-annotations</artifactId>
@@ -156,19 +158,17 @@
 
 	<repositories>
 		<repository>
-			<id>SmartCommunityLab</id>
-			<url>https://repository.smartcommunitylab.it/content/groups/public</url>
+			<id>smartcampus.gamification</id>
+			<url>
+				https://maven.pkg.github.com/smartcommunitylab/smartcampus.gamification
+			</url>
+		</repository>
+		<repository>
+			<id>game-engine.challenge-gen</id>
+			<url>
+				https://maven.pkg.github.com/smartcommunitylab/game-engine.challenge-gen
+			</url>
 		</repository>
 	</repositories>
 
-	<distributionManagement>
-		<repository>
-			<id>SmartCommunityLab-releases</id>
-			<url>https://repository.smartcommunitylab.it/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>SmartCommunityLab-snapshots</id>
-			<url>https://repository.smartcommunitylab.it/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 </project>
